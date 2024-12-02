@@ -36,6 +36,7 @@
         "vite": "^6.0.0"
     },
     "dependencies": {
-        "downshift": "^9.0.8"
+        "downshift": "^9.0.8",
+        "motion": "^11.12.0"
     }
 }
