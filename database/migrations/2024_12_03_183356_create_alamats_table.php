@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('alamats', function (Blueprint $table) {
             $table->id();
+            $table->string('alamat');
+            $table->foreignId('kelurahan_id')->constrained(
+                table:'villages'
+            );
+            $table->foreignId('kecamatan_id')->constrained(
+                table:'districts'
+            );
+            $table->foreignId('kabupaten_id')->constrained(
+                table:'regencies'
+            );
             $table->timestamps();
         });
     }
