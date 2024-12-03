@@ -77,6 +77,17 @@ CREATE TABLE IF NOT EXISTS `villages` (
 --
 -- Dumping data for table `provinces`
 --
+-- Jika tabel alamats sudah ada
+DROP TABLE IF EXISTS `alamats`;
+
+CREATE TABLE IF NOT EXISTS `alamats` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `alamat` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kelurahan_id` char(10) COLLATE utf8_unicode_ci NOT NULL,  -- Menyimpan ID dari tabel villages
+  PRIMARY KEY (`id`),
+  CONSTRAINT `alamats_kelurahan_id_foreign` FOREIGN KEY (`kelurahan_id`) REFERENCES `villages` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 LOCK TABLES `provinces` WRITE;
 /*!40000 ALTER TABLE `provinces` DISABLE KEYS */;
@@ -90179,3 +90190,4 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
