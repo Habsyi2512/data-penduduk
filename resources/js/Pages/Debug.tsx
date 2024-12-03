@@ -1,14 +1,17 @@
 import { useState } from "react";
 
 export default function Debug() {
+
     const [query, setQuery] = useState("");
     const [suggestions, setSuggestions] = useState([]);
 
     const fetchSuggestions = async (searchQuery: string) => {
         const response = await fetch(`/api/search-village?q=${searchQuery}`);
         const data = await response.json();
+
         setSuggestions(data);
     };
+    console.log('suge', suggestions)
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -47,7 +50,7 @@ export default function Debug() {
                             onClick={() => handleSuggestionClick(item)} // Tangani klik
                             className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                         >
-                            {item.name}
+                            {item.name}, {item.district_name}, {item.regency_name}
                         </li>
                     ))}
                 </ul>
