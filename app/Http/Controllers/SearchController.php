@@ -9,9 +9,8 @@ class SearchController extends Controller
 {
     public function searchDesa(Request $request)
     {
-        $search = $request->get('query'); // Ambil query dari request
+        $search = $request->get('query');
 
-        // Cari desa berdasarkan nama
         $results = Village::where('name', 'like', "%$search%")
             ->with(['district.regency.province']) // Include relasi
             ->get();

@@ -13,11 +13,10 @@ class DebugController extends Controller
     return Inertia::render('Debug');
 }
 
-
     public function search(Request $request){
     $query = $request->input('q');
     $results = Village::where('name', 'like', '%' . $query . '%')
-        ->limit(10) // Batasi hasil untuk efisiensi
+        ->limit(10) 
         ->get();
 
     return response()->json($results);
