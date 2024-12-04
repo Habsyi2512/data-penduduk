@@ -31,7 +31,6 @@ export default function Login({
     return (
         <GuestLayout>
             <Head title="Log in" />
-
             {status && (
                 <div className="mb-4 text-sm font-medium text-green-600">
                     {status}
@@ -47,7 +46,7 @@ export default function Login({
                         type="email"
                         name="email"
                         value={data.email}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full bg-slate-300"
                         autoComplete="username"
                         isFocused={true}
                         onChange={(e) => setData('email', e.target.value)}
@@ -64,7 +63,7 @@ export default function Login({
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full bg-slate-300"
                         autoComplete="current-password"
                         onChange={(e) => setData('password', e.target.value)}
                     />

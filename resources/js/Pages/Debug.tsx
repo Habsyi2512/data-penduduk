@@ -54,6 +54,7 @@ export default function Debug() {
 
     return (
         <div>
+
             <h1>Halaman Debug</h1>
             <form className="relative mx-auto w-fit rounded bg-slate-200 p-5 shadow">
                 <p>Kabupaten</p>
