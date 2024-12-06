@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class JenisKelamin extends Model
 {
-    //
+    protected $fillable = ['jenis_kelamin'];
+
+    public function data_penduduk()
+    {
+        return $this->hasMany(DataPenduduk::class, 'jenis_kelamin_id');
+    }
 }

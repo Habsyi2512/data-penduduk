@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AgamaController;
+use App\Http\Controllers\DataPendudukController;
 use App\Http\Controllers\DebugController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
@@ -23,13 +25,13 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/population', function () {
-        return Inertia::render('Population_data');
-    })->name('population_data'); 
+    Route::get('/population', [DataPendudukController::class, 'index'])->name('population_data');
 
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
-    })->name('dashboard'); 
+    })->name('dashboard');
+
+    Route::get('/agama', [AgamaController::class, 'index']);
 });
 
 Route::get('/debug', [DebugController::class, 'index']);
