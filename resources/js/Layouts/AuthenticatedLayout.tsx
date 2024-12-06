@@ -1,11 +1,10 @@
 import Sidebar from '@/Components/sidebar/Sidebar';
-import { PropsWithChildren, ReactNode, useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import AuthenticatedHeader from './AuthenticatedHeader';
 
 export default function Authenticated({
-    header,
     children,
-}: PropsWithChildren<{ header?: ReactNode }>) {
+}: PropsWithChildren<{  }>) {
     const [isOpenSidebar, setIsOpenSidebar] = useState(true);
     const [isDarkMode, setIsDarkMode] = useState(false);
 
