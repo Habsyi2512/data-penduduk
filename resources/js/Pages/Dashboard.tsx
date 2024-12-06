@@ -8,8 +8,41 @@ export default function Dashboard() {
     return (
         <AuthenticatedLayout>
             <Head title="Dashboard" />
-            <div className="mb-6 grid grid-cols-4">
-                <div className="w-full overflow-auto rounded-lg border border-blue-200 bg-white/20 p-5 shadow-md shadow-blue-400 backdrop-blur-md dark:border-gray-400">
+            <div className="mb-6 grid gap-x-4 grid-cols-4">
+                <div className="w-full overflow-auto rounded-lg border border-blue-200 bg-white/20 p-5 shadow-md shadow-blue-400 dark:shadow-gray-400 backdrop-blur-md dark:border-gray-400">
+                    <h2 className="mb-1 text-lg font-medium text-gray-600 dark:text-gray-400">
+                        Total
+                    </h2>
+                    <h2 className="font-inter text-2xl font-bold text-blue-700 dark:text-gray-300">
+                        129.999
+                    </h2>
+                    <p className="font-inter text-gray-600 dark:text-gray-400">
+                        Total penduduk seluruh kepri
+                    </p>
+                </div>
+                <div className="w-full overflow-auto rounded-lg border border-blue-200 bg-white/20 p-5 shadow-md shadow-blue-400 dark:shadow-gray-400 backdrop-blur-md dark:border-gray-400">
+                    <h2 className="mb-1 text-lg font-medium text-gray-600 dark:text-gray-400">
+                        Total
+                    </h2>
+                    <h2 className="font-inter text-2xl font-bold text-blue-700 dark:text-gray-300">
+                        129.999
+                    </h2>
+                    <p className="font-inter text-gray-600 dark:text-gray-400">
+                        Total penduduk seluruh kepri
+                    </p>
+                </div>
+                <div className="w-full overflow-auto rounded-lg border border-blue-200 bg-white/20 p-5 shadow-md shadow-blue-400 dark:shadow-gray-400 backdrop-blur-md dark:border-gray-400">
+                    <h2 className="mb-1 text-lg font-medium text-gray-600 dark:text-gray-400">
+                        Total
+                    </h2>
+                    <h2 className="font-inter text-2xl font-bold text-blue-700 dark:text-gray-300">
+                        129.999
+                    </h2>
+                    <p className="font-inter text-gray-600 dark:text-gray-400">
+                        Total penduduk seluruh kepri
+                    </p>
+                </div>
+                <div className="w-full overflow-auto rounded-lg border border-blue-200 bg-white/20 p-5 shadow-md shadow-blue-400 dark:shadow-gray-400 backdrop-blur-md dark:border-gray-400">
                     <h2 className="mb-1 text-lg font-medium text-gray-600 dark:text-gray-400">
                         Total
                     </h2>

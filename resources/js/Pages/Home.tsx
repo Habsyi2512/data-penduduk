@@ -1,7 +1,9 @@
 import HyperText from '@/Components/ui/hyper-text';
 import OrbitingCircles from '@/Components/ui/orbiting-circles';
+import GuestHeader from '@/Layouts/GuestHeader';
 import { PageProps } from '@/types';
 import { Head } from '@inertiajs/react';
+import { motion } from 'framer-motion';
 
 export default function Home({
     auth,
@@ -23,7 +25,7 @@ export default function Home({
         <>
             <Head title="Welcome" />
             <div className="relative h-screen w-full text-black/50">
-                <header className="h-16 w-full border-b border-gray-600 bg-[#0E2A47] shadow"></header>
+                <GuestHeader />
                 <img
                     src="/bgjar/WorldMap.svg"
                     alt=""
@@ -37,29 +39,51 @@ export default function Home({
                             alt=""
                             className="absolute left-0 top-0 -z-10 h-full w-full object-cover"
                         />
-                        <div className="my-auto basis-1/2 px-5 font-inter">
-                            <h1 className="text-3xl font-[900] text-slate-200">
-                                WEBSITE STATISTIK
+                        <motion.div
+                            initial={{
+                                opacity: 0,
+                            }}
+                            animate={{
+                                y: -10,
+                                opacity: 1,
+                            }}
+                            transition={{
+                                duration: 0.2,
+                                delay: 0.5,
+                                ease: 'linear',
+                            }}
+                            className="my-auto basis-1/2 px-5 font-inter"
+                        >
+                            <h1 className="text-center text-5xl font-[800] text-gray-300">
+                                WEB STATISTIK DATA PENDUDUK
                             </h1>
-                            <h1 className="text-3xl font-[900] text-slate-200">
-                                DATA PENDUDUK
-                            </h1>
-                            <h1 className="text-3xl font-[900] text-slate-200">
+                            <h1 className="text-center text-5xl font-[800] text-gray-300">
                                 KEPULAUAN RIAU
                             </h1>
-                        </div>
+                        </motion.div>
 
                         <div className="basis-1/2">
                             <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-lg">
                                 <HyperText
-                                    className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-gray-200 to-blue-900 to-90% bg-clip-text text-center text-7xl font-semibold leading-none text-transparent dark:from-white dark:to-black"
+                                    className="pointer-events-none mt-[180px] whitespace-pre-wrap bg-gradient-to-b from-gray-200 to-blue-900 to-90% bg-clip-text text-center text-7xl font-semibold leading-none text-transparent dark:from-white dark:to-black"
                                     text="KEPULAUAN RIAU"
                                 />
+                                <OrbitingCircles
+                                    className="size-[70px] border-none bg-transparent"
+                                    duration={20}
+                                    delay={15}
+                                    radius={0}
+                                >
+                                    <img
+                                        src="/logo-kabupaten/Kepri.png"
+                                        alt=""
+                                    />
+                                </OrbitingCircles>
                                 <OrbitingCircles
                                     className="size-[30px] border-none bg-transparent"
                                     duration={20}
                                     delay={15}
-                                    radius={80}
+                                    radius={90}
                                 >
                                     <img
                                         src="/logo-kabupaten/Anambas.webp"
@@ -70,7 +94,7 @@ export default function Home({
                                     className="size-[30px] border-none bg-transparent"
                                     duration={20}
                                     delay={25}
-                                    radius={80}
+                                    radius={90}
                                 >
                                     <img
                                         src="/logo-kabupaten/Batam.png"
@@ -136,6 +160,7 @@ export default function Home({
                         </div>
                     </div>
                 </div>
+                <div className="h-[calc(100vh-64px)] w-full"></div>
             </div>
             {/* <div>content w</div> */}
         </>
