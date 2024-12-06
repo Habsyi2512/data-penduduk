@@ -36,7 +36,14 @@
         "vite": "^6.0.0"
     },
     "dependencies": {
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
         "downshift": "^9.0.8",
-        "motion": "^11.12.0"
+        "framer-motion": "^11.13.1",
+        "lucide-react": "^0.468.0",
+        "motion": "^11.12.0",
+        "recharts": "^2.14.1",
+        "tailwind-merge": "^2.5.5",
+        "tailwindcss-animate": "^1.0.7"
     }
 }

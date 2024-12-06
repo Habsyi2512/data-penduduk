@@ -80,20 +80,8 @@ export default function Authenticated({
 
                     {/* Scrollable Main Content */}
                     <main className="flex-1 overflow-y-auto bg-blue-100 px-5 py-6 transition-colors duration-500 dark:bg-gray-800">
-                        <div className="space-y-4">
-                            <h2 className="text-lg font-semibold text-blue-700 dark:text-gray-400">
-                                Welcome to the Dashboard
-                            </h2>
-                            <p className="text-gray-600 dark:text-gray-400">
-                                This is an example of a scrollable content
-                                layout using Tailwind CSS.
-                            </p>
-                        </div>
-                        <div className="max-w-3xl rounded-lg bg-white/20 p-5 shadow-lg backdrop-blur-md">
-                            <p className="text-gray-600 dark:text-gray-400">
-                                content
-                            </p>
-                        </div>
+                        
+                        {children}
                     </main>
                 </div>
             </div>
