@@ -18,7 +18,16 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+Route::get('/population', function () {
+    return Inertia::render('Population_data');
+})
+
+    ->middleware(['auth', 'verified'])
+    ->name('population_data');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -30,4 +39,4 @@ Route::get('/debug', [DebugController::class, 'index']);
 Route::get('/search-desa', [SearchController::class, 'searchDesa']);
 Route::get('/api/search-village', [DebugController::class, 'search']);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
