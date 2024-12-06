@@ -16,23 +16,20 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-
-Route::get('/population', function () {
-    return Inertia::render('Population_data');
-})
-
-    ->middleware(['auth', 'verified'])
-    ->name('population_data');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/population', function () {
+        return Inertia::render('Population_data');
+    })->name('population_data'); 
+
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard'); 
 });
 
 Route::get('/debug', [DebugController::class, 'index']);
