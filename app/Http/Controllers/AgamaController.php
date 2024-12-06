@@ -11,6 +11,7 @@ class AgamaController extends Controller
     {
         // Mengambil semua data agama
         $agamas = Agama::all();
+        dd($agamas);
 
         // Mengirim data agama ke view
         return view('agama.index', ['agamas' => $agamas]);

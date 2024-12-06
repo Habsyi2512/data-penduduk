@@ -10,17 +10,17 @@ class DataPendudukController extends Controller
 {
     public function index()
     {
-        $data_penduduk = DataPenduduk::with(['agama', 'jenis_kelamin', 'pekerjaan', 'gol_darah', 'status_kawin', 'kewarganegaraan', 'alamat'])->get(); // Pastikan data ini berbentuk koleksi/array
-
+        $data_penduduk = DataPenduduk::with(['agama', 'jenis_kelamin', 'pekerjaan', 'gol_darah', 'status_kawin', 'kewarganegaraan'])->get();
         return Inertia::render('Population_data', [
-            'population_data' => $data_penduduk,
+            'data_penduduk' => $data_penduduk,
         ]);
     }
 
     public function show($id)
     {
         $data_penduduk = DataPenduduk::with(['agama', 'jenis_kelamin', 'gol_darah', 'kewarganegaraan', 'pekerjaan', 'status_kawin', ''])->findOrFail($id);
-        return view('data_penduduk.show', compact('data_penduduk'));
+        return Inertia::render('data_penduduk_detail', [
+            'data_penduduk' => $data_penduduk,
+        ]);
     }
 }
-

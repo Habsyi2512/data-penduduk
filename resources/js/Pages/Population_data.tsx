@@ -1,19 +1,33 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { useEffect } from 'react';
 
-interface AgamaProps {
-    id: string;
-    name: string;
+interface data_pendudukProps {
+id: number;
+nik: string;
+nama: string;
+tempat_lahir: string;
+tanggal_lahir: string;
+kelamin: string;
+gol_darah: string;
+agama: string;
+status_kawin: string;
+pekerjaan: string;
+kewarganegaraan: string;
 }
 
-export default function Population_data({agamas}: {agamas: AgamaProps[]}) {
-    useEffect(()=>{
-        console.log('agama = ', agamas);
-    },[agamas])
-// Mengambil data population_data yang diterima dari controller
+
+export default function Population_data({data_penduduk}: {data_penduduk: data_pendudukProps[]}) {
+function formatDate(dateString : string){
+const options: Intl.DateTimeFormatOptions = {
+year: 'numeric',
+month: 'long',
+day: 'numeric',
+};
+const date = new Date(dateString);
+return date.toLocaleDateString('id-ID', options);
+}
 return (
 <AuthenticatedLayout>
-    {/* <div className="p-4">
+    <div className="p-4">
         <h1 className="mb-4 text-xl font-bold">Data Penduduk</h1>
         <div className="overflow-x-auto">
             <table className="w-full table-auto border-collapse border border-gray-400">
@@ -38,6 +52,9 @@ return (
                             Kelamin
                         </th>
                         <th className="border border-gray-400 px-4 py-2">
+                            Golongan Darah
+                        </th>
+                        <th className="border border-gray-400 px-4 py-2">
                             Agama
                         </th>
                         <th className="border border-gray-400 px-4 py-2">
@@ -49,11 +66,11 @@ return (
                         <th className="border border-gray-400 px-4 py-2">
                             Kewarganegaraan
                         </th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {population_data.map(
-                    (penduduk: any, index: number) => (
+                    {data_penduduk.map((penduduk: any, index: number) => (
                     <tr key={penduduk.id}>
                         <td className="border border-gray-400 px-4 py-2">
                             {index + 1}
@@ -68,46 +85,35 @@ return (
                             {penduduk.tempat_lahir}
                         </td>
                         <td className="border border-gray-400 px-4 py-2">
-                            {penduduk.tanggal_lahir}
+                            {formatDate(penduduk.tanggal_lahir)}
                         </td>
                         <td className="border border-gray-400 px-4 py-2">
-                            {penduduk.jenis_kelamin?.nama}
+                            {penduduk.jenis_kelamin?.jenis_kelamin}
                         </td>
                         <td className="border border-gray-400 px-4 py-2">
-                            {penduduk.agama?.nama}
+                            {penduduk.gol_darah?.gol_darah}
                         </td>
                         <td className="border border-gray-400 px-4 py-2">
-                            {penduduk.status_kawin?.nama}
+                            {penduduk.agama?.agama}
                         </td>
                         <td className="border border-gray-400 px-4 py-2">
-                            {penduduk.pekerjaan?.nama}
+                            {penduduk.status_kawin?.status}
                         </td>
                         <td className="border border-gray-400 px-4 py-2">
-                            {penduduk.kewarganegaraan?.nama}
+                            {penduduk.pekerjaan?.pekerjaan}
+                        </td>
+                        <td className="border border-gray-400 px-4 py-2">
+                            {penduduk.kewarganegaraan?.kewarganegaraan}
+                            {console.log(penduduk)}
+                        </td>
+                        <td>
+                            <a href="#">Edit</a>
                         </td>
                     </tr>
-                    ),
-                    )}
+                    ))}
                 </tbody>
             </table>
         </div>
-    </div> */}
-
-    <div>
-        <h1>Data Agama</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Agama</th>
-                </tr>
-            </thead>
-            <tbody>
-                {/* Menggunakan map() untuk iterasi array agamas */}
-               
-    
-            </tbody>
-        </table>
     </div>
 </AuthenticatedLayout>
 );
