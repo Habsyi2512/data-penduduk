@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('tanggal_lahir');
             $table->unsignedBigInteger('kelamin_id');
             $table->unsignedBigInteger('gol_darah_id');
-            // $table->unsignedBigInteger('alamat_id');
+            $table->unsignedBigInteger('alamat_id');
             $table->unsignedBigInteger('agama_id');
             $table->unsignedBigInteger('status_kawin_id');
             $table->unsignedBigInteger('pekerjaan_id');
@@ -28,7 +28,7 @@ return new class extends Migration
 
             $table->foreign('kelamin_id')->references('id')->on('jenis_kelamins');
             $table->foreign('gol_darah_id')->references('id')->on('gol_darahs');
-            // $table->foreign('alamat_id')->references('id')->on('alamats');
+            $table->foreign('alamat_id')->references('id')->on('alamats');
             $table->foreign('agama_id')->references('id')->on('agamas');
             $table->foreign('status_kawin_id')->references('id')->on('status_kawins');
             $table->foreign('pekerjaan_id')->references('id')->on('pekerjaans');
