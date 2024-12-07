@@ -1,9 +1,9 @@
 import { ErrorMessage, Form, FormikProps } from 'formik';
 import { SetStateAction } from 'react';
 import Box from '../box/Box';
+import { TrashIcon } from '../icons/TrashIcon';
 import InputField from './components/Input';
 import Label from './components/Label';
-import { TrashIcon } from '../icons/TrashIcon';
 
 interface AddPendudukFormProps {
     formik: FormikProps<{
@@ -44,7 +44,7 @@ export default function AddPendudukForm({
                         <h2 className="font-inter text-xl font-bold text-blue-600 dark:text-gray-400">
                             Form {index + 1}
                         </h2>
-                        <div className='flex w-auto space-x-3 h-full'>
+                        <div className="flex h-full w-auto space-x-3">
                             {!openByIdx[index] && (
                                 <button
                                     type="button"
@@ -56,9 +56,9 @@ export default function AddPendudukForm({
                                         )
                                     }
                                     disabled={formik.values.forms.length === 1} // Disable when there's only one form
-                                    className="w-10 flex-1 flex items-center justify-center aspect-square hover:bg-red-600 rounded-md bg-red-500 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+                                    className="flex aspect-square w-10 flex-1 items-center justify-center rounded-md bg-red-500 text-white hover:bg-red-600 disabled:cursor-not-allowed disabled:bg-gray-500"
                                 >
-                                    <TrashIcon className='w-5 h-5'/>
+                                    <TrashIcon className="h-5 w-5" />
                                 </button>
                             )}
                             <button
@@ -70,6 +70,7 @@ export default function AddPendudukForm({
                             </button>
                         </div>
                     </div>
+                    {openByIdx[index] && <hr className="border-blue-200 dark:border-gray-800" />}
                     <div
                         className={`grid transition-all ${
                             openByIdx[index]

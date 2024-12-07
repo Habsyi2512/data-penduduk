@@ -3,6 +3,7 @@
 use App\Http\Controllers\AgamaController;
 use App\Http\Controllers\DataPendudukController;
 use App\Http\Controllers\DebugController;
+use App\Http\Controllers\PendudukFormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Foundation\Application;
@@ -23,9 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/dashboard/tambah-penduduk', function(){
-        return Inertia::render('Form/AddPenduduk');
-    });
+    Route::get('/dashboard/tambah-penduduk', [PendudukFormController::class, 'index'])->name('tambah-penduduk');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
