@@ -17,23 +17,22 @@ const validationSchema = Yup.object({
 });
 
 export default function AddPenduduk() {
-    const [openByIdx, setOpenByIdx] = useState<boolean[]>([false]);
+    const [openByIdx, setOpenByIdx] = useState<boolean[]>([true]);
     const [idx, setIdx] = useState<number>(0);
     const [isOpenConfirmModal, setIsOpenConfirmModal] =
         useState<boolean>(false);
-    // Fungsi untuk toggle accordion
+
     const toggleAccordion = (index: number) => {
         const newOpenByIdx = [...openByIdx];
         newOpenByIdx[index] = !newOpenByIdx[index];
         setOpenByIdx(newOpenByIdx);
     };
 
-    // Fungsi untuk konfirmasi penghapusan
     const handleConfirmModal = (
         remove: <X = any>(index: number) => X | undefined,
         index: number,
         formik: FormikProps<{
-            forms: { nik: string; name: string }[]; // Ensure this matches the actual structure you're using
+            forms: { nik: string; name: string }[]; 
         }>,
     ) => {
         setIdx(index);

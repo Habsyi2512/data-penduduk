@@ -3,6 +3,7 @@ import { SetStateAction } from 'react';
 import Box from '../box/Box';
 import InputField from './components/Input';
 import Label from './components/Label';
+import { TrashIcon } from '../icons/TrashIcon';
 
 interface AddPendudukFormProps {
     formik: FormikProps<{
@@ -43,13 +44,31 @@ export default function AddPendudukForm({
                         <h2 className="font-inter text-xl font-bold text-blue-600 dark:text-gray-400">
                             Form {index + 1}
                         </h2>
-                        <button
-                            type="button"
-                            onClick={() => toggleAccordion(index)}
-                            className="w-20 rounded-md border border-blue-300/50 bg-blue-100 p-2 text-blue-600 hover:bg-blue-200 dark:border-gray-500/50 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
-                        >
-                            {openByIdx[index] ? 'Tutup' : 'Buka'}
-                        </button>
+                        <div className='flex w-auto space-x-3 h-full'>
+                            {!openByIdx[index] && (
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        handleConfirmModal(
+                                            remove,
+                                            index,
+                                            formik,
+                                        )
+                                    }
+                                    disabled={formik.values.forms.length === 1} // Disable when there's only one form
+                                    className="w-10 flex-1 flex items-center justify-center aspect-square hover:bg-red-600 rounded-md bg-red-500 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
+                                >
+                                    <TrashIcon className='w-5 h-5'/>
+                                </button>
+                            )}
+                            <button
+                                type="button"
+                                onClick={() => toggleAccordion(index)}
+                                className="w-20 rounded-md border border-blue-300/50 bg-blue-100 p-2 text-blue-600 hover:bg-blue-200 dark:border-gray-500/50 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+                            >
+                                {openByIdx[index] ? 'Tutup' : 'Buka'}
+                            </button>
+                        </div>
                     </div>
                     <div
                         className={`grid transition-all ${
