@@ -1,0 +1,110 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class PekerjaanSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run()
+    {
+        $data = [
+            ['pekerjaan' => 'Belum/ Tidak Bekerja'],
+            ['pekerjaan' => 'Mengurus Rumah Tangga'],
+            ['pekerjaan' => 'Pelajar/ Mahasiswa'],
+            ['pekerjaan' => 'Pensiunan'],
+            ['pekerjaan' => 'Pegawai Negeri Sipil'],
+            ['pekerjaan' => 'Tentara Nasional Indonesia'],
+            ['pekerjaan' => 'Kepolisian RI'],
+            ['pekerjaan' => 'Perdagangan'],
+            ['pekerjaan' => 'Petani/ Pekebun'],
+            ['pekerjaan' => 'Peternak'],
+            ['pekerjaan' => 'Nelayan/ Perikanan'],
+            ['pekerjaan' => 'Industri'],
+            ['pekerjaan' => 'Konstruksi'],
+            ['pekerjaan' => 'Transportasi'],
+            ['pekerjaan' => 'Karyawan Swasta'],
+            ['pekerjaan' => 'Karyawan BUMN'],
+            ['pekerjaan' => 'Karyawan BUMD'],
+            ['pekerjaan' => 'Karyawan Honorer'],
+            ['pekerjaan' => 'Buruh Harian Lepas'],
+            ['pekerjaan' => 'Buruh Tani/ Perkebunan'],
+            ['pekerjaan' => 'Buruh Nelayan/ Perikanan'],
+            ['pekerjaan' => 'Buruh Peternakan'],
+            ['pekerjaan' => 'Pembantu Rumah Tangga'],
+            ['pekerjaan' => 'Tukang Cukur'],
+            ['pekerjaan' => 'Tukang Listrik'],
+            ['pekerjaan' => 'Tukang Batu'],
+            ['pekerjaan' => 'Tukang Kayu'],
+            ['pekerjaan' => 'Tukang Sol Sepatu'],
+            ['pekerjaan' => 'Tukang Las/ Pandai Besi'],
+            ['pekerjaan' => 'Tukang Jahit'],
+            ['pekerjaan' => 'Tukang Gigi'],
+            ['pekerjaan' => 'Penata Rias'],
+            ['pekerjaan' => 'Penata Busana'],
+            ['pekerjaan' => 'Penata Rambut'],
+            ['pekerjaan' => 'Mekanik'],
+            ['pekerjaan' => 'Seniman'],
+            ['pekerjaan' => 'Tabib'],
+            ['pekerjaan' => 'Paraji'],
+            ['pekerjaan' => 'Perancang Busana'],
+            ['pekerjaan' => 'Penterjemah'],
+            ['pekerjaan' => 'Imam Masjid'],
+            ['pekerjaan' => 'Pendeta'],
+            ['pekerjaan' => 'Pastor'],
+            ['pekerjaan' => 'Wartawan'],
+            ['pekerjaan' => 'Ustadz/ Mubaligh'],
+            ['pekerjaan' => 'Juru Masak'],
+            ['pekerjaan' => 'Promotor Acara'],
+            ['pekerjaan' => 'Anggota DPR-RI'],
+            ['pekerjaan' => 'Anggota DPD'],
+            ['pekerjaan' => 'Anggota BPK'],
+            ['pekerjaan' => 'Presiden'],
+            ['pekerjaan' => 'Wakil Presiden'],
+            ['pekerjaan' => 'Anggota Mahkamah Konstitusi'],
+            ['pekerjaan' => 'Anggota Kabinet/ Kementerian'],
+            ['pekerjaan' => 'Duta Besar'],
+            ['pekerjaan' => 'Gubernur'],
+            ['pekerjaan' => 'Wakil Gubernur'],
+            ['pekerjaan' => 'Bupati'],
+            ['pekerjaan' => 'Wakil Bupati'],
+            ['pekerjaan' => 'Walikota'],
+            ['pekerjaan' => 'Wakil Walikota'],
+            ['pekerjaan' => 'Anggota DPRD Provinsi'],
+            ['pekerjaan' => 'Anggota DPRD Kabupaten/ Kota'],
+            ['pekerjaan' => 'Dosen'],
+            ['pekerjaan' => 'Guru'],
+            ['pekerjaan' => 'Pilot'],
+            ['pekerjaan' => 'Pengacara'],
+            ['pekerjaan' => 'Notaris'],
+            ['pekerjaan' => 'Arsitek'],
+            ['pekerjaan' => 'Akuntan'],
+            ['pekerjaan' => 'Konsultan'],
+            ['pekerjaan' => 'Dokter'],
+            ['pekerjaan' => 'Bidan'],
+            ['pekerjaan' => 'Perawat'],
+            ['pekerjaan' => 'Apoteker'],
+            ['pekerjaan' => 'Psikiater/ Psikolog'],
+            ['pekerjaan' => 'Penyiar Televisi'],
+            ['pekerjaan' => 'Penyiar Radio'],
+            ['pekerjaan' => 'Pelaut'],
+            ['pekerjaan' => 'Peneliti'],
+            ['pekerjaan' => 'Sopir'],
+            ['pekerjaan' => 'Pialang'],
+            ['pekerjaan' => 'Paranormal'],
+            ['pekerjaan' => 'Pedagang'],
+            ['pekerjaan' => 'Perangkat Desa'],
+            ['pekerjaan' => 'Kepala Desa'],
+            ['pekerjaan' => 'Biarawati'],
+            ['pekerjaan' => 'Wiraswasta'],
+            ['pekerjaan' => 'Lainnya'],
+        ];
+
+        DB::table('pekerjaans')->insert($data);
+    }
+}
