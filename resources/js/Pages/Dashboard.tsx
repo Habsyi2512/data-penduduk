@@ -10,7 +10,7 @@ export default function Dashboard() {
         <AuthenticatedLayout>
             <Head title="Dashboard" />
             <div className="mb-6 grid grid-cols-4 gap-x-4">
-                <Box className='px-5 py-2'>
+                <Box className="px-5 py-2">
                     <h2 className="mb-1 text-lg font-medium text-gray-600 dark:text-gray-400">
                         Total
                     </h2>

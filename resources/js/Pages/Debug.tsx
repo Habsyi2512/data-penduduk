@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 
-export default function Debug() {
+export default function Debug({alamat}:any) {
+    useEffect(()=>{
+        console.log('alamat',alamat);
+    },[])
     const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [regency, setRegency] = useState<{
@@ -18,7 +21,6 @@ export default function Debug() {
 
         setSuggestions(data);
     };
-    console.log('suggestions: ', suggestions);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;

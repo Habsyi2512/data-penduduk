@@ -13,7 +13,7 @@ class DebugController extends Controller
 {
     $alamat = Alamat::find(1);
     return Inertia::render('Debug', [
-        'alamat' => $alamat->village->name
+        'alamat' => $alamat->village->district->regency->province->name
     ]);
 }
 

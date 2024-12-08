@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class DataPenduduk extends Model
 {
-    protected $fillable = ['nik', 'nama', 'tempat_lahir', 'tanggal_lahir', 'kelamin_id', 'agama_id', 'pekerjaan_id', 'gol_darah_id', 'status_kawin_id', 'kewarganegaraan_id'];
+    protected $fillable = ['nik', 'nama', 'tempat_lahir', 'tanggal_lahir', 'kelamin_id', 'agama_id', 'pekerjaan_id', 'gol_darah_id', 'status_kawin_id', 'kewarganegaraan_id', 'alamat_id'];
+
+    
     protected $casts = [
         'tanggal_lahir' => 'date',
     ];
