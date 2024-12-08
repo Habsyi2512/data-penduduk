@@ -22,8 +22,9 @@ class DataPendudukController extends Controller
         'pekerjaan',
         'gol_darah',
         'status_kawin',
-        'kewarganegaraan'
-    ])->paginate(10); // 10 data per halaman
+        'kewarganegaraan',
+        'alamat.village.district.regency'
+    ])->paginate(5); // 10 data per halaman
     // dd($data_penduduk);
     return Inertia::render('Population_data', [
         'data_penduduk' => $data_penduduk,

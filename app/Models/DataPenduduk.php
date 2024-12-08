@@ -47,4 +47,8 @@ class DataPenduduk extends Model
     {
         return $this->belongsTo(Kewarganegaraan::class, 'kewarganegaraan_id');
     }
+
+    public function alamat(){
+        return $this->belongsTo(Alamat::class, 'alamat_id', 'id');
+    }
 }
