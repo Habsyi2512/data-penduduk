@@ -46,7 +46,29 @@ export default function Sidebar({
         },
         {
             title:'Managemen Data',
-            url: '/managemen-data',
+            url: '',
+            subMenu: [
+                {
+                    title: ' Data Agama',
+                    url: '/dashboard/data-agama',
+                },
+                {
+                    title: ' Data Golongan Darah', 
+                    url: '/dashboard/data-gol-darah',
+                },
+                {
+                    title: ' Data Status Kawin',
+                    url: '/dashboard/data-status-kawin',
+                },
+                {
+                    title: ' Data Pekerjaan',
+                    url: '/dashboard/data-pekerjaan',
+                },
+                {
+                    title:' Data Warganegara',
+                    url: '/dashboard/data-kewarganegaraan',
+                }
+            ]
         },
         {
             title: 'Laporan',
@@ -98,7 +120,7 @@ export default function Sidebar({
                                     </span>
                                 </button>
                                 <ul
-                                    className={`overflow-hidden pl-6 transition-all duration-300 ease-in-out ${
+                                    className={`overflow-y-auto pl-6 transition-all duration-300 ease-in-out ${
                                         openSubMenuIndex === index
                                             ? 'max-h-40 mt-2 opacity-100'
                                             : 'max-h-0 opacity-0'
@@ -108,7 +130,7 @@ export default function Sidebar({
                                         <li key={subIndex} className='mb-2'>
                                             <a
                                                 href={subMenu.url}
-                                                className={`inline-block ${subMenu.url == url && 'bg-blue-800 dark:bg-gray-700'} w-full rounded px-3 py-2 hover:bg-blue-700 dark:hover:bg-gray-600`}
+                                                className={`inline-block ${subMenu.url == url && ' bg-blue-800 dark:bg-gray-700'} w-full rounded px-3 py-2 hover:bg-blue-700 dark:hover:bg-gray-600`}
                                             >
                                                 {subMenu.title}
                                             </a>

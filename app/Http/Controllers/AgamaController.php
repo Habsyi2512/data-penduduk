@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agama;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AgamaController extends Controller
 {
@@ -11,9 +12,8 @@ class AgamaController extends Controller
     {
         // Mengambil semua data agama
         $agamas = Agama::all();
-        dd($agamas);
 
         // Mengirim data agama ke view
-        return view('agama.index', ['agamas' => $agamas]);
+        return Inertia::render('Form/DataAgama', ['data_agama' => $agamas]);
     }
 }

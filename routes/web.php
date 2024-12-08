@@ -3,9 +3,14 @@
 use App\Http\Controllers\AgamaController;
 use App\Http\Controllers\DataPendudukController;
 use App\Http\Controllers\DebugController;
+use App\Http\Controllers\GolDarahController;
+use App\Http\Controllers\KewarganegaraanController;
+use App\Http\Controllers\PekerjaanController;
 use App\Http\Controllers\PendudukFormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\StatusKawinController;
+use App\Models\Kewarganegaraan;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,6 +32,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard/tambah-penduduk', [PendudukFormController::class, 'index'])->name('tambah-penduduk');
     Route::post('/dashboard/tambah-penduduk/tambah', [PendudukFormController::class, 'store'])->name('penduduk.store');
+
+    Route::get('/dashboard/data-agama', [AgamaController::class, 'index'])->name('data-agama');
+    Route::get('/dashboard/data-gol-darah', [GolDarahController::class, 'index'])->name('data-gol-darah');
+    Route::get('/dashboard/data-status-kawin', [StatusKawinController::class, 'index'])->name('data-status-kawin');
+    Route::get('/dashboard/data-pekerjaan', [PekerjaanController::class, 'index'])->name('data-pekerjaan');
+    Route::get('/dashboard/data-kewarganegaraan', [KewarganegaraanController::class, 'index'])->name('data-kewarganegaraan');
+
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
