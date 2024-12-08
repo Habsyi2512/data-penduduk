@@ -15,12 +15,21 @@ use Inertia\Inertia;
 class DataPendudukController extends Controller
 {
     public function index()
-    {
-        $data_penduduk = DataPenduduk::with(['agama', 'jenis_kelamin', 'pekerjaan', 'gol_darah', 'status_kawin', 'kewarganegaraan'])->get();
-        return Inertia::render('Population_data', [
-            'data_penduduk' => $data_penduduk,
-        ]);
-    }
+{
+    $data_penduduk = DataPenduduk::with([
+        'agama',
+        'jenis_kelamin',
+        'pekerjaan',
+        'gol_darah',
+        'status_kawin',
+        'kewarganegaraan'
+    ])->paginate(10); // 10 data per halaman
+    // dd($data_penduduk);
+    return Inertia::render('Population_data', [
+        'data_penduduk' => $data_penduduk,
+    ]);
+}
+
 
     public function show($id)
     {

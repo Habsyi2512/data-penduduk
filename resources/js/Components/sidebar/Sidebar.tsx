@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Bars3Icon from '../icons/Bars3Icon';
 import { ChevronDownIcon } from '../icons/ChevronDownIcon';
 import { ChevronRightIcon } from '../icons/ChevronRightIcon';
+import {Link} from '@inertiajs/react';
 
 export default function Sidebar({
     isOpenSidebar,
@@ -128,23 +129,23 @@ export default function Sidebar({
                                 >
                                     {menu.subMenu.map((subMenu, subIndex) => (
                                         <li key={subIndex} className='mb-2'>
-                                            <a
+                                            <Link
                                                 href={subMenu.url}
                                                 className={`inline-block ${subMenu.url == url && ' bg-blue-800 dark:bg-gray-700'} w-full rounded px-3 py-2 hover:bg-blue-700 dark:hover:bg-gray-600`}
                                             >
                                                 {subMenu.title}
-                                            </a>
+                                            </Link>
                                         </li>
                                     ))}
                                 </ul>
                             </>
                         ) : (
-                            <a
+                            <Link
                                 href={menu.url}
                                 className={`inline-block w-full rounded px-3 py-2 hover:bg-blue-800 dark:hover:bg-gray-700 ${url == menu.url && 'bg-blue-800 dark:bg-gray-700'}`}
                             >
                                 {menu.title}
-                            </a>
+                            </Link>
                         )}
                     </li>
                 ))}

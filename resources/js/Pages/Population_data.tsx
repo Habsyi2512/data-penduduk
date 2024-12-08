@@ -1,4 +1,6 @@
+import { PaginatedPenduduk } from '@/interface/pagination/interface';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import React from 'react';
 import { Toaster } from 'react-hot-toast';
 
 interface data_pendudukProps {
@@ -15,11 +17,16 @@ interface data_pendudukProps {
     kewarganegaraan: string;
 }
 
+interface PopulationDataProps {
+    data_penduduk: PaginatedPenduduk;
+}
+
 export default function Population_data({
     data_penduduk,
-}: {
-    data_penduduk: data_pendudukProps[];
-}) {
+}: PopulationDataProps) {
+    React.useEffect(()=>{
+        console.log('data penduduk = ', data_penduduk)
+    },[data_penduduk])
     function formatDate(dateString: string) {
         const options: Intl.DateTimeFormatOptions = {
             year: 'numeric',
@@ -30,7 +37,9 @@ export default function Population_data({
         return date.toLocaleDateString('id-ID', options);
     }
     return (
-        <AuthenticatedLayout>
+       <>
+       <p>oke</p>
+        {/* <AuthenticatedLayout>
             <div className="p-4">
                 <h1 className="mb-4 text-3xl font-bold text-gray-800">
                     Data Penduduk
@@ -76,7 +85,7 @@ export default function Population_data({
                             </tr>
                         </thead>
                         <tbody>
-                            {data_penduduk.map(
+                            {data_penduduk.data.map(
                                 (penduduk: any, index: number) => (
                                     <tr key={penduduk.id}>
                                         <td className="border border-gray-400 px-4 py-2">
@@ -129,6 +138,7 @@ export default function Population_data({
                     </table>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </AuthenticatedLayout> */}
+        </>
     );
 }
