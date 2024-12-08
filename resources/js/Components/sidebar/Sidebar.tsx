@@ -28,7 +28,7 @@ export default function Sidebar({
         },
         {
             title: 'Data Penduduk',
-            url: '/data-penduduk',
+            url: '/population',
             subMenu: [
                 {
                     title: 'Tambah Penduduk',
@@ -39,6 +39,10 @@ export default function Sidebar({
                     url: '/dashboard/hapus-penduduk',
                 },
             ],
+        },
+        {
+            title:'Managemen Data',
+            url: '/managemen-data',
         },
         {
             title: 'Laporan',
