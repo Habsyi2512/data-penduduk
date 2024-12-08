@@ -85,33 +85,6 @@ return (
             <JumlahPendudukChart />
         </div>
     </div>
-    {/* <div
-        className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
-        <HyperText
-            className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-blue-700 to-gray-300 bg-clip-text text-center text-7xl font-semibold leading-none text-transparent dark:from-white dark:to-black"
-            text="KEPULAUAN RIAU" />
-        <OrbitingCircles className="size-[30px] border-none bg-transparent" duration={20} delay={15} radius={80}>
-            <img src="/logo-kabupaten/Anambas.webp" alt="" />
-        </OrbitingCircles>
-        <OrbitingCircles className="size-[30px] border-none bg-transparent" duration={20} delay={25} radius={80}>
-            <img src="/logo-kabupaten/Batam.png" alt="" />
-        </OrbitingCircles>
-        <OrbitingCircles className="size-[30px] border-none bg-transparent" duration={15} delay={10} radius={150}>
-            <img src="/logo-kabupaten/Bintan.png" alt="" />
-        </OrbitingCircles>
-        <OrbitingCircles className="size-[30px] border-none bg-transparent" duration={20} delay={30} radius={150}>
-            <img src="/logo-kabupaten/Karimun.gif" alt="" />
-        </OrbitingCircles>
-        <OrbitingCircles className="size-[30px] border-none bg-transparent" duration={10} delay={30} radius={150}>
-            <img src="/logo-kabupaten/Lingga.png" alt="" />
-        </OrbitingCircles>
-        <OrbitingCircles className="size-[30px] border-none bg-transparent" duration={25} delay={10} radius={200}>
-            <img src="/logo-kabupaten/Natuna.png" alt="" />
-        </OrbitingCircles>
-        <OrbitingCircles className="size-[30px] border-none bg-transparent" duration={30} delay={20} radius={200}>
-            <img src="/logo-kabupaten/Tanjungpinang.png" alt="" />
-        </OrbitingCircles>
-    </div> */}
 </AuthenticatedLayout>
 );
 }
