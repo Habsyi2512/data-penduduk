@@ -3,49 +3,18 @@ import ConfirmDiscardModal from '@/Components/modal/ConfirmDiscardModal';
 import { InputPendudukProps } from '@/interface/interface';
 import { AddPendudukProps } from '@/interface/pageprops/interface';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
-import { FieldArray, Formik, FormikProps } from 'formik';
 import { router } from '@inertiajs/react';
+import { FieldArray, Formik, FormikProps } from 'formik';
 import { useState } from 'react';
-import * as Yup from 'yup';
-
-const validationSchema = Yup.object({
-    forms: Yup.array().of(
-        Yup.object({
-            nik: Yup.string()
-                .required('NIK Wajib diisi')
-                .length(16, 'NIK harus berisi 16 karakter berupa angka'),
-            nama: Yup.string().required('Nama wajib diisi'),
-            tempat_lahir: Yup.string().required('Tempat lahir wajib diisi'),
-            tanggal_lahir: Yup.string().required('Tanggal lahir wajib diisi'),
-            jenis_kelamin: Yup.object({
-                jenis_kelamin: Yup.string().required(
-                    'Jenis kelamin wajib diisi',
-                ),
-            }).required(),
-            gol_darahs: Yup.object({
-                gol_darah: Yup.string().required('Golongan darah wajib diisi'),
-            }).required('Golongan darah wajib diisi'),
-            agama: Yup.object({
-                agama: Yup.string().required('Agama wajib diisi'),
-            }).required('Agama wajib diisi'),
-            status_kawin: Yup.object({
-                status: Yup.string().required('Status kawin wajib diisi'),
-            }).required('Status kawin wajib diisi'),
-            pekerjaan: Yup.object({
-                pekerjaan: Yup.string().required('Pekerjaan wajib diisi'),
-            }).required('Pekerjaan wajib diisi'),
-            kewarganegaraan: Yup.object({
-                kewarganegaraan: Yup.string().required(
-                    'Kewarganegaraan wajib diisi',
-                ),
-            }).required('Kewarganegaraan wajib diisi'),
-            alamat: Yup.object({
-                alamat: Yup.string().required('Alamat wajib diisi'),
-                kelurahan_id: Yup.string().required('Kelurahan wajib diisi'),
-            }).required('Alamat wajib diisi'),
-        }),
-    ),
-});
+import { formField } from './FormatData';
+import { validationSchema } from './validation';
+import toast from 'react-hot-toast';
+interface StoreResponse {
+    success: boolean;
+    message: string;
+    redirect_url: string;
+  }
+  
 
 export default function AddPenduduk({
     agama,
@@ -55,6 +24,7 @@ export default function AddPenduduk({
     dataPekerjaan,
     dataStatusKawin,
 }: AddPendudukProps) {
+    const [loading, setLoading] = useState(false);
     const [openByIdx, setOpenByIdx] = useState<boolean[]>([true]);
     const [idx, setIdx] = useState<number>(0);
     const [isOpenConfirmModal, setIsOpenConfirmModal] =
@@ -85,35 +55,31 @@ export default function AddPenduduk({
 
     const handleSubmit = async (values: any) => {
         try {
-            // Kirim data ke server menggunakan router.post
-            router.post(route('penduduk.store'), { forms: values.forms }, {
-                onSuccess: () => {
-                    // Setelah berhasil submit, misalnya redirect ke halaman penduduk
-                    console.log('Data submitted successfully');
-                    router.get(route('dashboard')); // Redirect ke halaman index penduduk
+            setLoading(true);
+            router.post(
+                route('penduduk.store'),
+                { forms: values.forms },
+                {
+                    onSuccess: () => {
+                        toast.success('Berhasil input data');
+                        router.visit('/population')
+                    },
+                    onError: (errors) => {
+                        console.error('Error submitting form:', errors);
+                    },
                 },
-                onError: (errors) => {
-                    console.error('Error submitting form:', errors);
-                },
-            });
+            );
         } catch (error) {
             console.error('Form submit error:', error);
+        } finally {
+            setLoading(false); // Set loading to false when the submit finishes
         }
     };
+      
+      
+      
+      
 
-    const formField: InputPendudukProps = {
-        nik: '',
-        nama: '',
-        tempat_lahir: '',
-        tanggal_lahir: '',
-        jenis_kelamin: { id: '', jenis_kelamin: '' },
-        gol_darahs: { id: '', gol_darah: '' },
-        agama: { id: '', agama: '' },
-        status_kawin: { id: '', status: '' },
-        pekerjaan: { id: '', pekerjaan: '' },
-        kewarganegaraan: { id: '', kewarganegaraan: '' },
-        alamat: { id: '', alamat: '', kelurahan_id: '2105040005' },
-    };
     return (
         <Authenticated>
             <Formik
@@ -145,6 +111,7 @@ export default function AddPenduduk({
                                         formik={formikProps}
                                         openByIdx={openByIdx}
                                         push={push}
+                                        loading={loading}
                                         remove={remove}
                                     />
                                     {isOpenConfirmModal && (

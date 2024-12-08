@@ -37,23 +37,18 @@ export interface InputPendudukProps {
     nama: string;
     tempat_lahir: string;
     tanggal_lahir: string;
-    jenis_kelamin: {id:string, jenis_kelamin:string};
-    gol_darahs: {id:string, gol_darah:string};
-    agama: {id:string, agama:string};
-    status_kawin: {id:string, status:string};
-    pekerjaan: {id:string, pekerjaan:string};
-    kewarganegaraan: {id:string, kewarganegaraan:string};
-    alamat: {id:string, alamat: string, kelurahan_id:string}
+    jenis_kelamin: { id: string; jenis_kelamin: string };
+    gol_darahs: { id: string; gol_darah: string };
+    agama: { id: string; agama: string };
+    status_kawin: { id: string; status: string };
+    pekerjaan: { id: string; pekerjaan: string };
+    kewarganegaraan: { id: string; kewarganegaraan: string };
+    alamat: {
+        id: string;
+        alamat: string;
+        kelurahan_id: string;
+        kelurahan_nama: string;
+        kecamatan_nama:string;
+        kabupaten_nama:string;
+    };
 }
-
-// nik
-// nama
-// tempat_lahir
-// tanggal_lahir
-// kelamin_id
-// gol_darah_id
-// alamat_id
-// agama_id
-// status_kawin_id
-// pekerjaan_id
-// kewarganegaraan_id

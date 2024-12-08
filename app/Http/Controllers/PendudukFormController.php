@@ -64,8 +64,7 @@ class PendudukFormController extends Controller
         ]);
     }
 
-    // Mengarahkan ke halaman index setelah berhasil
-    return Inertia::location(route('dashboard'));
+    return to_route('population_data');
 }
 
 }

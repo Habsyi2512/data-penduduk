@@ -1,5 +1,6 @@
+import { useFormHooks } from '@/hooks/FormHooks';
 import { AnimatePresence, motion } from 'framer-motion';
-import { SetStateAction } from 'react';
+import { SetStateAction, useEffect } from 'react';
 
 export default function ConfirmDiscardModal({
     index,
@@ -12,6 +13,10 @@ export default function ConfirmDiscardModal({
     index: number;
     remove: <X = any>(index: number) => X | undefined;
 }) {
+    const {setQueries} = useFormHooks()
+    useEffect(()=>{
+        console.log('index modal sekarang = ', index)
+    },[])
     return (
         <AnimatePresence>
             {isOpenConfirmModal && (
@@ -44,7 +49,13 @@ export default function ConfirmDiscardModal({
                         <div className="flex justify-end space-x-3 p-5 font-inter font-medium">
                             <button
                                 onClick={() => {
-                                    remove(index);
+                                    remove(index); // Remove form at the current index
+                                    setQueries((prevState) => {
+                                        // Create a copy of prevState and delete the key at the given index
+                                        const newQueries = { ...prevState };
+                                        delete newQueries[index];
+                                        return newQueries;
+                                    });
                                     setIsOpenConfirmModal(false);
                                 }}
                                 className="rounded-md bg-red-500 px-3 py-2 text-white hover:bg-red-600 active:bg-red-50"

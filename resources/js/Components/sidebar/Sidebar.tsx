@@ -27,9 +27,13 @@ export default function Sidebar({
             url: '/dashboard',
         },
         {
-            title: 'Data Penduduk',
+            title: 'Penduduk',
             url: '/population',
             subMenu: [
+                {
+                    title: 'Data Penduduk',
+                    url: '/population',
+                },
                 {
                     title: 'Tambah Penduduk',
                     url: '/dashboard/tambah-penduduk',
@@ -101,7 +105,7 @@ export default function Sidebar({
                                     }`}
                                 >
                                     {menu.subMenu.map((subMenu, subIndex) => (
-                                        <li key={subIndex}>
+                                        <li key={subIndex} className='mb-2'>
                                             <a
                                                 href={subMenu.url}
                                                 className={`inline-block ${subMenu.url == url && 'bg-blue-800 dark:bg-gray-700'} w-full rounded px-3 py-2 hover:bg-blue-700 dark:hover:bg-gray-600`}

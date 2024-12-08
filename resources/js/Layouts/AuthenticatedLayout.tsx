@@ -1,6 +1,7 @@
 import Sidebar from '@/Components/sidebar/Sidebar';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import AuthenticatedHeader from './AuthenticatedHeader';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Authenticated({
     children,
@@ -36,6 +37,7 @@ export default function Authenticated({
 
     return (
         <div className="h-screen w-full bg-blue-50 transition-colors duration-500 dark:bg-gray-900">
+            <Toaster position='top-center'/>
             <div className="flex h-full w-full">
                 {/* Sidebar */}
                 <Sidebar
