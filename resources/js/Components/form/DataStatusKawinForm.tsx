@@ -31,7 +31,7 @@ formik: FormikProps<{ forms: { status: string }[] }>;
                         const handleAddForm = (
                         push: <X=any>(obj: X) => void,
                             ) => {
-                            push({ status: '' });
+                            push({ status_: '' });
                             setOpenByIdx((prevState) => [...prevState, true]);
                             };
                             return (

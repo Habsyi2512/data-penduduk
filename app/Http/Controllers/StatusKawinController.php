@@ -12,6 +12,18 @@ class StatusKawinController extends Controller
     {
         $statusKawin = StatusKawin::all();
 
-        return Inertia::render('Form/DataStatusKawin', ['status_kawin' => $statusKawin]);
+        return Inertia::render('Form/DataStatusKawin', ['status' => $statusKawin]);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'status' => 'required',
+        ]);
+
+        StatusKawin::create([
+            'status' => $request->status,
+        ]);
+        return Inertia::location('/dashboard');
     }
 }

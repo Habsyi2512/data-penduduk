@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StatusKawin extends Model
 {
-    protected $fillable = ['status_kawin'];
+    protected $fillable = ['status'];
 
     public function data_penduduk()
     {
