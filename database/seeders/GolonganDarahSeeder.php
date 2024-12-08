@@ -14,14 +14,11 @@ class GolonganDarahSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['gol_darah' => 'A+'],
-            ['gol_darah' => 'A-'],
-            ['gol_darah' => 'B+'],
-            ['gol_darah' => 'B-'],
-            ['gol_darah' => 'AB+'],
-            ['gol_darah' => 'AB-'],
-            ['gol_darah' => 'O+'],
-            ['gol_darah' => 'O-'],
+            ['gol_darah' => 'A'],
+            ['gol_darah' => 'B'],
+            ['gol_darah' => 'AB'],
+            ['gol_darah' => 'O'],
+
         ];
 
         DB::table('gol_darahs')->insert($data);

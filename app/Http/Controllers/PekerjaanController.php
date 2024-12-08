@@ -13,4 +13,15 @@ class PekerjaanController extends Controller
 
         return Inertia::render('Form/DataPekerjaan', ['pekerjaan' => $pekerjaan]);
     }
+
+    public function store(Request $request){
+        $request->validate([
+            'pekerjaan' => 'required'
+        ]);
+
+        Pekerjaan::create([
+            'pekerjaan' => $request->pekerjaan
+        ]);
+        return Inertia::location('/dashboard');
+    }
 }

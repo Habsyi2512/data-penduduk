@@ -29,16 +29,29 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-
+    // Route Dashboard
     Route::get('/dashboard/tambah-penduduk', [PendudukFormController::class, 'index'])->name('tambah-penduduk');
     Route::post('/dashboard/tambah-penduduk/tambah', [PendudukFormController::class, 'store'])->name('penduduk.store');
 
+    // route Agama
     Route::get('/dashboard/data-agama', [AgamaController::class, 'index'])->name('data-agama');
-    Route::get('/dashboard/data-gol-darah', [GolDarahController::class, 'index'])->name('data-gol-darah');
-    Route::get('/dashboard/data-status-kawin', [StatusKawinController::class, 'index'])->name('data-status-kawin');
-    Route::get('/dashboard/data-pekerjaan', [PekerjaanController::class, 'index'])->name('data-pekerjaan');
-    Route::get('/dashboard/data-kewarganegaraan', [KewarganegaraanController::class, 'index'])->name('data-kewarganegaraan');
+    Route::post('dashboard/data-agama', [AgamaController::class, 'store'])->name('data-agama.store');
 
+    // Route Golongan Darah
+    Route::get('/dashboard/data-gol-darah', [GolDarahController::class, 'index'])->name('data-gol-darah');
+    Route::post('/dashboard/data-gol-darah', [GolDarahController::class, 'store'])->name('data-gol-darah.store');
+
+    // Route Status Kawin
+    Route::get('/dashboard/data-status-kawin', [StatusKawinController::class, 'index'])->name('data-status-kawin');
+    Route::post('/dashboard/data-status-kawin', [StatusKawinController::class, 'store'])->name('data-status-kawin.store');
+
+    // Route Pekerjaan
+    Route::get('/dashboard/data-pekerjaan', [PekerjaanController::class, 'index'])->name('data-pekerjaan');
+    Route::post('/dashboard/data-pekerjaan', [PekerjaanController::class, 'store'])->name('data-pekerjaan.store');
+
+    // Route Kewarganegaraan
+    Route::get('/dashboard/data-kewarganegaraan', [KewarganegaraanController::class, 'index'])->name('data-kewarganegaraan');
+    Route::post('/dashboard/data-kewarganegaraan', [KewarganegaraanController::class, 'store'])->name('data-kewarganegaraan.store');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

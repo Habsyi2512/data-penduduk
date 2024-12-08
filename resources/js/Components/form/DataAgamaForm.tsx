@@ -1,23 +1,25 @@
-import { ErrorMessage, Form, FormikProps } from "formik";
-import { SetStateAction } from "react";
-import Box from "../box/Box";
-import { TrashIcon } from "../icons/TrashIcon";
-import Label from "./components/Label";
-import InputText from "./components/InputText";
+'use client';
 
+import * as React from 'react';
 
+import { ErrorMessage, Form, FormikProps } from 'formik';
+import { SetStateAction } from 'react';
+import Box from '../box/Box';
+import { TrashIcon } from '../icons/TrashIcon';
+import InputText from './components/InputText';
+import Label from './components/Label';
 
 interface DataAgamaFormProps {
-formik: FormikProps<{ forms: {agama : string} [] }>;
-    push : <X=any>(obj : X) => void;
-        remove: <X=any>(index: number) => X | undefined
+formik: FormikProps<{ forms: { agama: string }[] }>;
+    push: <X=any>(obj: X) => void;
+        remove: <X=any>(index: number) => X | undefined;
             openByIdx: boolean[];
             setOpenByIdx: React.Dispatch<SetStateAction<boolean[]>>;
                 toggleAccordion: (index: number) => void;
                 handleConfirmModal: (
                 remove: <X=any>(index: number) => X | undefined,
                     index: number,
-                    formik: FormikProps<{ forms: {agama : string} [] }>,
+                    formik: FormikProps<{ forms: { agama: string }[] }>,
                         ) => void;
                         }
 
@@ -28,22 +30,27 @@ formik: FormikProps<{ forms: {agama : string} [] }>;
                         openByIdx,
                         setOpenByIdx,
                         toggleAccordion,
-                        handleConfirmModal
+                        handleConfirmModal,
                         }: DataAgamaFormProps) {
-                        const handleAddForm = (push: <X=any>(obj: X)=> void) =>{
-                            push({agama: ''});
+                        const handleAddForm = (push: <X=any>(obj: X) => void) => {
+                            push({ agama: '' });
                             setOpenByIdx((prevState) => [...prevState, true]);
                             };
+
                             return (
                             <Form>
-                                {formik.values.forms.map((form, index) => (
+                                {formik.values.forms.map(
+                                (form, index) => (
                                 <Box key={index} className="my-3">
                                     <div className="flex items-center justify-between p-5">
                                         <h2 className="font-inter text-xl font-bold text-blue-600 dark:text-gray-400">
-                                            Edit Agama {index + 1}
+                                            Edit Agama{' '}
+                                            {index + 1}
                                         </h2>
                                         <div className="flex h-full w-auto space-x-3">
-                                            {!openByIdx[index] && (
+                                            {!openByIdx[
+                                            index
+                                            ] && (
                                             <button type="button" onClick={()=>
                                                 handleConfirmModal(
                                                 remove,
@@ -52,7 +59,8 @@ formik: FormikProps<{ forms: {agama : string} [] }>;
                                                 )
                                                 }
                                                 disabled={
-                                                formik.values
+                                                formik
+                                                .values
                                                 .forms
                                                 .length ===
                                                 1
@@ -69,7 +77,9 @@ formik: FormikProps<{ forms: {agama : string} [] }>;
                                                 }
                                                 className="w-20 rounded-md border border-blue-300/50 bg-blue-100 p-2 text-blue-600 hover:bg-blue-200 dark:border-gray-500/50 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
                                                 >
-                                                {openByIdx[index]
+                                                {openByIdx[
+                                                index
+                                                ]
                                                 ? 'Tutup'
                                                 : 'Buka'}
                                             </button>
@@ -99,7 +109,8 @@ formik: FormikProps<{ forms: {agama : string} [] }>;
                                                     )
                                                     }
                                                     disabled={
-                                                    formik.values
+                                                    formik
+                                                    .values
                                                     .forms
                                                     .length ===
                                                     1
@@ -112,9 +123,12 @@ formik: FormikProps<{ forms: {agama : string} [] }>;
                                         </div>
                                     </div>
                                 </Box>
-                                ))}
+                                ),
+                                )}
                                 <div className="space-x-5">
-                                    <button type="button" onClick={()=> handleAddForm(push)}
+                                    <button type="button" onClick={()=>
+                                        handleAddForm(push)
+                                        }
                                         className="mt-4 rounded-md bg-blue-500 px-4 py-2 text-white"
                                         >
                                         Add Form
@@ -127,5 +141,4 @@ formik: FormikProps<{ forms: {agama : string} [] }>;
                                 </div>
                             </Form>
                             );
-
                             }
