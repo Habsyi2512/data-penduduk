@@ -32,10 +32,10 @@ return (
                 Persentase
             </h2>
             <h2 className="font-inter text-2xl font-bold text-blue-700 dark:text-gray-300">
-                85%
+                15%
             </h2>
             <p className="font-inter text-gray-600 dark:text-gray-400">
-                Masyarakat Bekerja
+                Masyarakat Tidak Bekerja
             </p>
         </Box>
         <Box className="px-5 py-2">
