@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/logout', [ProfileController::class, 'logout'])->name('logout');
 
     // Route Dashboard
     Route::get('/dashboard/tambah-penduduk', [PendudukFormController::class, 'index'])->name('tambah-penduduk');
@@ -41,12 +42,11 @@ Route::middleware('auth')->group(function () {
     Route::put('/penduduk/update/{nik}', [PendudukFormController::class, 'update'])->name('penduduk.update');
     // Route::post('/penduduk/{id}/update', [PendudukFormController::class, 'update']);
 
-
     // route Agama
     Route::get('/dashboard/data-agama', [AgamaController::class, 'index'])->name('data-agama');
     Route::post('dashboard/data-agama', [AgamaController::class, 'store'])->name('data-agama.store');
     Route::get('/dashboard/data-agama/{$id}/edit', [AgamaController::class, 'edit'])->name('data-agama.edit');
-    Route::put('/dashboard/data-agama/{$id}', [AgamaController::class, 'update'])->name('data-agama.update',);
+    Route::put('/dashboard/data-agama/{$id}', [AgamaController::class, 'update'])->name('data-agama.update');
 
     // Route Golongan Darah
     Route::get('/dashboard/data-gol-darah', [GolDarahController::class, 'index'])->name('data-gol-darah');

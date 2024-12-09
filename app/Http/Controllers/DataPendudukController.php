@@ -17,27 +17,9 @@ class DataPendudukController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-    
-        $data_penduduk = DataPenduduk::with([
-            'agama',
-            'jenis_kelamin',
-            'pekerjaan',
-            'gol_darah',
-            'status_kawin',
-            'kewarganegaraan',
-            'alamat.village.district.regency'
-        ])
-        ->when($search, function ($query) use ($search) {
-            $query->where('nama', 'like', "%{$search}%")
-                  ->orWhere('nik', 'like', "%{$search}%")
-                  ->orWhereHas('alamat', function ($q) use ($search) {
-                      $q->where('alamat', 'like', "%{$search}%");
-                  });
-        })
-        ->paginate(5);
 
-        
-    
+        $data_penduduk = DataPenduduk::with(['agama', 'jenis_kelamin', 'pekerjaan', 'gol_darah', 'status_kawin', 'kewarganegaraan', 'alamat.village.district.regency'])->paginate(5);
+
         return Inertia::render('Population_data', [
             'data_penduduk' => $data_penduduk,
             'filters' => [
@@ -46,9 +28,6 @@ class DataPendudukController extends Controller
             'csrf_token' => csrf_token(),
         ]);
     }
-
-    
-
 
     public function show($id)
     {
@@ -115,7 +94,4 @@ class DataPendudukController extends Controller
 
     //     return response()->json(['message' => 'Data berhasil diupdate']);
     // }
-
 }
-
-  

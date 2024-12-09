@@ -4,37 +4,37 @@ import { Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from "recharts";
 export default function JumlahPendudukChart() {
 const data = [
 {
-name: 'Page A',
+name: 'Tanjungpinang',
 uv: 4000,
 pv: 2400,
 },
 {
-name: 'Page B',
+name: 'Batam',
 uv: 3000,
 pv: 1398,
 },
 {
-name: 'Page C',
+name: 'Anambas',
 uv: 2000,
 pv: 9800,
 },
 {
-name: 'Page D',
+name: 'Karimun',
 uv: 2780,
 pv: 3908,
 },
 {
-name: 'Page E',
+name: 'Bintan',
 uv: 1890,
 pv: 4800,
 },
 {
-name: 'Page F',
+name: 'Lingga',
 uv: 2390,
 pv: 3800,
 },
 {
-name: 'Page G',
+name: 'Natuna',
 uv: 3490,
 pv: 4300,
 },
