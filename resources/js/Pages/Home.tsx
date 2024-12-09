@@ -33,12 +33,12 @@ export default function Home({
                 />
                 {/* content 1 */}
                 <div className="h-[calc(100vh-64px)] w-full bg-black/20 p-16 backdrop-blur-[3px]">
-                    <div className="relative flex h-full w-full rounded bg-[#0E2A47]/80">
-                        <img
+                    <div className="relative flex h-full shadow-md backdrop-blur-[6px] w-full rounded bg-white/10">
+                        {/* <img
                             src="/bgjar/WorldMap.svg"
                             alt=""
                             className="absolute left-0 top-0 -z-10 h-full w-full object-cover"
-                        />
+                        /> */}
                         <motion.div
                             initial={{
                                 opacity: 0,

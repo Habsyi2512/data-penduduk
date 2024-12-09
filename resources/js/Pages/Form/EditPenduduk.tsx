@@ -53,26 +53,9 @@ export default function EditPenduduk({
             });
         };
 
-    const handleConfirmModal = (
-        remove: <X = any>(index: number) => X | undefined,
-        index: number,
-        formik: FormikProps<{
-            forms: InputPendudukProps[];
-        }>,
-    ) => {
-        setIdx(index);
-        const formValues = formik.values.forms[index];
-        const isValid = Object.values(formValues).some((value) => value !== '');
-        if (isValid) {
-            setisOpenDiscardModal(true);
-        } else {
-            remove(index);
-        }
-    };
 
-    React.useEffect(()=>{
-        console.log('data', data_penduduk)
-    },[])
+        
+        
 
     const formField: InputPendudukProps = {
         nik: data_penduduk.nik,
@@ -120,7 +103,6 @@ export default function EditPenduduk({
                                             dataStatusKawin,
                                         }}
                                         formField={formField}
-                                        handleConfirmModal={handleConfirmModal}
                                         setOpenByIdx={setOpenByIdx}
                                         toggleAccordion={toggleAccordion}
                                         formik={formikProps}

@@ -1,4 +1,5 @@
 import { useFormHooks } from '@/hooks/FormHooks';
+import ModalHooks from '@/hooks/ModalHooks';
 import { AddPendudukFormProps } from '@/interface/pageprops/interface';
 import { ErrorMessage, Field, Form } from 'formik';
 import { useEffect } from 'react';
@@ -25,9 +26,10 @@ export default function AddPendudukForm({
     openByIdx,
     setOpenByIdx,
     toggleAccordion,
-    handleConfirmModal,
     setIsOpenSubmitModal,
+    setIsOpenDiscardModal,
     loading,
+    setIdx,
 }: AddPendudukFormProps) {
     const {
         suggestions,
@@ -38,6 +40,8 @@ export default function AddPendudukForm({
         handleInputChange,
         handleSuggestionClick,
     } = useFormHooks();
+
+    const { handleConfirmModal } = ModalHooks();
 
     const {
         agama,
@@ -89,13 +93,17 @@ export default function AddPendudukForm({
                             {!openByIdx[index] && (
                                 <RemoveButton
                                     disabled={formik.values.forms.length === 1}
-                                    onClick={() =>
-                                        handleConfirmModal(
-                                            remove,
-                                            index,
-                                            formik,
-                                        )
-                                    }
+                                    onClick={() => {
+                                        if (setIdx && setIsOpenDiscardModal) {
+                                            handleConfirmModal(
+                                                remove,
+                                                index,
+                                                formik,
+                                                setIdx, // Pastikan setIdx sudah didefinisikan
+                                                setIsOpenDiscardModal,
+                                            );
+                                        }
+                                    }}
                                 />
                             )}
                             <BlueButton
@@ -524,9 +532,17 @@ export default function AddPendudukForm({
                         {/* Button to remove the current form */}
                         <button
                             type="button"
-                            onClick={() =>
-                                handleConfirmModal(remove, index, formik)
-                            }
+                            onClick={() => {
+                                if (setIdx && setIsOpenDiscardModal) {
+                                    handleConfirmModal(
+                                        remove,
+                                        index,
+                                        formik,
+                                        setIdx, // Pastikan setIdx sudah didefinisikan
+                                        setIsOpenDiscardModal,
+                                    );
+                                }
+                            }}
                             disabled={formik.values.forms.length === 1}
                             className="mt-8 rounded-md bg-red-500 px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
                         >

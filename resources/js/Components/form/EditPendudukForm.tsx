@@ -19,13 +19,9 @@ import Label from './components/Label';
 export default function EditPendudukForm({
     formik,
     data,
-    formField,
-    push,
     remove,
     openByIdx,
-    setOpenByIdx,
     toggleAccordion,
-    handleConfirmModal,
     setIsOpenSubmitModal,
     loading,
 }: AddPendudukFormProps) {
@@ -34,7 +30,6 @@ export default function EditPendudukForm({
         queries,
         setDistrict,
         setRegency,
-        handleAddForm,
         handleInputChange,
         handleSuggestionClick,
     } = useFormHooks();
@@ -84,20 +79,9 @@ export default function EditPendudukForm({
             {formik.values.forms.map((form, index) => (
                 <Box key={index} className="mb-3">
                     <FormHeader>
-                        <FormTitle title="Form Edit" index={index} />
+                        <FormTitle title={`Form Edit ${form.nik} `} showIndex={false} index={index} />
                         <FormHeaderAction>
-                            {!openByIdx[index] && (
-                                <RemoveButton
-                                    disabled={formik.values.forms.length === 1}
-                                    onClick={() =>
-                                        handleConfirmModal(
-                                            remove,
-                                            index,
-                                            formik,
-                                        )
-                                    }
-                                />
-                            )}
+                            
                             <BlueButton
                                 onClick={() => toggleAccordion(index)}
                                 isOpen={openByIdx[index]}
@@ -524,16 +508,6 @@ export default function EditPendudukForm({
 
                         {/* Button to remove the current form */}
                         <div className="space-x-5">
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    handleConfirmModal(remove, index, formik)
-                                }
-                                disabled={formik.values.forms.length === 1}
-                                className="mt-8 rounded-md bg-red-500 px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
-                            >
-                                Hapus
-                            </button>
                             <button
                                 type="button"
                                 onClick={() => setIsOpenSubmitModal(true)}

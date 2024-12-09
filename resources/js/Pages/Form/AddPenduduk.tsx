@@ -1,11 +1,10 @@
 import AddPendudukForm from '@/Components/form/AddPendudukForm';
 import ConfirmDiscardModal from '@/Components/modal/ConfirmDiscardModal';
 import ConfirmSubmitModal from '@/Components/modal/ConfirmSubmitModal';
-import { InputPendudukProps } from '@/interface/interface';
 import { AddPendudukProps } from '@/interface/pageprops/interface';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { router } from '@inertiajs/react';
-import { FieldArray, Formik, FormikProps } from 'formik';
+import { FieldArray, Formik } from 'formik';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { formField } from './FormatData';
@@ -30,23 +29,6 @@ export default function AddPenduduk({
         const newOpenByIdx = [...openByIdx];
         newOpenByIdx[index] = !newOpenByIdx[index];
         setOpenByIdx(newOpenByIdx);
-    };
-
-    const handleConfirmModal = (
-        remove: <X = any>(index: number) => X | undefined,
-        index: number,
-        formik: FormikProps<{
-            forms: InputPendudukProps[];
-        }>,
-    ) => {
-        setIdx(index);
-        const formValues = formik.values.forms[index];
-        const isValid = Object.values(formValues).some((value) => value !== '');
-        if (isValid) {
-            setisOpenDiscardModal(true);
-        } else {
-            remove(index);
-        }
     };
 
     const handleSubmit = async (values: any) => {
@@ -97,7 +79,6 @@ export default function AddPenduduk({
                                             dataStatusKawin,
                                         }}
                                         formField={formField}
-                                        handleConfirmModal={handleConfirmModal}
                                         setOpenByIdx={setOpenByIdx}
                                         toggleAccordion={toggleAccordion}
                                         formik={formikProps}
@@ -105,7 +86,10 @@ export default function AddPenduduk({
                                         push={push}
                                         loading={loading}
                                         remove={remove}
-                                        setIsOpenSubmitModal={setIsOpenSubmitModal}
+                                        setIsOpenSubmitModal={
+                                            setIsOpenSubmitModal
+                                        }
+                                        setIdx={setIdx}
                                     />
                                     {isOpenDiscardModal && (
                                         <ConfirmDiscardModal

@@ -30,13 +30,15 @@ export interface AddPendudukFormProps {
     openByIdx: boolean[];
     setOpenByIdx: React.Dispatch<SetStateAction<boolean[]>>;
     toggleAccordion: (index: number) => void;
-    handleConfirmModal: (
+    handleConfirmModal?: (
         remove: <X = any>(index: number) => X | undefined,
         index: number,
         formik: FormikProps<{
             forms: InputPendudukProps[];
         }>,
     ) => void;
+    setIsOpenDiscardModal?:React.Dispatch<SetStateAction<boolean>>;
     loading: boolean;
     setIsOpenSubmitModal:React.Dispatch<SetStateAction<boolean>>;
+    setIdx?: React.Dispatch<React.SetStateAction<number>>|undefined;
 }
