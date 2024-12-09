@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function () {
     // route Agama
     Route::get('/dashboard/data-agama', [AgamaController::class, 'index'])->name('data-agama');
     Route::post('dashboard/data-agama', [AgamaController::class, 'store'])->name('data-agama.store');
+    Route::get('/dashboard/data-agama/{$id}/edit', [AgamaController::class, 'edit'])->name('data-agama.edit');
+    Route::put('/dashboard/data-agama/{$id}', [AgamaController::class, 'update'])->name('data-agama.update',);
 
     // Route Golongan Darah
     Route::get('/dashboard/data-gol-darah', [GolDarahController::class, 'index'])->name('data-gol-darah');
