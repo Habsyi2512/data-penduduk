@@ -1,9 +1,9 @@
 import Bars3Icon from '@/Components/icons/Bars3Icon';
 import MoonIcon from '@/Components/icons/MoonIcon';
 import SunIcon from '@/Components/icons/SunIcon';
-import { usePage } from '@inertiajs/react';
+import { Link, useForm, usePage } from '@inertiajs/react';
 import { motion } from 'motion/react';
-import { SetStateAction } from 'react';
+import { FormEventHandler, SetStateAction } from 'react';
 
 export default function AuthenticatedHeader({
     setIsOpenSidebar,
@@ -16,6 +16,12 @@ export default function AuthenticatedHeader({
     toggleDarkMode: () => void;
     isDarkMode: boolean;
 }) {
+    const { post, processing } = useForm({});
+    const submit: FormEventHandler = (e) => {
+        e.preventDefault();
+
+        post(route('verification.send'));
+    };
     const user = usePage().props.auth.user;
     return (
         <>
@@ -52,6 +58,16 @@ export default function AuthenticatedHeader({
                         <button className="rounded-lg bg-blue-100 p-2 text-blue-600 hover:bg-blue-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">
                             {user.name}
                         </button>
+                        <form onSubmit={submit} action="POST">
+                            <Link
+                                method="post"
+                                as="button"
+                                href={route('logout')}
+                                className="rounded-lg bg-blue-100 p-2 text-blue-600 hover:bg-blue-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+                            >
+                                Logout
+                            </Link>
+                        </form>
                     </div>
                 </div>
             </header>
