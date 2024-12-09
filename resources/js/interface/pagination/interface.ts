@@ -18,6 +18,8 @@ export interface PaginatedData<T> {
     data: T[];
     links: PaginationLink[];
     meta: PaginationMeta;
+    current_page:number;
+    per_page:number
 }
 
 export interface Regency {

@@ -7,7 +7,7 @@ interface TableHeadProps extends React.HTMLProps<HTMLTableSectionElement> {
 
 export default function TableHead({ children, className = '', ...props }: TableHeadProps) {
   return (
-    <thead className={`bg-gray-50 ${className}`} {...props}>
+    <thead className={` border-0 ${className}`} {...props}>
       {children}
     </thead>
   );

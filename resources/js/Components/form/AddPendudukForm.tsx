@@ -26,13 +26,12 @@ export default function AddPendudukForm({
     setOpenByIdx,
     toggleAccordion,
     handleConfirmModal,
+    setIsOpenSubmitModal,
     loading,
 }: AddPendudukFormProps) {
     const {
         suggestions,
         queries,
-        regency,
-        district,
         setDistrict,
         setRegency,
         handleAddForm,
@@ -531,7 +530,7 @@ export default function AddPendudukForm({
                             disabled={formik.values.forms.length === 1}
                             className="mt-8 rounded-md bg-red-500 px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
                         >
-                            Remove
+                            Hapus
                         </button>
                     </FormContent>
                 </Box>
@@ -545,30 +544,17 @@ export default function AddPendudukForm({
                     }
                     className="mt-4 rounded-md bg-blue-500 px-4 py-2 text-white"
                 >
-                    Add Form
+                    Tambah Formulir
                 </button>
 
                 <button
-                    type="submit"
+                    type="button"
+                    onClick={() => setIsOpenSubmitModal(true)}
                     className="mt-4 rounded-md bg-green-500 px-4 py-2 text-white"
                 >
-                    {loading ? 'Loading...' : 'Submit'}
+                    {loading ? 'Memuat...' : 'Kirim'}
                 </button>
             </div>
         </Form>
     );
 }
-
-const TextArea = ({ children }: { children: React.ReactNode }) => {
-    return (
-        <textarea
-            className="mb-2 mt-1 block w-full rounded-md border border-blue-300/50 bg-white px-3 py-2 dark:border-gray-500/50 dark:bg-gray-700 dark:focus:ring-gray-800"
-            id="w3review"
-            name="w3review"
-            rows={4}
-            cols={50}
-        >
-            {children}
-        </textarea>
-    );
-};

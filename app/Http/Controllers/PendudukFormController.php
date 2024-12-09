@@ -67,4 +67,27 @@ class PendudukFormController extends Controller
     return to_route('population_data');
 }
 
+    public function edit($id)
+    {
+        // Ambil data penduduk berdasarkan ID
+        $penduduk = DataPenduduk::findOrFail($id);
+        $agama = Agama::all();
+        $data_kelamin = JenisKelamin::all();
+        $data_gol_darah = GolDarah::all();
+        $status_kawin = StatusKawin::all();
+        $pekerjaan = Pekerjaan::all();
+        $kewarganegaraan = Kewarganegaraan::all();
+        // dd($penduduk);
+
+
+
+        return to_route('data-agama');
+    }
+
+    public function halamanEdit(){
+        return Inertia::render('dashboard');
+    }
+
+
+
 }

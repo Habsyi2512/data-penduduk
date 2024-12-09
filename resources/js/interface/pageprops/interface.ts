@@ -38,4 +38,5 @@ export interface AddPendudukFormProps {
         }>,
     ) => void;
     loading: boolean;
+    setIsOpenSubmitModal:React.Dispatch<SetStateAction<boolean>>;
 }

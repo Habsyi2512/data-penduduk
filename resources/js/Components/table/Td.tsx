@@ -6,7 +6,7 @@ interface TdProps extends TdHTMLAttributes<HTMLTableCellElement> {
 
 export default function Td({ children, className = '', ...props }: TdProps) {
   return (
-    <td className={`border border-gray-400 px-4 py-2 ${className}`} {...props}>
+    <td className={`border-none text-gray-600 font-medium px-2 truncate py-2 ${className}`} {...props}>
       {children}
     </td>
   );

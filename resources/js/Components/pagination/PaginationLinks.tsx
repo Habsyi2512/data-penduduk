@@ -1,6 +1,5 @@
 import { PaginationLink } from '@/interface/pagination/interface';
 import { Link } from '@inertiajs/react';
-import { ChevronRightIcon } from '../icons/ChevronRightIcon';
 
 export default function PaginationLinks({
     links,
@@ -8,11 +7,13 @@ export default function PaginationLinks({
     links: PaginationLink[];
 }) {
     return (
-        <ul className="mt-5 flex mx-auto w-fit justify-center">
+        <ul className="mx-auto flex w-fit justify-center">
             {links.map((link, index) => {
                 if (link.label == '...') {
                     return (
-                        <Li className={`inline-block border px-5 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700`}>
+                        <Li
+                            className={`inline-block border bg-gray-100 px-5 py-1 hover:bg-gray-200 dark:bg-gray-700`}
+                        >
                             {link.label}
                         </Li>
                     );
@@ -22,7 +23,7 @@ export default function PaginationLinks({
                         <Li key={index}>
                             <Link
                                 href={link.url ?? '#'}
-                                className={`inline-block border-gray-300 hover:bg-gray-200 border rounded-l px-5 py-2 bg-gray-100 dark:bg-gray-700 `}
+                                className={`inline-block rounded-l border border-gray-300 bg-gray-100 px-5 py-1 hover:bg-gray-200 dark:bg-gray-700`}
                             >
                                 Prev
                             </Link>
@@ -33,10 +34,10 @@ export default function PaginationLinks({
                     return (
                         <Li key={index}>
                             <Link
-                                className={`inline-block border-gray-300 hover:bg-gray-200 border rounded-r px-5 py-2 bg-gray-100 dark:bg-gray-700`}
+                                className={`inline-block rounded-r border border-gray-300 bg-gray-100 px-5 py-1 hover:bg-gray-200 dark:bg-gray-700`}
                                 href={link.url ?? '#'}
                             >
-                                Next 
+                                Next
                             </Link>
                         </Li>
                     );
@@ -44,7 +45,7 @@ export default function PaginationLinks({
                 return (
                     <Li key={index}>
                         <Link
-                            className={`inline-block border-gray-300 hover:bg-gray-200 border px-5 py-2 ${link.active ? 'bg-gray-200 dark:bg-gray-500':'bg-gray-100 dark:bg-gray-700'}`}
+                            className={`inline-block border border-gray-300 px-5 py-1 hover:bg-gray-200 ${link.active ? 'bg-gray-200 dark:bg-gray-500' : 'bg-gray-100 dark:bg-gray-700'}`}
                             href={link.url ?? '#'}
                         >
                             {link.label}

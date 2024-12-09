@@ -32,6 +32,14 @@ Route::middleware('auth')->group(function () {
     // Route Dashboard
     Route::get('/dashboard/tambah-penduduk', [PendudukFormController::class, 'index'])->name('tambah-penduduk');
     Route::post('/dashboard/tambah-penduduk/tambah', [PendudukFormController::class, 'store'])->name('penduduk.store');
+    // routes/web.php
+    Route::post('/update-penduduk', [PendudukFormController::class, 'update'])->name('penduduk.update');
+    Route::post('/get-penduduk-data', [PendudukFormController::class, 'getPendudukData'])->name('getPendudukData');
+
+    // edit penduduk
+    Route::get('/penduduk/{id}/edit', [PendudukFormController::class, 'edit'])->name('penduduk.edit');
+    Route::get('/penduduk/get/edit', [PendudukFormController::class, 'halamanEdit'])->name('penduduk.edit.data');
+
 
     // route Agama
     Route::get('/dashboard/data-agama', [AgamaController::class, 'index'])->name('data-agama');

@@ -1,20 +1,15 @@
 import AddPendudukForm from '@/Components/form/AddPendudukForm';
 import ConfirmDiscardModal from '@/Components/modal/ConfirmDiscardModal';
+import ConfirmSubmitModal from '@/Components/modal/ConfirmSubmitModal';
 import { InputPendudukProps } from '@/interface/interface';
 import { AddPendudukProps } from '@/interface/pageprops/interface';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { router } from '@inertiajs/react';
 import { FieldArray, Formik, FormikProps } from 'formik';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { formField } from './FormatData';
 import { validationSchema } from './validation';
-import toast from 'react-hot-toast';
-interface StoreResponse {
-    success: boolean;
-    message: string;
-    redirect_url: string;
-  }
-  
 
 export default function AddPenduduk({
     agama,
@@ -27,7 +22,8 @@ export default function AddPenduduk({
     const [loading, setLoading] = useState(false);
     const [openByIdx, setOpenByIdx] = useState<boolean[]>([true]);
     const [idx, setIdx] = useState<number>(0);
-    const [isOpenConfirmModal, setIsOpenConfirmModal] =
+    const [isOpenSubmitModal, setIsOpenSubmitModal] = useState(false);
+    const [isOpenDiscardModal, setisOpenDiscardModal] =
         useState<boolean>(false);
 
     const toggleAccordion = (index: number) => {
@@ -47,7 +43,7 @@ export default function AddPenduduk({
         const formValues = formik.values.forms[index];
         const isValid = Object.values(formValues).some((value) => value !== '');
         if (isValid) {
-            setIsOpenConfirmModal(true);
+            setisOpenDiscardModal(true);
         } else {
             remove(index);
         }
@@ -62,7 +58,7 @@ export default function AddPenduduk({
                 {
                     onSuccess: () => {
                         toast.success('Berhasil input data');
-                        router.visit('/population')
+                        router.visit('/population');
                     },
                     onError: (errors) => {
                         console.error('Error submitting form:', errors);
@@ -75,10 +71,6 @@ export default function AddPenduduk({
             setLoading(false); // Set loading to false when the submit finishes
         }
     };
-      
-      
-      
-      
 
     return (
         <Authenticated>
@@ -113,17 +105,30 @@ export default function AddPenduduk({
                                         push={push}
                                         loading={loading}
                                         remove={remove}
+                                        setIsOpenSubmitModal={setIsOpenSubmitModal}
                                     />
-                                    {isOpenConfirmModal && (
+                                    {isOpenDiscardModal && (
                                         <ConfirmDiscardModal
                                             isOpenConfirmModal={
-                                                isOpenConfirmModal
+                                                isOpenDiscardModal
                                             }
                                             index={idx}
                                             setIsOpenConfirmModal={
-                                                setIsOpenConfirmModal
+                                                setisOpenDiscardModal
                                             }
                                             remove={remove}
+                                        />
+                                    )}
+                                    {isOpenSubmitModal && (
+                                        <ConfirmSubmitModal
+                                            formik={formikProps}
+                                            isOpenSubmitModal={
+                                                isOpenSubmitModal
+                                            }
+                                            index={idx}
+                                            setIsOpenSubmitModal={
+                                                setIsOpenSubmitModal
+                                            }
                                         />
                                     )}
                                 </>
