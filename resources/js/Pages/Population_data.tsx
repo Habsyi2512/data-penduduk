@@ -8,11 +8,10 @@ import TableHead from '@/Components/table/TableHead';
 import Th from '@/Components/table/Th';
 import Tr from '@/Components/table/Tr';
 import TooltipDemo from '@/Components/tooltip/TooltipDemo';
-import { handleEdit } from '@/hooks/Edit/FormHooks';
 import { PaginatedPenduduk } from '@/interface/pagination/interface';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
-import React, { useState } from 'react';
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/react';
+import { useState } from 'react';
 
 interface PopulationDataProps {
     data_penduduk: PaginatedPenduduk;
@@ -28,11 +27,6 @@ export default function Population_data({
     const currentPage = data_penduduk.current_page;
     const perPage = data_penduduk.per_page;
 
-    React.useEffect(() => {
-        console.log(data_penduduk);
-        console.log('token = ', csrf_token);
-    }, [csrf_token]);
-
     // Fungsi untuk menangani perubahan seleksi
     const handleSelect = (id: number) => {
         setSelectedIds((prevSelectedIds) => {
@@ -46,19 +40,9 @@ export default function Population_data({
         });
     };
 
-    const handleEditButton = (id: number | string) => {
-        // Menggunakan Inertia untuk mengarahkan ke halaman edit
-        Inertia.visit(`/penduduk/${id}/edit`, {
-            preserveState: true, // Menjaga state halaman tetap ada saat navigasi
-        });
+    const handleEditButton = (dataId: number) => {
+        router.get(`/penduduk/edit/${dataId}`);
     };
-
-    // Menampilkan data yang dipilih di konsol
-    React.useEffect(() => {
-        if (selectedIds.length > 0) {
-            console.log('Data yang dipilih: ', selectedIds);
-        }
-    }, [selectedIds]);
 
     function formatDate(dateString: string) {
         const options: Intl.DateTimeFormatOptions = {
@@ -80,7 +64,7 @@ export default function Population_data({
                 </div>
                 <div className="mb-2 flex items-center space-x-5">
                     <button
-                        onClick={() => handleEdit(selectedIds[0], csrf_token)}
+                        onClick={() => {}}
                         disabled={selectedIds.length < 1}
                         className="flex items-center justify-center space-x-2 rounded bg-blue-500 p-1 px-3 text-white shadow hover:bg-blue-600 active:bg-blue-500 disabled:cursor-not-allowed disabled:bg-gray-300"
                     >
@@ -153,7 +137,9 @@ export default function Population_data({
                                     <TooltipDemo value={penduduk.nama} />
                                 </Td>
                                 <Td className="max-w-[41px] truncate">
-                                    {penduduk.tempat_lahir}
+                                    <TooltipDemo
+                                        value={penduduk.tempat_lahir}
+                                    />
                                 </Td>
                                 <Td className="w-[41px] max-w-[4qpx] truncate">
                                     {formatDate(penduduk.tanggal_lahir)}
@@ -167,7 +153,12 @@ export default function Population_data({
                                     {penduduk.kewarganegaraan?.kewarganegaraan}
                                 </Td>
                                 <Td className="flex justify-center pr-5">
-                                    <button onClick={()=>{handleEditButton(penduduk.id)}} className="rounded bg-blue-500 p-1 text-white shadow hover:bg-blue-600 active:bg-blue-500">
+                                    <button
+                                        onClick={() => {
+                                            handleEditButton(penduduk.id);
+                                        }}
+                                        className="rounded bg-blue-500 p-1 text-white shadow hover:bg-blue-600 active:bg-blue-500"
+                                    >
                                         <PencilSquareIcon className="size-4" />
                                     </button>
                                 </Td>

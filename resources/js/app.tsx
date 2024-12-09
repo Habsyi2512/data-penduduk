@@ -9,11 +9,13 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
-    resolve: (name) =>
-        resolvePageComponent(
+    resolve: (name) => {
+        console.log(`Resolving component: ${name}`);
+        return resolvePageComponent(
             `./Pages/${name}.tsx`,
             import.meta.glob('./Pages/**/*.tsx'),
-        ),
+        );
+    },
     setup({ el, App, props }) {
         if (import.meta.env.SSR) {
             hydrateRoot(el, <App {...props} />);

@@ -36,9 +36,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/update-penduduk', [PendudukFormController::class, 'update'])->name('penduduk.update');
     Route::post('/get-penduduk-data', [PendudukFormController::class, 'getPendudukData'])->name('getPendudukData');
 
-    // edit penduduk
-    Route::get('/penduduk/{id}/edit', [PendudukFormController::class, 'edit'])->name('penduduk.edit');
-    Route::get('/penduduk/get/edit', [PendudukFormController::class, 'halamanEdit'])->name('penduduk.edit.data');
+    // edit data
+    Route::get('/penduduk/edit/{id}', [PendudukFormController::class, 'getData']);
+    Route::put('/penduduk/update/{nik}', [PendudukFormController::class, 'update'])->name('penduduk.update');
+    // Route::post('/penduduk/{id}/update', [PendudukFormController::class, 'update']);
 
 
     // route Agama

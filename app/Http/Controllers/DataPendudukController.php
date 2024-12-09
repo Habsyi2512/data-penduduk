@@ -97,24 +97,24 @@ class DataPendudukController extends Controller
         return Inertia::location('/population');
     }
 
-    public function update(Request $request)
-    {
-        // Validasi ID yang dikirim
-        $request->validate([
-            'selected_ids' => 'required|array|min:1',
-            'selected_ids.*' => 'integer|exists:penduduks,id', // Validasi apakah ID ada di database
-        ]);
+    // public function update(Request $request)
+    // {
+    //     // Validasi ID yang dikirim
+    //     $request->validate([
+    //         'selected_ids' => 'required|array|min:1',
+    //         'selected_ids.*' => 'integer|exists:penduduks,id', // Validasi apakah ID ada di database
+    //     ]);
 
-        // Ambil ID yang dipilih
-        $selectedIds = $request->input('selected_ids');
+    //     // Ambil ID yang dipilih
+    //     $selectedIds = $request->input('selected_ids');
 
-        // Lakukan update sesuai dengan kebutuhan, misalnya update status
-        DataPenduduk::whereIn('id', $selectedIds)->update([
-            'status' => 'updated', // Misalnya mengupdate status
-        ]);
+    //     // Lakukan update sesuai dengan kebutuhan, misalnya update status
+    //     DataPenduduk::whereIn('id', $selectedIds)->update([
+    //         'status' => 'updated', // Misalnya mengupdate status
+    //     ]);
 
-        return response()->json(['message' => 'Data berhasil diupdate']);
-    }
+    //     return response()->json(['message' => 'Data berhasil diupdate']);
+    // }
 
 }
 

@@ -12,11 +12,13 @@ createServer((page) =>
         page,
         render: ReactDOMServer.renderToString,
         title: (title) => `${title} - ${appName}`,
-        resolve: (name) =>
-            resolvePageComponent(
+        resolve: (name) => {
+            console.log(`Resolving component: ${name}`);
+            return resolvePageComponent(
                 `./Pages/${name}.tsx`,
                 import.meta.glob('./Pages/**/*.tsx'),
-            ),
+            );
+        },
         setup: ({ App, props }) => {
             /* eslint-disable */
             // @ts-expect-error
