@@ -1,5 +1,11 @@
 import DataKewarganegaraanForm from '@/Components/form/DataKewarganegaraanForm';
 import ConfirmDiscardModal from '@/Components/modal/ConfirmDiscardModal';
+import Table from '@/Components/table/Table';
+import TableBody from '@/Components/table/TableBody';
+import TableHead from '@/Components/table/TableHead';
+import Td from '@/Components/table/Td';
+import Th from '@/Components/table/Th';
+import Tr from '@/Components/table/Tr';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { Inertia } from '@inertiajs/inertia';
 import { FieldArray, Formik, FormikProps } from 'formik';
@@ -62,41 +68,27 @@ export default function DataKewarganegaraan({kewarganegaraan}: DataKewarganegara
  };
 return (
     <Authenticated>
-        <div className="p-5">
-            <h1 className="mb-5 text-center text-3xl font-bold text-blue-600">
-                Manajemen Data Golongan Darah
+        <div className="px-5">
+            <h1 className="mb-3 py-2 font-inter text-2xl font-bold text-blue-500">
+                Management Data Kewarganegaraan
             </h1>
-
-            <div className="overflow-x-auto">
-                <table
-                    className="border-collaps table-fixed border border-gray-300"
-                    style={{ width: '600px' }}
-                >
-                    <thead>
-                        <tr className="bg-gray-100">
-                            <th className="w-1/4 border border-gray-300 px-4 py-2 text-left">
-                                No
-                            </th>
-                            <th className="w-3/4 border border-gray-300 px-4 py-2 text-left">
-                                Golongan Darah
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {kewarganegaraan.map((item, index) => (
-                            <tr key={item.id} className="hover:bg-gray-50">
-                                <td className="border border-gray-300 px-4 py-2">
-                                    {index + 1}
-                                </td>
-                                <td className="border border-gray-300 px-4 py-2">
-                                    {item.kewarganegaraan}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
         </div>
+        <Table>
+            <TableHead>
+                <Tr>
+                    <Th>No</Th>
+                    <Th>Kewarganegaraan</Th>
+                </Tr>
+            </TableHead>
+            <TableBody>
+                {kewarganegaraan.map((item, index) => (
+                    <Tr>
+                        <Td>{index + 1}</Td>
+                        <Td>{item.kewarganegaraan}</Td>
+                    </Tr>
+                ))}
+            </TableBody>
+        </Table>
         <Formik
             initialValues={{ forms: [{ kewarganegaraan: '' }] }}
             onSubmit={handleSubmit}

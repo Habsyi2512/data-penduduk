@@ -8,19 +8,21 @@ use Inertia\Inertia;
 
 class PekerjaanController extends Controller
 {
-    public function index(){
-        $pekerjaan = Pekerjaan::all();
+    public function index()
+    {
+        $pekerjaan = Pekerjaan::Paginate(10);
 
         return Inertia::render('Form/DataPekerjaan', ['pekerjaan' => $pekerjaan]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
-            'pekerjaan' => 'required'
+            'pekerjaan' => 'required',
         ]);
 
         Pekerjaan::create([
-            'pekerjaan' => $request->pekerjaan
+            'pekerjaan' => $request->pekerjaan,
         ]);
         return Inertia::location('/dashboard');
     }

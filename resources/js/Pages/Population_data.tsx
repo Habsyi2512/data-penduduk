@@ -14,30 +14,30 @@ import { router } from '@inertiajs/react';
 import { useState } from 'react';
 
 interface PopulationDataProps {
-    data_penduduk: PaginatedPenduduk;
-    csrf_token: string;
+data_penduduk: PaginatedPenduduk;
+csrf_token: string;
 }
 
 export default function Population_data({
-    data_penduduk,
-    csrf_token,
+data_penduduk,
+csrf_token,
 }: PopulationDataProps) {
-    const [selectedIds, setSelectedIds] = useState<number[]>([]);
+const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
     const currentPage = data_penduduk.current_page;
     const perPage = data_penduduk.per_page;
 
     // Fungsi untuk menangani perubahan seleksi
     const handleSelect = (id: number) => {
-        setSelectedIds((prevSelectedIds) => {
-            if (prevSelectedIds.includes(id)) {
-                return prevSelectedIds.filter(
-                    (selectedId) => selectedId !== id,
-                ); // Menghapus ID jika sudah terpilih
-            } else {
-                return [...prevSelectedIds, id]; // Menambahkan ID jika belum terpilih
-            }
-        });
+    setSelectedIds((prevSelectedIds) => {
+    if (prevSelectedIds.includes(id)) {
+    return prevSelectedIds.filter(
+    (selectedId) => selectedId !== id,
+    ); // Menghapus ID jika sudah terpilih
+    } else {
+    return [...prevSelectedIds, id]; // Menambahkan ID jika belum terpilih
+    }
+    });
     };
 
     const handleEditButton = (dataId: number) => {
@@ -45,13 +45,13 @@ export default function Population_data({
     };
 
     function formatDate(dateString: string) {
-        const options: Intl.DateTimeFormatOptions = {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-        };
-        const date = new Date(dateString);
-        return date.toLocaleDateString('id-ID', options);
+    const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('id-ID', options);
     }
 
     return (
@@ -176,4 +176,4 @@ export default function Population_data({
             </Box>
         </Authenticated>
     );
-}
+    }

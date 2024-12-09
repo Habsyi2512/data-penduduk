@@ -44,7 +44,7 @@ formik: FormikProps<{ forms: { agama: string }[] }>;
                                 <Box key={index} className="my-3">
                                     <div className="flex items-center justify-between p-5">
                                         <h2 className="font-inter text-xl font-bold text-blue-600 dark:text-gray-400">
-                                            Edit Agama{' '}
+                                            Tambah Agama{' '}
                                             {index + 1}
                                         </h2>
                                         <div className="flex h-full w-auto space-x-3">

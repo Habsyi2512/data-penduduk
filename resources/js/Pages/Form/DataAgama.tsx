@@ -1,5 +1,11 @@
 import DataAgamaForm from '@/Components/form/DataAgamaForm';
 import ConfirmDiscardModal from '@/Components/modal/ConfirmDiscardModal';
+import Table from '@/Components/table/Table';
+import TableBody from '@/Components/table/TableBody';
+import TableHead from '@/Components/table/TableHead';
+import Td from '@/Components/table/Td';
+import Th from '@/Components/table/Th';
+import Tr from '@/Components/table/Tr';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { Inertia } from '@inertiajs/inertia';
 import { FieldArray, Formik, FormikProps } from 'formik';
@@ -21,20 +27,21 @@ interface DataAgamaProps {
     }[];
 }
 
-export default function DataAgama({data_agama}: DataAgamaProps){
+export default function DataAgama({ data_agama}: DataAgamaProps) {
     const [openByIdx, setOpenByIdx] = React.useState<boolean[]>([true]);
     const [idx, setIdx] = useState<number>(0);
-    const [isOpenConfirmModal, setIsOpenConfirmModal] = useState<boolean>(false);
+    const [isOpenConfirmModal, setIsOpenConfirmModal] =
+        useState<boolean>(false);
     const toggleAccordion = (index: number) => {
         const newOpenByIdx = [...openByIdx];
         newOpenByIdx[index] = !newOpenByIdx[index];
         setOpenByIdx(newOpenByIdx);
-    }
+    };
     const handleConfirmModal = (
         remove: <X = any>(index: number) => X | undefined,
         index: number,
         formik: FormikProps<{
-            forms: { agama: string }[]; 
+            forms: { agama: string }[];
         }>,
     ) => {
         setIdx(index);
@@ -63,46 +70,31 @@ export default function DataAgama({data_agama}: DataAgamaProps){
 
     return (
         <Authenticated>
-            <div className="p-5">
-                <h1 className="mb-5 text-center text-3xl font-bold text-blue-600">
-                    Manajemen Data Agama
+            <div className="px-5">
+                <h1 className="mb-3 py-2 font-inter text-2xl font-bold text-blue-500">
+                    Management Data Agama
                 </h1>
-
-                <div className="overflow-x-auto">
-                    <table
-                        className="border-collaps table-fixed border border-gray-300"
-                        style={{ width: '600px' }}
-                    >
-                        <thead>
-                            <tr className="bg-gray-100">
-                                <th className="w-1/4 border border-gray-300 px-4 py-2 text-left">
-                                    No
-                                </th>
-                                <th className="w-3/4 border border-gray-300 px-4 py-2 text-left">
-                                    Agama
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {data_agama.map((item, index) => (
-                                <tr key={item.id} className="hover:bg-gray-50">
-                                    <td className="border border-gray-300 px-4 py-2">
-                                        {index + 1}
-                                    </td>
-                                    <td className="border border-gray-300 px-4 py-2">
-                                        {item.agama}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
             </div>
+            <Table>
+                <TableHead>
+                    <Tr>
+                        <Th>No</Th>
+                        <Th>Agama</Th>
+                    </Tr>
+                </TableHead>
+                <TableBody>
+                    {data_agama.map((item, index) => (
+                        <Tr>
+                            <Td>{index + 1}</Td>
+                            <Td>{item.agama}</Td>
+                        </Tr>
+                    ))}
+                </TableBody>
+            </Table>
             <Formik
-                initialValues={{ forms:[{agama: ''}] }}
+                initialValues={{ forms: [{ agama: '' }] }}
                 onSubmit={handleSubmit}
                 validationSchema={validationSchema}
-            
             >
                 {(formikProps) => (
                     <FieldArray name="forms">

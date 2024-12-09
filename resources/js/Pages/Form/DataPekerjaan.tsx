@@ -1,5 +1,13 @@
 import DataPekerjaanForm from '@/Components/form/DataPekerjaanForm';
 import ConfirmDiscardModal from '@/Components/modal/ConfirmDiscardModal';
+import PaginationLinks from '@/Components/pagination/PaginationLinks';
+import Table from '@/Components/table/Table';
+import TableBody from '@/Components/table/TableBody';
+import TableHead from '@/Components/table/TableHead';
+import Td from '@/Components/table/Td';
+import Th from '@/Components/table/Th';
+import Tr from '@/Components/table/Tr';
+import { PaginatePekerjaan } from '@/interface/pagination/interface';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { Inertia } from '@inertiajs/inertia';
 import { FieldArray, Formik, FormikProps } from 'formik';
@@ -14,13 +22,19 @@ pekerjaan: Yup.string().required('Pekerjaan is required'),
 ),
 });
 
+interface PopulationDataProps {
+    pekerjaan: PaginatePekerjaan;
+}
+
 interface PekerjaanFormProps {
     pekerjaan : {
         id: number;
         pekerjaan: string;
     }[];
 }
-export default function DataPekerjaan({pekerjaan}: PekerjaanFormProps) {
+export default function DataPekerjaan({pekerjaan}: PopulationDataProps) {
+const current_page = pekerjaan.current_page;
+const per_page = pekerjaan.per_page;
 const [openByIdx, setOpenByIdx] = React.useState<boolean[]>([true]);
     const [idx, setIdx] = useState<number>(0);
         const [isOpenConfirmModal, setIsOpenConfirmModal] = useState<boolean>(false);
@@ -61,44 +75,35 @@ const [openByIdx, setOpenByIdx] = React.useState<boolean[]>([true]);
                     };
                     return (
                         <Authenticated>
-                            <div className="p-5">
-                                <h1 className="mb-5 text-center text-3xl font-bold text-blue-600">
-                                    Manajemen Data Golongan Darah
+                            <div className="px-5">
+                                <h1 className="mb-3 py-2 font-inter text-2xl font-bold text-blue-500">
+                                    Management Data Pekerjaan
                                 </h1>
-
-                                <div className="overflow-x-auto">
-                                    <table
-                                        className="border-collaps table-fixed border border-gray-300"
-                                        style={{ width: '600px' }}
-                                    >
-                                        <thead>
-                                            <tr className="bg-gray-100">
-                                                <th className="w-1/4 border border-gray-300 px-4 py-2 text-left">
-                                                    No
-                                                </th>
-                                                <th className="w-3/4 border border-gray-300 px-4 py-2 text-left">
-                                                    Golongan Darah
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {pekerjaan.map((item, index) => (
-                                                <tr
-                                                    key={item.id}
-                                                    className="hover:bg-gray-50"
-                                                >
-                                                    <td className="border border-gray-300 px-4 py-2">
-                                                        {index + 1}
-                                                    </td>
-                                                    <td className="border border-gray-300 px-4 py-2">
-                                                        {item.pekerjaan}
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
+                            <Table>
+                                <TableHead>
+                                    <Tr>
+                                        <Th>No</Th>
+                                        <Th>Agama</Th>
+                                    </Tr>
+                                </TableHead>
+                                <TableBody>
+                                    {pekerjaan.data.map((item, index) => (
+                                        <Tr>
+                                            <Td>
+                                                {index +
+                                                    1 +
+                                                    (current_page - 1) *
+                                                        per_page}
+                                            </Td>
+                                            <Td>{item.pekerjaan}</Td>
+                                        </Tr>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                            <tfoot className="mt-5 flex items-center justify-center">
+                                <PaginationLinks links={pekerjaan.links} />
+                            </tfoot>
                             <Formik
                                 initialValues={{ forms: [{ pekerjaan: '' }] }}
                                 onSubmit={handleSubmit}
