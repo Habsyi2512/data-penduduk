@@ -10,7 +10,6 @@ use App\Http\Controllers\PendudukFormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StatusKawinController;
-use App\Models\Kewarganegaraan;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,6 +32,7 @@ Route::middleware('auth')->group(function () {
     // Route Dashboard
     Route::get('/dashboard/tambah-penduduk', [PendudukFormController::class, 'index'])->name('tambah-penduduk');
     Route::post('/dashboard/tambah-penduduk/tambah', [PendudukFormController::class, 'store'])->name('penduduk.store');
+
     // routes/web.php
     Route::post('/update-penduduk', [PendudukFormController::class, 'update'])->name('penduduk.update');
     Route::post('/get-penduduk-data', [PendudukFormController::class, 'getPendudukData'])->name('getPendudukData');
@@ -40,7 +40,6 @@ Route::middleware('auth')->group(function () {
     // edit data
     Route::get('/penduduk/edit/{id}', [PendudukFormController::class, 'getData']);
     Route::put('/penduduk/update/{nik}', [PendudukFormController::class, 'update'])->name('penduduk.update');
-    // Route::post('/penduduk/{id}/update', [PendudukFormController::class, 'update']);
 
     // route Agama
     Route::get('/dashboard/data-agama', [AgamaController::class, 'index'])->name('data-agama');

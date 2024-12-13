@@ -2,7 +2,7 @@ import { useFormHooks } from '@/hooks/FormHooks';
 import ModalHooks from '@/hooks/ModalHooks';
 import { AddPendudukFormProps } from '@/interface/pageprops/interface';
 import { ErrorMessage, Field, Form } from 'formik';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Box from '../box/Box';
 import Divider from '../ui/Divider';
 import {
@@ -28,7 +28,6 @@ export default function AddPendudukForm({
     toggleAccordion,
     setIsOpenSubmitModal,
     setIsOpenDiscardModal,
-    loading,
     setIdx,
 }: AddPendudukFormProps) {
     const {
@@ -568,7 +567,7 @@ export default function AddPendudukForm({
                     onClick={() => setIsOpenSubmitModal(true)}
                     className="mt-4 rounded-md bg-green-500 px-4 py-2 text-white"
                 >
-                    {loading ? 'Memuat...' : 'Kirim'}
+                    Kirim
                 </button>
             </div>
         </Form>

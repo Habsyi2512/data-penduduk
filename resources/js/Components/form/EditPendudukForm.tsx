@@ -10,7 +10,6 @@ import {
     FormHeader,
     FormHeaderAction,
     FormTitle,
-    RemoveButton,
     SuggestionList,
 } from './components/FormComponents';
 import InputText from './components/InputText';
@@ -19,11 +18,9 @@ import Label from './components/Label';
 export default function EditPendudukForm({
     formik,
     data,
-    remove,
     openByIdx,
     toggleAccordion,
     setIsOpenSubmitModal,
-    loading,
 }: AddPendudukFormProps) {
     const {
         suggestions,
@@ -79,9 +76,12 @@ export default function EditPendudukForm({
             {formik.values.forms.map((form, index) => (
                 <Box key={index} className="mb-3">
                     <FormHeader>
-                        <FormTitle title={`Form Edit ${form.nik} `} showIndex={false} index={index} />
+                        <FormTitle
+                            title={`Form Edit ${form.nik} `}
+                            showIndex={false}
+                            index={index}
+                        />
                         <FormHeaderAction>
-                            
                             <BlueButton
                                 onClick={() => toggleAccordion(index)}
                                 isOpen={openByIdx[index]}
@@ -100,7 +100,7 @@ export default function EditPendudukForm({
                                     <InputText
                                         disabled={true}
                                         name={`forms.${index}.nik`}
-                                        className="mb-2 block disabled:bg-gray-200 disabled:cursor-not-allowed"
+                                        className="mb-2 block disabled:cursor-not-allowed disabled:bg-gray-200"
                                         value={form.nik || ''}
                                     />
                                     <ErrorMessage
@@ -513,7 +513,7 @@ export default function EditPendudukForm({
                                 onClick={() => setIsOpenSubmitModal(true)}
                                 className="mt-4 rounded-md bg-green-500 px-4 py-2 text-white"
                             >
-                                {loading ? 'Memuat...' : 'Kirim'}
+                                Kirim
                             </button>
                         </div>
                     </FormContent>

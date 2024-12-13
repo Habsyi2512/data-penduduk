@@ -38,7 +38,6 @@ export interface AddPendudukFormProps {
         }>,
     ) => void;
     setIsOpenDiscardModal?:React.Dispatch<SetStateAction<boolean>>;
-    loading: boolean;
     setIsOpenSubmitModal:React.Dispatch<SetStateAction<boolean>>;
     setIdx?: React.Dispatch<React.SetStateAction<number>>|undefined;
 }
