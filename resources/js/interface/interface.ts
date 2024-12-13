@@ -51,4 +51,9 @@ export interface InputPendudukProps {
         kecamatan_nama:string;
         kabupaten_nama:string;
     };
+    getKelurahan():string 
+}
+
+export interface DataPendudukProps extends InputPendudukProps{
+    getSex?():string;
 }

@@ -52,9 +52,6 @@ export default function EditPenduduk({
                 },
             });
         };
-
-
-        
         
 
     const formField: InputPendudukProps = {
@@ -76,6 +73,9 @@ export default function EditPenduduk({
             kecamatan_nama: data_penduduk.alamat.village.district.name,
             kabupaten_nama: data_penduduk.alamat.village.district.regency.name,
         },
+        getKelurahan: function():string{
+            return this.alamat.kelurahan_nama
+        }
     };
 
     return (

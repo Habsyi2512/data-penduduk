@@ -5,7 +5,7 @@ import { AddPendudukProps } from '@/interface/pageprops/interface';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { router } from '@inertiajs/react';
 import { FieldArray, Formik } from 'formik';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { formField } from './FormatData';
 import { validationSchema } from './validation';
@@ -53,6 +53,7 @@ export default function AddPenduduk({
             setLoading(false); // Set loading to false when the submit finishes
         }
     };
+
 
     return (
         <Authenticated>
