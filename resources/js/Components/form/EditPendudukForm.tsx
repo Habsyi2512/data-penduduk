@@ -1,5 +1,5 @@
 import { useFormHooks } from '@/hooks/FormHooks';
-import { AddPendudukFormProps } from '@/interface/pageprops/interface';
+import { EditPendudukFormProps } from '@/interface/pageprops/interface';
 import { ErrorMessage, Field, Form } from 'formik';
 import { useEffect } from 'react';
 import Box from '../box/Box';
@@ -21,7 +21,7 @@ export default function EditPendudukForm({
     openByIdx,
     toggleAccordion,
     setIsOpenSubmitModal,
-}: AddPendudukFormProps) {
+}: EditPendudukFormProps) {
     const {
         suggestions,
         queries,

@@ -55,8 +55,6 @@ export default function DataAgama({ data_agama}: DataAgamaProps) {
     };
 
     const handleSubmit = (values: { forms: { agama: string }[] }) => {
-        console.log(values);
-        // Kirim data ke backend
         Inertia.post(
             '/dashboard/data-agama',
             { agama: values.forms[0].agama },

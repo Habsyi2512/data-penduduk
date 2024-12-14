@@ -65,7 +65,7 @@ export default function AddPenduduk({
                 validationSchema={validationSchema} // Apply Yup validation schema
             >
                 {(formikProps) => {
-                    console.log('formikProps:', formikProps.values.forms);
+
                     return (
                         <FieldArray name="forms">
                             {({ push, remove }) => (
@@ -85,7 +85,6 @@ export default function AddPenduduk({
                                         formik={formikProps}
                                         openByIdx={openByIdx}
                                         push={push}
-                                        loading={loading}
                                         remove={remove}
                                         setIsOpenSubmitModal={
                                             setIsOpenSubmitModal

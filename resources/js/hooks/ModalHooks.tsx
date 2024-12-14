@@ -13,7 +13,6 @@ export default function ModalHooks() {
         setIdx:React.Dispatch<SetStateAction<number>>,
         setisOpenDiscardModal:React.Dispatch<SetStateAction<boolean>>
     ) => {
-        console.log('index')
         setIdx(index);
         const formValues = formik.values.forms[index];
         const isEmpty = Object.values(formValues).every((value) => {

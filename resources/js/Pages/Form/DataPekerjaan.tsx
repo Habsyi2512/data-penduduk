@@ -60,9 +60,7 @@ const [openByIdx, setOpenByIdx] = React.useState<boolean[]>([true]);
 
                     const handleSubmit = (values: {
                         forms: { pekerjaan: string }[];
-                    }) => {
-                        console.log(values);
-                        // Kirim data ke backend
+                    }) => { 
                         Inertia.post(
                             '/dashboard/data-pekerjaan',
                             { pekerjaan: values.forms[0].pekerjaan },

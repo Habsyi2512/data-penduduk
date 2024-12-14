@@ -2,12 +2,15 @@ import Sidebar from '@/Components/sidebar/Sidebar';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import AuthenticatedHeader from './AuthenticatedHeader';
 import toast, { Toaster } from 'react-hot-toast';
+import { usePage } from '@inertiajs/react';
 
 export default function Authenticated({
     children,
 }: PropsWithChildren<{  }>) {
     const [isOpenSidebar, setIsOpenSidebar] = useState(true);
     const [isDarkMode, setIsDarkMode] = useState(false);
+    const { props } = usePage();
+
 
     // Apply dark mode class to the root HTML element
     useEffect(() => {

@@ -35,11 +35,10 @@ Route::middleware('auth')->group(function () {
 
     // routes/web.php
     Route::post('/update-penduduk', [PendudukFormController::class, 'update'])->name('penduduk.update');
-    Route::post('/get-penduduk-data', [PendudukFormController::class, 'getPendudukData'])->name('getPendudukData');
 
     // edit data
-    Route::get('/penduduk/edit/{id}', [PendudukFormController::class, 'getData']);
-    Route::put('/penduduk/update/{nik}', [PendudukFormController::class, 'update'])->name('penduduk.update');
+    Route::get('/dashboard/penduduk/edit', [PendudukFormController::class, 'edit'])->name('penduduk.edit');
+    Route::put('/dashboard/penduduk/update', [PendudukFormController::class, 'update'])->name('penduduk.update');
 
     // route Agama
     Route::get('/dashboard/data-agama', [AgamaController::class, 'index'])->name('data-agama');

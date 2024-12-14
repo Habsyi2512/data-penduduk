@@ -13,7 +13,6 @@ createServer((page) =>
         render: ReactDOMServer.renderToString,
         title: (title) => `${title} - ${appName}`,
         resolve: (name) => {
-            console.log(`Resolving component: ${name}`);
             return resolvePageComponent(
                 `./Pages/${name}.tsx`,
                 import.meta.glob('./Pages/**/*.tsx'),

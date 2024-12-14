@@ -1,6 +1,7 @@
-import { DataPendudukProps } from '@/interface/interface';
+import { InputPendudukProps } from "@/interface/interface";
 
-export const formField: DataPendudukProps = {
+
+export const formField: InputPendudukProps = {
     nik: '',
     nama: '',
     tempat_lahir: '',
@@ -18,11 +19,5 @@ export const formField: DataPendudukProps = {
         kelurahan_nama: '',
         kecamatan_nama: '',
         kabupaten_nama: '',
-    },
-    getSex: function (): string {
-        return this.jenis_kelamin.jenis_kelamin;
-    },
-    getKelurahan: function (): string {
-        return this.alamat.kelurahan_nama;
     },
 };

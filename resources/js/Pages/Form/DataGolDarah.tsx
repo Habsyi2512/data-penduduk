@@ -56,8 +56,6 @@ const [openByIdx, setOpenByIdx] = React.useState<boolean[]>([true]);
                 const handleSubmit = (values: {
                     forms: { gol_darah: string }[];
                 }) => {
-                    console.log(values);
-                    // Kirim data ke backend
                     Inertia.post(
                         '/dashboard/data-gol-darah',
                         { gol_darah: values.forms[0].gol_darah },

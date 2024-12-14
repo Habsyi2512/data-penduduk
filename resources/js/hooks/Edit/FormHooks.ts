@@ -15,7 +15,6 @@ export const handleEdit = async (selectedId: number, csrfToken: string) => {
         const data = await response.json();
 
         if (response.ok) {
-            console.log('data', data);
             
             // Redirect ke halaman edit dengan data yang didapat
             Inertia.visit(

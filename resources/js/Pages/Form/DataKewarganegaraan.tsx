@@ -54,8 +54,6 @@ export default function DataKewarganegaraan({kewarganegaraan}: DataKewarganegara
         }
     };
  const handleSubmit = (values: { forms: { kewarganegaraan: string }[] }) => {
-     console.log(values);
-     // Kirim data ke backend
      Inertia.post(
          '/dashboard/data-kewarganegaraan',
          { kewarganegaraan: values.forms[0].kewarganegaraan },

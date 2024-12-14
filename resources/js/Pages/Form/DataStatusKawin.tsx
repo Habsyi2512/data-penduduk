@@ -56,8 +56,6 @@ export default function DataStatusKawin({status}: DataStatusKawinProps) {
             }
         };
         const handleSubmit = (values: { forms: { status: string }[] }) => {
-            console.log(values);
-            // Kirim data ke backend
             Inertia.post(
                 '/dashboard/data-status-kawin',
                 { status: values.forms[0].status },

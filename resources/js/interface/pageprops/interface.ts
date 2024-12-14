@@ -10,6 +10,24 @@ import {
     statusKawinType,
 } from '../interface';
 
+// Type untuk properti yang sering digunakan
+type CommonFormikProps = FormikProps<{
+    forms: InputPendudukProps[];
+}>;
+
+type CommonModalHandlers = {
+    setIsOpenDiscardModal?: React.Dispatch<SetStateAction<boolean>>;
+    setIsOpenSubmitModal: React.Dispatch<SetStateAction<boolean>>;
+    setIdx?: React.Dispatch<SetStateAction<number>> | undefined;
+};
+
+type AccordionHandlers = {
+    openByIdx: boolean[];
+    setOpenByIdx: React.Dispatch<SetStateAction<boolean[]>>;
+    toggleAccordion: (index: number) => void;
+};
+
+// Type untuk data tambahan yang dibutuhkan
 export interface AddPendudukProps {
     agama: agamaType[];
     dataKelamin: jenisKelaminType[];
@@ -19,25 +37,25 @@ export interface AddPendudukProps {
     dataKewarganegaraan: kewarganegaraanType[];
 }
 
-export interface AddPendudukFormProps {
-    formik: FormikProps<{
-        forms: InputPendudukProps[];
-    }>;
+// Base interface untuk form penduduk
+interface BasePendudukFormProps {
+    formik: CommonFormikProps;
     data: AddPendudukProps;
-    formField: InputPendudukProps;
     push: <X = any>(obj: X) => void;
     remove: <X = any>(index: number) => X | undefined;
-    openByIdx: boolean[];
-    setOpenByIdx: React.Dispatch<SetStateAction<boolean[]>>;
-    toggleAccordion: (index: number) => void;
     handleConfirmModal?: (
         remove: <X = any>(index: number) => X | undefined,
         index: number,
-        formik: FormikProps<{
-            forms: InputPendudukProps[];
-        }>,
+        formik: CommonFormikProps,
     ) => void;
-    setIsOpenDiscardModal?:React.Dispatch<SetStateAction<boolean>>;
-    setIsOpenSubmitModal:React.Dispatch<SetStateAction<boolean>>;
-    setIdx?: React.Dispatch<React.SetStateAction<number>>|undefined;
+}
+
+// Interface untuk form Add Penduduk
+export interface AddPendudukFormProps extends BasePendudukFormProps, AccordionHandlers, CommonModalHandlers {
+    formField: InputPendudukProps; // Form field tunggal
+}
+
+// Interface untuk form Edit Penduduk
+export interface EditPendudukFormProps extends BasePendudukFormProps, AccordionHandlers, CommonModalHandlers {
+    formField: InputPendudukProps[]; // Form field array
 }

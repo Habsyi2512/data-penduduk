@@ -14,9 +14,7 @@ export default function ConfirmDiscardModal({
     remove: <X = any>(index: number) => X | undefined;
 }) {
     const {setQueries} = useFormHooks()
-    useEffect(()=>{
-        console.log('index modal sekarang = ', index)
-    },[])
+    
     return (
         <AnimatePresence>
             {isOpenConfirmModal && (

@@ -14,10 +14,6 @@ export const useFormHooks = () => {
         [key: number]: { district_id: string; district_name: string };
     }>({});
 
-    React.useEffect(() => {
-        console.log('queris = ', queries);
-    }, [queries]);
-
     const fetchSuggestions = async (searchQuery: string, index: number) => {
         try {
             const response = await fetch(

@@ -11,47 +11,47 @@ import TooltipDemo from '@/Components/tooltip/TooltipDemo';
 import { PaginatedPenduduk } from '@/interface/pagination/interface';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { router } from '@inertiajs/react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 interface PopulationDataProps {
-data_penduduk: PaginatedPenduduk;
-csrf_token: string;
+    data_penduduk: PaginatedPenduduk;
+    csrf_token: string;
 }
 
 export default function Population_data({
-data_penduduk,
-csrf_token,
+    data_penduduk,
+    csrf_token,
 }: PopulationDataProps) {
-const [selectedIds, setSelectedIds] = useState<number[]>([]);
+    const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
     const currentPage = data_penduduk.current_page;
     const perPage = data_penduduk.per_page;
 
     // Fungsi untuk menangani perubahan seleksi
     const handleSelect = (id: number) => {
-    setSelectedIds((prevSelectedIds) => {
-    if (prevSelectedIds.includes(id)) {
-    return prevSelectedIds.filter(
-    (selectedId) => selectedId !== id,
-    ); // Menghapus ID jika sudah terpilih
-    } else {
-    return [...prevSelectedIds, id]; // Menambahkan ID jika belum terpilih
-    }
-    });
+        setSelectedIds((prevSelectedIds) => {
+            if (prevSelectedIds.includes(id)) {
+                return prevSelectedIds.filter(
+                    (selectedId) => selectedId !== id,
+                ); // Menghapus ID jika sudah terpilih
+            } else {
+                return [...prevSelectedIds, id]; // Menambahkan ID jika belum terpilih
+            }
+        });
     };
 
-    const handleEditButton = (dataId: number) => {
-        router.get(`/penduduk/edit/${dataId}`);
+    const handleEditButton = () => {
+        router.get(route('penduduk.edit'), { id: selectedIds });
     };
 
     function formatDate(dateString: string) {
-    const options: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    };
-    const date = new Date(dateString);
-    return date.toLocaleDateString('id-ID', options);
+        const options: Intl.DateTimeFormatOptions = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        };
+        const date = new Date(dateString);
+        return date.toLocaleDateString('id-ID', options);
     }
 
     return (
@@ -64,7 +64,7 @@ const [selectedIds, setSelectedIds] = useState<number[]>([]);
                 </div>
                 <div className="mb-2 flex items-center space-x-5">
                     <button
-                        onClick={() => {}}
+                        onClick={handleEditButton}
                         disabled={selectedIds.length < 1}
                         className="flex items-center justify-center space-x-2 rounded bg-blue-500 p-1 px-3 text-white shadow hover:bg-blue-600 active:bg-blue-500 disabled:cursor-not-allowed disabled:bg-gray-300"
                     >
@@ -154,9 +154,7 @@ const [selectedIds, setSelectedIds] = useState<number[]>([]);
                                 </Td>
                                 <Td className="flex justify-center pr-5">
                                     <button
-                                        onClick={() => {
-                                            handleEditButton(penduduk.id);
-                                        }}
+                                        onClick={handleEditButton}
                                         className="rounded bg-blue-500 p-1 text-white shadow hover:bg-blue-600 active:bg-blue-500"
                                     >
                                         <PencilSquareIcon className="size-4" />
@@ -176,4 +174,4 @@ const [selectedIds, setSelectedIds] = useState<number[]>([]);
             </Box>
         </Authenticated>
     );
-    }
+}

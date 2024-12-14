@@ -64,7 +64,6 @@ class DataPendudukController extends Controller
             'kewarganegaraan_id' => 'required|exists:kewarganegaraans,id',
             'pekerjaan_id' => 'required|exists:pekerjaans,id',
         ]);
-        $data_penduduk = DataPenduduk::create($validated);
         return Inertia::location('/population');
     }
 }
