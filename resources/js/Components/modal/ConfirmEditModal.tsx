@@ -47,7 +47,7 @@ export default function ConfirmEditModal({
                                 type="submit"
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    setIsOpenSubmitModal(false)
+                                    setIsOpenSubmitModal(false);
                                     formik.handleSubmit();
                                 }}
                                 className="rounded-md bg-green-500 px-3 py-2 text-white hover:bg-green-600 active:bg-green-500"

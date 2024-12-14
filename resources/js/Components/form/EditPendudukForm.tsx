@@ -14,31 +14,18 @@ import {
 } from './components/FormComponents';
 import InputText from './components/InputText';
 import Label from './components/Label';
+import InputDateField from './components/form-fields/InputDateField';
+import InputSelectField from './components/form-fields/InputSelectField';
+import InputTextField from './components/form-fields/InputTextField';
 
 export default function EditPendudukForm({
     formik,
     data,
     openByIdx,
     toggleAccordion,
-    setIsOpenSubmitModal,
 }: EditPendudukFormProps) {
-    const {
-        suggestions,
-        queries,
-        setDistrict,
-        setRegency,
-        handleInputChange,
-        handleSuggestionClick,
-    } = useFormHooks();
-
-    const {
-        agama,
-        dataKelamin,
-        dataGolDarah,
-        dataKewarganegaraan,
-        dataPekerjaan,
-        dataStatusKawin,
-    } = data;
+    const { suggestions, queries, setDistrict, setRegency, handleInputChange, handleSuggestionClick } = useFormHooks();
+    const { agama, dataKelamin, dataGolDarah, dataKewarganegaraan, dataPekerjaan, dataStatusKawin } = data;
 
     const handleChange = (
         value: string,
@@ -53,21 +40,16 @@ export default function EditPendudukForm({
         if (selectedData) {
             formik.setFieldValue(name.id, selectedData.id);
             formik.setFieldValue(name.name, selectedData[key]);
+        } else {
+            formik.setFieldValue(name.id, '');
+            formik.setFieldValue(name.name, '');
         }
     };
 
     useEffect(() => {
-        if (Object.keys(queries).length === 0) {
-            Object.keys(queries).forEach((index) => {
-                setDistrict(parseInt(index), {
-                    district_id: '',
-                    district_name: '',
-                });
-                setRegency(parseInt(index), {
-                    regency_id: '',
-                    regency_name: '',
-                });
-            });
+        if (!Object.keys(queries).length) {
+            setDistrict(0, { district_id: '', district_name: '' });
+            setRegency(0, { regency_id: '', regency_name: '' });
         }
     }, [queries]);
 
@@ -93,287 +75,92 @@ export default function EditPendudukForm({
                         <div className="grid grid-cols-2 gap-5">
                             <div className="col-span-2 grid grid-cols-3 gap-x-6">
                                 {/* NIK */}
-                                <div>
-                                    <Label htmlFor={`forms.${index}.nik`}>
-                                        NIK
-                                    </Label>
-                                    <InputText
-                                        disabled={true}
-                                        name={`forms.${index}.nik`}
-                                        className="mb-2 block disabled:cursor-not-allowed disabled:bg-gray-200"
-                                        value={form.nik || ''}
-                                    />
-                                    <ErrorMessage
-                                        name={`forms.${index}.nik`}
-                                        component="div"
-                                        className="text-sm text-red-500"
-                                    />
-                                </div>
+                                <InputTextField
+                                    label="NIK"
+                                    name={`forms.${index}.nik`}
+                                    disabled={true}
+                                    placeholder="Masukkan NIK"
+                                />
 
                                 {/* Nama */}
-                                <div>
-                                    <Label htmlFor={`forms.${index}.nama`}>
-                                        Nama
-                                    </Label>
-                                    <InputText
-                                        name={`forms.${index}.nama`}
-                                        className="mb-2 block"
-                                        value={form.nama || ''}
-                                    />
-                                    <ErrorMessage
-                                        name={`forms.${index}.nama`}
-                                        component="div"
-                                        className="text-sm text-red-500"
-                                    />
-                                </div>
+                                <InputTextField
+                                    label="Nama"
+                                    name={`forms.${index}.nama`}
+                                    placeholder="Masukkan nama"
+                                />
 
                                 {/* Tempat Lahir */}
-                                <div>
-                                    <Label
-                                        htmlFor={`forms.${index}.tempat_lahir`}
-                                    >
-                                        Tempat Lahir
-                                    </Label>
-                                    <InputText
-                                        name={`forms.${index}.tempat_lahir`}
-                                        className="mb-2 block"
-                                        value={form.tempat_lahir || ''}
-                                    />
-                                    <ErrorMessage
-                                        name={`forms.${index}.tempat_lahir`}
-                                        component="div"
-                                        className="text-sm text-red-500"
-                                    />
-                                </div>
+                                <InputTextField
+                                    label="Tempat Lahir"
+                                    name={`forms.${index}.tempat_lahir`}
+                                    placeholder="Masukkan tempat lahir"
+                                />
                             </div>
 
                             <div className="col-span-2 grid grid-cols-3 gap-x-6">
                                 {/* Tanggal Lahir */}
-                                <div>
-                                    <Label
-                                        htmlFor={`forms.${index}.tanggal_lahir`}
-                                    >
-                                        Tanggal Lahir
-                                    </Label>
-                                    <Field
-                                        type="date"
-                                        name={`forms.${index}.tanggal_lahir`}
-                                        className="mb-2 mt-1 block w-full rounded-md border border-blue-300/50 bg-white px-3 py-2 dark:border-gray-500/50 dark:bg-gray-700 dark:focus:ring-gray-800"
-                                        value={form.tanggal_lahir || ''}
-                                    />
-                                    <ErrorMessage
-                                        name={`forms.${index}.tanggal_lahir`}
-                                        component="div"
-                                        className="text-sm text-red-500"
-                                    />
-                                </div>
+                                <InputDateField
+                                    label="Tanggal Lahir"
+                                    name={`forms.${index}.tanggal_lahir`}
+                                    className="custom-class"
+                                />
 
                                 {/* Golongan Darah */}
-                                <div>
-                                    <Label
-                                        htmlFor={`forms.${index}.gol_darahs`}
-                                    >
-                                        Golongan Darah
-                                    </Label>
-                                    <Field
-                                        as="select"
-                                        name={`forms.${index}.gol_darahs.gol_darah`}
-                                        onChange={(e: any) =>
-                                            handleChange(
-                                                e.target.value,
-                                                dataGolDarah,
-                                                'gol_darah',
-                                                {
-                                                    id: `forms.${index}.gol_darahs.id`,
-                                                    name: `forms.${index}.gol_darahs.gol_darah`,
-                                                },
-                                            )
-                                        }
-                                        className="mb-2 mt-1 block w-full rounded-md border border-blue-300/50 bg-white px-3 py-2 dark:border-gray-500/50 dark:bg-gray-700 dark:focus:ring-gray-800"
-                                    >
-                                        {dataGolDarah.map(
-                                            ({ id, gol_darah }) => (
-                                                <option
-                                                    key={id}
-                                                    value={gol_darah}
-                                                >
-                                                    {gol_darah}
-                                                </option>
-                                            ),
-                                        )}
-                                    </Field>
-
-                                    <ErrorMessage
-                                        name={`forms.${index}.gol_darahs.gol_darah`}
-                                        component="div"
-                                        className="text-sm text-red-500"
-                                    />
-                                </div>
+                                <InputSelectField
+                                    index={index}
+                                    dataKey="gol_darah"
+                                    onChange={handleChange}
+                                    name={`forms.${index}.gol_darahs.gol_darah`}
+                                    label="Golongan Darah"
+                                    options={dataGolDarah}
+                                />
 
                                 {/* Agama */}
-                                <div>
-                                    <Label htmlFor={`forms.${index}.agama`}>
-                                        Agama
-                                    </Label>
-                                    <Field
-                                        as="select"
-                                        name={`forms.${index}.agama.agama`}
-                                        onChange={(e: any) =>
-                                            handleChange(
-                                                e.target.value,
-                                                agama,
-                                                'agama',
-                                                {
-                                                    id: `forms.${index}.agama.id`,
-                                                    name: `forms.${index}.agama.agama`,
-                                                },
-                                            )
-                                        }
-                                        className="mb-2 mt-1 block w-full rounded-md border border-blue-300/50 bg-white px-3 py-2 dark:border-gray-500/50 dark:bg-gray-700 dark:focus:ring-gray-800"
-                                    >
-                                        {agama.map(({ id, agama }) => (
-                                            <option key={id} value={agama}>
-                                                {agama}
-                                            </option>
-                                        ))}
-                                    </Field>
-
-                                    <ErrorMessage
-                                        name={`forms.${index}.agama.agama`}
-                                        component="div"
-                                        className="text-sm text-red-500"
-                                    />
-                                </div>
+                                <InputSelectField
+                                    index={index}
+                                    dataKey="agama"
+                                    onChange={handleChange}
+                                    name={`forms.${index}.agama.agama`}
+                                    label="Agama"
+                                    options={agama}
+                                />
                             </div>
 
                             <div className="col-span-2 grid grid-cols-3 gap-6">
                                 {/* Pekerjaan */}
-                                <div>
-                                    <Label
-                                        htmlFor={`forms.${index}.pekerjaan.pekerjaan`}
-                                    >
-                                        Pekerjaan
-                                    </Label>
-                                    <Field
-                                        as="select"
-                                        name={`forms.${index}.pekerjaan.pekerjaan`}
-                                        onChange={(e: any) =>
-                                            handleChange(
-                                                e.target.value,
-                                                dataPekerjaan,
-                                                'pekerjaan',
-                                                {
-                                                    id: `forms.${index}.pekerjaan.id`,
-                                                    name: `forms.${index}.pekerjaan.pekerjaan`,
-                                                },
-                                            )
-                                        }
-                                        className="mb-2 mt-1 block w-full rounded-md border border-blue-300/50 bg-white px-3 py-2 dark:border-gray-500/50 dark:bg-gray-700 dark:focus:ring-gray-800"
-                                    >
-                                        {dataPekerjaan.map(
-                                            ({ id, pekerjaan }) => (
-                                                <option
-                                                    key={id}
-                                                    value={pekerjaan}
-                                                >
-                                                    {pekerjaan}
-                                                </option>
-                                            ),
-                                        )}
-                                    </Field>
-
-                                    <ErrorMessage
-                                        name={`forms.${index}.pekerjaan.pekerjaan`}
-                                        component="div"
-                                        className="text-sm text-red-500"
-                                    />
-                                </div>
+                                <InputSelectField
+                                    index={index}
+                                    dataKey="pekerjaan"
+                                    onChange={handleChange}
+                                    name={`forms.${index}.pekerjaan.pekerjaan`}
+                                    label="Pekerjaan"
+                                    options={dataPekerjaan}
+                                />
 
                                 {/* Kewarganegaraan */}
-                                <div>
-                                    <Label
-                                        htmlFor={`forms.${index}.kewarganegaraan.kewarganegaraan`}
-                                    >
-                                        Kewarganegaraan
-                                    </Label>
-                                    <Field
-                                        as="select"
-                                        name={`forms.${index}.kewarganegaraan.kewarganegaraan`}
-                                        onChange={(e: any) =>
-                                            handleChange(
-                                                e.target.value,
-                                                dataKewarganegaraan,
-                                                'kewarganegaraan',
-                                                {
-                                                    id: `forms.${index}.kewarganegaraan.id`,
-                                                    name: `forms.${index}.kewarganegaraan.kewarganegaraan`,
-                                                },
-                                            )
-                                        }
-                                        className="mb-2 mt-1 block w-full rounded-md border border-blue-300/50 bg-white px-3 py-2 dark:border-gray-500/50 dark:bg-gray-700 dark:focus:ring-gray-800"
-                                    >
-                                        {dataKewarganegaraan.map(
-                                            ({ id, kewarganegaraan }) => (
-                                                <option
-                                                    key={id}
-                                                    value={kewarganegaraan}
-                                                >
-                                                    {kewarganegaraan}
-                                                </option>
-                                            ),
-                                        )}
-                                    </Field>
-
-                                    <ErrorMessage
-                                        name={`forms.${index}.kewarganegaraan.kewarganegaraan`}
-                                        component="div"
-                                        className="text-sm text-red-500"
-                                    />
-                                </div>
+                                <InputSelectField
+                                    index={index}
+                                    dataKey="kewarganegaraan"
+                                    onChange={handleChange}
+                                    name={`forms.${index}.kewarganegaraan.kewarganegaraan`}
+                                    label="Kewarganegaraan"
+                                    options={dataKewarganegaraan}
+                                />
 
                                 {/* Status Kawin */}
-                                <div>
-                                    <Label
-                                        htmlFor={`forms.${index}.status_kawin.status`}
-                                    >
-                                        Status Kawin
-                                    </Label>
-                                    <Field
-                                        as="select"
-                                        name={`forms.${index}.status_kawin.status`}
-                                        onChange={(e: any) =>
-                                            handleChange(
-                                                e.target.value,
-                                                dataStatusKawin,
-                                                'status',
-                                                {
-                                                    id: `forms.${index}.status_kawin.id`,
-                                                    name: `forms.${index}.status_kawin.status`,
-                                                },
-                                            )
-                                        }
-                                        className="mb-2 mt-1 block w-full rounded-md border border-blue-300/50 bg-white px-3 py-2 dark:border-gray-500/50 dark:bg-gray-700 dark:focus:ring-gray-800"
-                                    >
-                                        {dataStatusKawin.map(
-                                            ({ id, status }) => (
-                                                <option key={id} value={status}>
-                                                    {status}
-                                                </option>
-                                            ),
-                                        )}
-                                    </Field>
-
-                                    <ErrorMessage
-                                        name={`forms.${index}.status_kawin.status`}
-                                        component="div"
-                                        className="text-sm text-red-500"
-                                    />
-                                </div>
+                                <InputSelectField
+                                    index={index}
+                                    dataKey="status"
+                                    onChange={handleChange}
+                                    name={`forms.${index}.status_kawin.status`}
+                                    label="Status Kawin"
+                                    options={dataStatusKawin}
+                                />
                             </div>
 
                             {/* Wilayah */}
                             <div className="col-span-2 grid grid-cols-3 gap-x-6">
-                                <div className="flex-1">
+                                <div>
                                     <Label htmlFor={`Kabupaten`}>
                                         Kabupaten
                                     </Label>
@@ -390,7 +177,7 @@ export default function EditPendudukForm({
                                     />
                                 </div>
 
-                                <div className="flex-1">
+                                <div>
                                     <Label htmlFor={`Kecamatan`}>
                                         Kecamatan
                                     </Label>
@@ -471,7 +258,7 @@ export default function EditPendudukForm({
                                             name={`forms.${index}.jenis_kelamin.jenis_kelamin`}
                                             value={jenis_kelamin}
                                             className="mr-2"
-                                            onChange={(e: any) =>
+                                            onChange={() =>
                                                 handleChange(
                                                     jenis_kelamin, // Value yang dipilih
                                                     dataKelamin, // Data array untuk mencari ID
@@ -505,8 +292,6 @@ export default function EditPendudukForm({
                                 />
                             </div>
                         </div>
-
-                        
                     </FormContent>
                 </Box>
             ))}

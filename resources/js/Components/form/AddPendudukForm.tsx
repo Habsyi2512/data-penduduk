@@ -564,7 +564,20 @@ export default function AddPendudukForm({
 
                 <button
                     type="button"
-                    onClick={() => setIsOpenSubmitModal(true)}
+                    onClick={async () => {
+                        // Lakukan validasi form
+                        const isValid = await formik.validateForm();
+
+                        // Cek apakah validasi berhasil
+                        if (Object.keys(isValid).length === 0) {
+                            setIsOpenSubmitModal(true); // Buka modal jika valid
+                        } else {
+                            // Tampilkan pesan error jika form tidak valid
+                            alert(
+                                'Form belum terisi dengan benar, silakan periksa kembali.',
+                            );
+                        }
+                    }}
                     className="mt-4 rounded-md bg-green-500 px-4 py-2 text-white"
                 >
                     Kirim
