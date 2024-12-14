@@ -7,7 +7,6 @@ import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { router } from '@inertiajs/react';
 import { FieldArray, Formik } from 'formik';
 import { useState } from 'react';
-import toast from 'react-hot-toast';
 
 interface EditPendudukProps extends AddPendudukProps {
     data_penduduk: InputPendudukProps[];
@@ -35,15 +34,7 @@ export default function EditPenduduk({
     };
 
     const handleSubmit = (values: any) => {
-        router.put(route('penduduk.update'), values, {
-            onSuccess: () => {
-                toast.success('Data berhasil diperbarui!');
-            },
-            onError: (errors) => {
-                console.error('Error:', errors);
-                toast.error('Terjadi kesalahan, silakan coba lagi.');
-            },
-        });
+        router.put(route('penduduk.update'), values);
     };
 
     return (
@@ -147,6 +138,16 @@ export default function EditPenduduk({
                     );
                 }}
             </Formik>
+            {/* Button to remove the current form */}
+            <div className="space-x-5">
+                <button
+                    type="button"
+                    onClick={() => setIsOpenSubmitModal(true)}
+                    className="mt-4 rounded-md bg-green-500 px-4 py-2 text-white"
+                >
+                    Simpan
+                </button>
+            </div>
         </Authenticated>
     );
 }

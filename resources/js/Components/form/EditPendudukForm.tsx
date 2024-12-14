@@ -506,16 +506,7 @@ export default function EditPendudukForm({
                             </div>
                         </div>
 
-                        {/* Button to remove the current form */}
-                        <div className="space-x-5">
-                            <button
-                                type="button"
-                                onClick={() => setIsOpenSubmitModal(true)}
-                                className="mt-4 rounded-md bg-green-500 px-4 py-2 text-white"
-                            >
-                                Kirim
-                            </button>
-                        </div>
+                        
                     </FormContent>
                 </Box>
             ))}

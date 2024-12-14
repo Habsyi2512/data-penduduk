@@ -32,14 +32,14 @@ export default function ConfirmEditModal({
                 >
                     <motion.div className="w-full max-w-xl rounded-xl bg-gray-200 shadow">
                         <h2 className="p-5 font-inter text-2xl font-bold text-gray-600">
-                            Simpan Perubahan Form Edit {index + 1} ?
+                            Simpan Perubahan Form Edit?
                         </h2>
                         {/* Mengatur warna hr */}
                         <hr className="border-t-1 border-gray-600/50" />
                         <p className="px-5 pb-2 pt-5 font-inter font-medium text-gray-600">
                             Silahkan periksa kembali data inputan jika anda ragu{' '}
                             <span className="text-lg font-bold text-gray-700">
-                                Form Edit {index + 1}
+                                Form Edit
                             </span>
                         </p>
                         <div className="flex justify-end space-x-3 p-5 font-inter font-medium">

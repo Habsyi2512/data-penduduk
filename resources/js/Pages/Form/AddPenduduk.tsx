@@ -49,8 +49,6 @@ export default function AddPenduduk({
             );
         } catch (error) {
             console.error('Form submit error:', error);
-        } finally {
-            setLoading(false); // Set loading to false when the submit finishes
         }
     };
 

@@ -33,9 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/tambah-penduduk', [PendudukFormController::class, 'index'])->name('tambah-penduduk');
     Route::post('/dashboard/tambah-penduduk/tambah', [PendudukFormController::class, 'store'])->name('penduduk.store');
 
-    // routes/web.php
-    Route::post('/update-penduduk', [PendudukFormController::class, 'update'])->name('penduduk.update');
-
     // edit data
     Route::get('/dashboard/penduduk/edit', [PendudukFormController::class, 'edit'])->name('penduduk.edit');
     Route::put('/dashboard/penduduk/update', [PendudukFormController::class, 'update'])->name('penduduk.update');

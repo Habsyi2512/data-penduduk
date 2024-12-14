@@ -14,8 +14,14 @@ export default {
     theme: {
     	extend: {
     		fontFamily: {
-    			sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-    			inter: ['Inter', 'sans-serif']
+    			sans: [
+    				'Figtree',
+                    ...defaultTheme.fontFamily.sans
+                ],
+    			inter: [
+    				'Inter',
+    				'sans-serif'
+    			]
     		},
     		borderRadius: {
     			lg: 'var(--radius)',
@@ -65,7 +71,8 @@ export default {
     			}
     		},
     		animation: {
-    			orbit: 'orbit calc(var(--duration)*1s) linear infinite'
+    			orbit: 'orbit calc(var(--duration)*1s) linear infinite',
+    			rippling: 'rippling var(--duration) ease-out'
     		},
     		keyframes: {
     			orbit: {
@@ -74,6 +81,15 @@ export default {
     				},
     				'100%': {
     					transform: 'rotate(360deg) translateY(calc(var(--radius) * 1px)) rotate(-360deg)'
+    				}
+    			},
+    			rippling: {
+    				'0%': {
+    					opacity: '1'
+    				},
+    				'100%': {
+    					transform: 'scale(2)',
+    					opacity: '0'
     				}
     			}
     		}
