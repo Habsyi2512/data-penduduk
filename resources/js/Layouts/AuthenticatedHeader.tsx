@@ -55,9 +55,6 @@ export default function AuthenticatedHeader({
                     </div>
 
                     <div className="flex items-center space-x-4">
-                        <button className="rounded-lg bg-blue-100 p-2 text-blue-600 hover:bg-blue-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">
-                            {user.name}
-                        </button>
                         <form onSubmit={submit} action="POST">
                             <Link
                                 method="post"
@@ -68,6 +65,9 @@ export default function AuthenticatedHeader({
                                 Logout
                             </Link>
                         </form>
+                        <button className="rounded-lg bg-blue-100 p-2 text-blue-600 hover:bg-blue-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">
+                            {user.name}
+                        </button>
                     </div>
                 </div>
             </header>
