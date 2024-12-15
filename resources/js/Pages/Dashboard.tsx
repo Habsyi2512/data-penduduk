@@ -3,10 +3,20 @@ import JumlahPendudukChart from '@/Components/charts/bar-chart/JumlahPendudukCha
 import JumlahPendudukPie from '@/Components/charts/pie-chart/JumlahPendudukPie';
 import HyperText from '@/Components/ui/hyper-text';
 import OrbitingCircles from '@/Components/ui/orbiting-circles';
+import { PaginatedPenduduk } from '@/interface/pagination/interface';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
-export default function Dashboard() {
+interface PopulationDataProps {
+data_penduduk: PaginatedPenduduk;
+total_penduduk: number;
+persentaseTidakBekerja : number
+jumlahLakiLaki : number
+jumlahPerempuan : number
+}
+
+export default function Dashboard({data_penduduk, total_penduduk, persentaseTidakBekerja, jumlahLakiLaki,
+jumlahPerempuan}: PopulationDataProps) {
 
 return (
 <AuthenticatedLayout>
@@ -21,7 +31,7 @@ return (
                 Total
             </h2>
             <h2 className="font-inter text-2xl font-bold text-blue-700 dark:text-gray-300">
-                129.999
+                {total_penduduk}
             </h2>
             <p className="font-inter text-gray-600 dark:text-gray-400">
                 Penduduk seluruh kepri
@@ -32,7 +42,7 @@ return (
                 Persentase
             </h2>
             <h2 className="font-inter text-2xl font-bold text-blue-700 dark:text-gray-300">
-                15%
+                {persentaseTidakBekerja}%
             </h2>
             <p className="font-inter text-gray-600 dark:text-gray-400">
                 Masyarakat Tidak Bekerja
@@ -43,7 +53,7 @@ return (
                 Angka
             </h2>
             <h2 className="font-inter text-2xl font-bold text-blue-700 dark:text-gray-300">
-                69%
+                {jumlahLakiLaki}%
             </h2>
             <p className="font-inter text-gray-600 dark:text-gray-400">
                 Harapan Hidup Laki-laki
@@ -54,7 +64,7 @@ return (
                 Angka
             </h2>
             <h2 className="font-inter text-2xl font-bold text-blue-700 dark:text-gray-300">
-                31%
+                {jumlahPerempuan}%
             </h2>
             <p className="font-inter text-gray-600 dark:text-gray-400">
                 Harapan Hidup Perempuan
