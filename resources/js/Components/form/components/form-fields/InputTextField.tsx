@@ -1,14 +1,20 @@
-import React from 'react';
+import { CommonFormikProps } from '@/interface/pageprops/interface';
 import { ErrorMessage } from 'formik';
-import Label from '../Label';
+import React from 'react';
 import InputText from '../InputText';
+import Label from '../Label';
 
 interface InputTextFieldProps {
-    label: string; // Label text untuk input
-    name: string; 
-    disabled?: boolean; // Opsional, menentukan apakah input dinonaktifkan
-    className?: string; // Tambahan kelas CSS
-    [key: string]: any; // Untuk props tambahan seperti onChange, value, dll.
+    label: string;
+    name: string;
+    disabled?: boolean;
+    type?: 'hidden' | 'text';
+    className?: string;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    parentClassName?: string;
+    formik?: CommonFormikProps;
+    children?: React.ReactNode; // Menambahkan props children
+    [key: string]: any;
 }
 
 const InputTextField: React.FC<InputTextFieldProps> = ({
@@ -16,17 +22,35 @@ const InputTextField: React.FC<InputTextFieldProps> = ({
     name,
     disabled = false,
     className = '',
+    parentClassName = '',
+    type = 'text',
+    children,
+    onChange,
+    formik,
     ...rest
 }) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (formik) {
+            formik.handleChange(e);
+        }
+        if (onChange) {
+            onChange(e);
+        }
+    };
     return (
-        <div>
+        <div className={`${parentClassName} ${type}`}>
             <Label htmlFor={name}>{label}</Label>
             <InputText
-                type="text"
+                autoComplete="off"
+                type={type}
                 name={name}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleChange(e);
+                }}
                 disabled={disabled}
                 className={`mb-2 block w-full rounded-md ${
-                    disabled && 'disabled:cursor-not-allowed disabled:bg-gray-200' 
+                    disabled &&
+                    'disabled:cursor-not-allowed disabled:bg-gray-200'
                 } ${className}`}
                 {...rest}
             />
@@ -35,6 +59,8 @@ const InputTextField: React.FC<InputTextFieldProps> = ({
                 component="div"
                 className="text-sm text-red-500"
             />
+            {/* Render komponen tambahan secara dinamis */}
+            {children}
         </div>
     );
 };

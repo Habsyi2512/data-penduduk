@@ -1,8 +1,10 @@
 import { useFormHooks } from '@/hooks/FormHooks';
 import { EditPendudukFormProps } from '@/interface/pageprops/interface';
+import { Link } from '@inertiajs/react';
 import { ErrorMessage, Field, Form } from 'formik';
 import { useEffect } from 'react';
 import Box from '../box/Box';
+import { ChevronRightIcon } from '../icons/ChevronRightIcon';
 import Divider from '../ui/Divider';
 import {
     BlueButton,
@@ -12,7 +14,6 @@ import {
     FormTitle,
     SuggestionList,
 } from './components/FormComponents';
-import InputText from './components/InputText';
 import Label from './components/Label';
 import InputDateField from './components/form-fields/InputDateField';
 import InputSelectField from './components/form-fields/InputSelectField';
@@ -24,8 +25,22 @@ export default function EditPendudukForm({
     openByIdx,
     toggleAccordion,
 }: EditPendudukFormProps) {
-    const { suggestions, queries, setDistrict, setRegency, handleInputChange, handleSuggestionClick } = useFormHooks();
-    const { agama, dataKelamin, dataGolDarah, dataKewarganegaraan, dataPekerjaan, dataStatusKawin } = data;
+    const {
+        suggestions,
+        queries,
+        setDistrict,
+        setRegency,
+        handleInputChange,
+        handleSuggestionClick,
+    } = useFormHooks();
+    const {
+        agama,
+        dataKelamin,
+        dataGolDarah,
+        dataKewarganegaraan,
+        dataPekerjaan,
+        dataStatusKawin,
+    } = data;
 
     const handleChange = (
         value: string,
@@ -54,247 +69,230 @@ export default function EditPendudukForm({
     }, [queries]);
 
     return (
-        <Form>
-            {formik.values.forms.map((form, index) => (
-                <Box key={index} className="mb-3">
-                    <FormHeader>
-                        <FormTitle
-                            title={`Form Edit ${form.nik} `}
-                            showIndex={false}
-                            index={index}
-                        />
-                        <FormHeaderAction>
-                            <BlueButton
-                                onClick={() => toggleAccordion(index)}
-                                isOpen={openByIdx[index]}
+        <>
+            <Link
+                href="/population"
+                className="mb-3 flex w-fit items-center rounded bg-white/70 px-3 py-2 text-blue-600 shadow hover:text-blue-800 hover:underline"
+            >
+                <ChevronRightIcon className="w-5 rotate-180" />
+                Kembali
+            </Link>
+
+            <Form>
+                {formik.values.forms.map((form, index) => (
+                    <Box key={index} className="mb-3">
+                        <FormHeader>
+                            <FormTitle
+                                title={`Form Edit ${form.nik} `}
+                                showIndex={false}
+                                index={index}
                             />
-                        </FormHeaderAction>
-                    </FormHeader>
-                    <Divider isOpen={openByIdx[index]} />
-                    <FormContent isOpen={openByIdx[index]}>
-                        <div className="grid grid-cols-2 gap-5">
-                            <div className="col-span-2 grid grid-cols-3 gap-x-6">
-                                {/* NIK */}
-                                <InputTextField
-                                    label="NIK"
-                                    name={`forms.${index}.nik`}
-                                    disabled={true}
-                                    placeholder="Masukkan NIK"
+                            <FormHeaderAction>
+                                <BlueButton
+                                    onClick={() => toggleAccordion(index)}
+                                    isOpen={openByIdx[index]}
                                 />
+                            </FormHeaderAction>
+                        </FormHeader>
+                        <Divider isOpen={openByIdx[index]} />
+                        <FormContent isOpen={openByIdx[index]}>
+                            <div className="grid grid-cols-2 gap-5">
+                                <div className="col-span-2 grid grid-cols-3 gap-x-6">
+                                    {/* NIK */}
 
-                                {/* Nama */}
-                                <InputTextField
-                                    label="Nama"
-                                    name={`forms.${index}.nama`}
-                                    placeholder="Masukkan nama"
-                                />
-
-                                {/* Tempat Lahir */}
-                                <InputTextField
-                                    label="Tempat Lahir"
-                                    name={`forms.${index}.tempat_lahir`}
-                                    placeholder="Masukkan tempat lahir"
-                                />
-                            </div>
-
-                            <div className="col-span-2 grid grid-cols-3 gap-x-6">
-                                {/* Tanggal Lahir */}
-                                <InputDateField
-                                    label="Tanggal Lahir"
-                                    name={`forms.${index}.tanggal_lahir`}
-                                    className="custom-class"
-                                />
-
-                                {/* Golongan Darah */}
-                                <InputSelectField
-                                    index={index}
-                                    dataKey="gol_darah"
-                                    onChange={handleChange}
-                                    name={`forms.${index}.gol_darahs.gol_darah`}
-                                    label="Golongan Darah"
-                                    options={dataGolDarah}
-                                />
-
-                                {/* Agama */}
-                                <InputSelectField
-                                    index={index}
-                                    dataKey="agama"
-                                    onChange={handleChange}
-                                    name={`forms.${index}.agama.agama`}
-                                    label="Agama"
-                                    options={agama}
-                                />
-                            </div>
-
-                            <div className="col-span-2 grid grid-cols-3 gap-6">
-                                {/* Pekerjaan */}
-                                <InputSelectField
-                                    index={index}
-                                    dataKey="pekerjaan"
-                                    onChange={handleChange}
-                                    name={`forms.${index}.pekerjaan.pekerjaan`}
-                                    label="Pekerjaan"
-                                    options={dataPekerjaan}
-                                />
-
-                                {/* Kewarganegaraan */}
-                                <InputSelectField
-                                    index={index}
-                                    dataKey="kewarganegaraan"
-                                    onChange={handleChange}
-                                    name={`forms.${index}.kewarganegaraan.kewarganegaraan`}
-                                    label="Kewarganegaraan"
-                                    options={dataKewarganegaraan}
-                                />
-
-                                {/* Status Kawin */}
-                                <InputSelectField
-                                    index={index}
-                                    dataKey="status"
-                                    onChange={handleChange}
-                                    name={`forms.${index}.status_kawin.status`}
-                                    label="Status Kawin"
-                                    options={dataStatusKawin}
-                                />
-                            </div>
-
-                            {/* Wilayah */}
-                            <div className="col-span-2 grid grid-cols-3 gap-x-6">
-                                <div>
-                                    <Label htmlFor={`Kabupaten`}>
-                                        Kabupaten
-                                    </Label>
-                                    <InputText
-                                        disabled
-                                        type="text"
-                                        name={`forms.${index}.alamat.kabupaten_nama`}
-                                        placeholder="Kabupaten"
-                                    />
-                                    <ErrorMessage
-                                        name={`forms.${index}.alamat.kabupaten_nama`}
-                                        component="div"
-                                        className="text-sm text-red-500"
-                                    />
-                                </div>
-
-                                <div>
-                                    <Label htmlFor={`Kecamatan`}>
-                                        Kecamatan
-                                    </Label>
-                                    <InputText
-                                        disabled
-                                        type="text"
-                                        name={`forms.${index}.alamat.kecamatan_nama`}
-                                        placeholder="Kecamatan"
-                                    />
-                                    <ErrorMessage
-                                        name={`forms.${index}.alamat.kecamatan_nama`}
-                                        component="div"
-                                        className="text-sm text-red-500"
-                                    />
-                                </div>
-                                <div className="relative flex-1">
-                                    <Label htmlFor={`Kelurahan`}>
-                                        Kelurahan/Desa
-                                    </Label>
-                                    <InputText
-                                        type="text"
-                                        name={`forms.${index}.alamat.kelurahan_nama`}
-                                        placeholder="Desa/Kelurahan"
-                                        onChange={(e) =>
-                                            handleInputChange(e, index, formik)
-                                        }
-                                    />
-                                    <ErrorMessage
-                                        name={`forms.${index}.alamat.kelurahan_nama`}
-                                        component="div"
-                                        className="text-sm text-red-500"
-                                    />
-
-                                    <SuggestionList
-                                        queries={queries}
-                                        index={index} // Gunakan index yang sesuai
+                                    <InputTextField
+                                        label="NIK"
+                                        type='hidden'
                                         formik={formik}
-                                        handleSuggestionClick={
-                                            handleSuggestionClick
-                                        }
-                                        suggestions={suggestions}
+                                        name={`forms.${index}.nik`}
+                                        disabled={true}
+                                        placeholder="Masukkan NIK"
+                                    />
+
+                                    {/* Nama */}
+                                    <InputTextField
+                                        label="Nama"
+                                        formik={formik}
+                                        name={`forms.${index}.nama`}
+                                        placeholder="Masukkan nama"
+                                    />
+
+                                    {/* Tempat Lahir */}
+                                    <InputTextField
+                                        formik={formik}
+                                        label="Tempat Lahir"
+                                        name={`forms.${index}.tempat_lahir`}
+                                        placeholder="Masukkan tempat lahir"
                                     />
                                 </div>
-                            </div>
 
-                            {/* Alamat */}
-                            <div>
-                                <Label htmlFor={`forms.${index}.alamat.alamat`}>
-                                    Alamat
-                                </Label>
-                                <InputText
+                                <div className="col-span-2 grid grid-cols-3 gap-x-6">
+                                    {/* Tanggal Lahir */}
+                                    <InputDateField
+                                        label="Tanggal Lahir"
+                                        name={`forms.${index}.tanggal_lahir`}
+                                        className="custom-class"
+                                    />
+
+                                    {/* Golongan Darah */}
+                                    <InputSelectField
+                                        index={index}
+                                        dataKey="gol_darah"
+                                        onChange={handleChange}
+                                        name={`forms.${index}.gol_darahs.gol_darah`}
+                                        label="Golongan Darah"
+                                        options={dataGolDarah}
+                                    />
+
+                                    {/* Agama */}
+                                    <InputSelectField
+                                        index={index}
+                                        dataKey="agama"
+                                        onChange={handleChange}
+                                        name={`forms.${index}.agama.agama`}
+                                        label="Agama"
+                                        options={agama}
+                                    />
+                                </div>
+
+                                <div className="col-span-2 grid grid-cols-3 gap-6">
+                                    {/* Pekerjaan */}
+                                    <InputSelectField
+                                        index={index}
+                                        dataKey="pekerjaan"
+                                        onChange={handleChange}
+                                        name={`forms.${index}.pekerjaan.pekerjaan`}
+                                        label="Pekerjaan"
+                                        options={dataPekerjaan}
+                                    />
+
+                                    {/* Kewarganegaraan */}
+                                    <InputSelectField
+                                        index={index}
+                                        dataKey="kewarganegaraan"
+                                        onChange={handleChange}
+                                        name={`forms.${index}.kewarganegaraan.kewarganegaraan`}
+                                        label="Kewarganegaraan"
+                                        options={dataKewarganegaraan}
+                                    />
+
+                                    {/* Status Kawin */}
+                                    <InputSelectField
+                                        index={index}
+                                        dataKey="status"
+                                        onChange={handleChange}
+                                        name={`forms.${index}.status_kawin.status`}
+                                        label="Status Kawin"
+                                        options={dataStatusKawin}
+                                    />
+                                </div>
+
+                                {/* Wilayah */}
+                                <div className="col-span-2 grid grid-cols-3 gap-x-6">
+                                    <InputTextField
+                                        label="Kabupaten"
+                                        formik={formik}
+                                        name={`forms.${index}.alamat.kabupaten_nama`}
+                                        disabled={true}
+                                    />
+
+                                    <InputTextField
+                                        label="Kecamatan"
+                                        formik={formik}
+                                        name={`forms.${index}.alamat.kecamatan_nama`}
+                                        disabled={true}
+                                    />
+
+                                    <InputTextField
+                                        onChange={(
+                                            e: React.ChangeEvent<HTMLInputElement>,
+                                        ) => {
+                                            handleInputChange(e, index, formik);
+                                        }}
+                                        label="Kelurahan/Desa"
+                                        formik={formik}
+                                        parentClassName="relative flex-1"
+                                        name={`forms.${index}.alamat.kelurahan_nama`}
+                                        placeholder="Ketikkan Nama Kelurahan"
+                                    >
+                                        <SuggestionList
+                                            queries={queries}
+                                            index={index} // Gunakan index yang sesuai
+                                            formik={formik}
+                                            handleSuggestionClick={
+                                                handleSuggestionClick
+                                            }
+                                            suggestions={suggestions}
+                                        />
+                                    </InputTextField>
+                                </div>
+
+                                {/* Alamat */}
+                                <InputTextField
+                                    label="Alamat"
+                                    formik={formik}
                                     name={`forms.${index}.alamat.alamat`}
-                                    className="mb-2 block"
                                     placeholder="Contoh: Jl. Merdeka No. 123, RT 04/03, Jakarta"
                                 />
-                                <ErrorMessage
-                                    name={`forms.${index}.alamat.alamat`}
-                                    component="div"
-                                    className="text-sm text-red-500"
-                                />
-                            </div>
 
-                            {/* Jenis Kelamin */}
-                            <div className="col-span-2">
-                                <Label
-                                    htmlFor={`forms.${index}.jenis_kelamin.jenis_kelamin`}
-                                    className="block"
-                                >
-                                    Jenis Kelamin
-                                </Label>
-                                {dataKelamin.map(({ id, jenis_kelamin }) => (
-                                    <div
-                                        key={'kelamin' + id}
-                                        className="inline-block"
+                                {/* Jenis Kelamin */}
+                                <div className="col-span-2">
+                                    <Label
+                                        htmlFor={`forms.${index}.jenis_kelamin.jenis_kelamin`}
+                                        className="block"
                                     >
-                                        <Field
-                                            type="radio"
-                                            name={`forms.${index}.jenis_kelamin.jenis_kelamin`}
-                                            value={jenis_kelamin}
-                                            className="mr-2"
-                                            onChange={() =>
-                                                handleChange(
-                                                    jenis_kelamin, // Value yang dipilih
-                                                    dataKelamin, // Data array untuk mencari ID
-                                                    'jenis_kelamin', // Key untuk mencari data
-                                                    {
-                                                        id: `forms.${index}.jenis_kelamin.id`,
-                                                        name: `forms.${index}.jenis_kelamin.jenis_kelamin`,
-                                                    },
-                                                )
-                                            }
-                                        />
-                                        <Field
-                                            type="text"
-                                            name={`forms.${index}.jenis_kelamin.id`}
-                                            hidden={true}
-                                            value={id}
-                                        />
-                                        <label
-                                            htmlFor={`forms.${index}.jenis_kelamin.jenis_kelamin`}
-                                            className="mr-4"
-                                        >
-                                            {jenis_kelamin}
-                                        </label>
-                                    </div>
-                                ))}
+                                        Jenis Kelamin
+                                    </Label>
+                                    {dataKelamin.map(
+                                        ({ id, jenis_kelamin }) => (
+                                            <div
+                                                key={'kelamin' + id}
+                                                className="inline-block"
+                                            >
+                                                <Field
+                                                    type="radio"
+                                                    name={`forms.${index}.jenis_kelamin.jenis_kelamin`}
+                                                    value={jenis_kelamin}
+                                                    className="mr-2"
+                                                    onChange={() =>
+                                                        handleChange(
+                                                            jenis_kelamin,
+                                                            dataKelamin,
+                                                            'jenis_kelamin',
+                                                            {
+                                                                id: `forms.${index}.jenis_kelamin.id`,
+                                                                name: `forms.${index}.jenis_kelamin.jenis_kelamin`,
+                                                            },
+                                                        )
+                                                    }
+                                                />
+                                                <Field
+                                                    type="text"
+                                                    name={`forms.${index}.jenis_kelamin.id`}
+                                                    hidden={true}
+                                                    value={id}
+                                                />
+                                                <label
+                                                    htmlFor={`forms.${index}.jenis_kelamin.jenis_kelamin`}
+                                                    className="mr-4"
+                                                >
+                                                    {jenis_kelamin}
+                                                </label>
+                                            </div>
+                                        ),
+                                    )}
 
-                                <ErrorMessage
-                                    name={`forms.${index}.jenis_kelamin.jenis_kelamin`}
-                                    component="div"
-                                    className="text-sm text-red-500"
-                                />
+                                    <ErrorMessage
+                                        name={`forms.${index}.jenis_kelamin.jenis_kelamin`}
+                                        component="div"
+                                        className="text-sm text-red-500"
+                                    />
+                                </div>
                             </div>
-                        </div>
-                    </FormContent>
-                </Box>
-            ))}
-        </Form>
+                        </FormContent>
+                    </Box>
+                ))}
+            </Form>
+        </>
     );
 }

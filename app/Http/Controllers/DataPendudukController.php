@@ -16,15 +16,9 @@ class DataPendudukController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->get('search');
-
-        $data_penduduk = DataPenduduk::with(['agama', 'jenis_kelamin', 'pekerjaan', 'gol_darah', 'status_kawin', 'kewarganegaraan', 'alamat.village.district.regency'])->paginate(5);
 
         return Inertia::render('Population_data', [
-            'data_penduduk' => $data_penduduk,
-            'filters' => [
-                'search' => $search,
-            ],
+            'data_penduduk' => DataPenduduk::filter()->paginate(5),
             'csrf_token' => csrf_token(),
         ]);
     }

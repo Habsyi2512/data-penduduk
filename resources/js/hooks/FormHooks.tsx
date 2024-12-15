@@ -22,7 +22,7 @@ export const useFormHooks = () => {
             const data = await response.json();
             setSuggestions((prevState) => ({
                 ...prevState,
-                [index]: data, // Menyimpan suggestions per index
+                [index]: data, 
             }));
         } catch (error) {
             console.error('Error fetching suggestions:', error);
@@ -76,11 +76,14 @@ export const useFormHooks = () => {
         formik.setFieldValue(`forms[${index}].alamat.kelurahan_nama`, value);
 
         if (value.length > 2) {
-            fetchSuggestions(value, index); // Panggil fetchSuggestions untuk index tertentu
+            fetchSuggestions(
+                formik.values.forms[index].alamat.kelurahan_nama,
+                index,
+            ); 
         } else {
             setSuggestions((prevState) => ({
                 ...prevState,
-                [index]: [], // Reset suggestions untuk index tertentu
+                [index]: [], 
             }));
         }
     };

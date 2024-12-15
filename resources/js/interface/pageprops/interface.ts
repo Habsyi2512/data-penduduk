@@ -11,7 +11,7 @@ import {
 } from '../interface';
 
 // Type untuk properti yang sering digunakan
-type CommonFormikProps = FormikProps<{
+export type CommonFormikProps = FormikProps<{
     forms: InputPendudukProps[];
 }>;
 

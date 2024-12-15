@@ -1,7 +1,7 @@
 import Sidebar from '@/Components/sidebar/Sidebar';
 import { PageProps } from '@/types';
 import { usePage } from '@inertiajs/react';
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import AuthenticatedHeader from './AuthenticatedHeader';
 
@@ -9,11 +9,12 @@ export default function Authenticated({ children }: PropsWithChildren<{}>) {
     const [isOpenSidebar, setIsOpenSidebar] = useState(true);
     const [isDarkMode, setIsDarkMode] = useState(false);
     const { flash } = usePage<PageProps>().props;
-    React.useEffect(() => {
+
+    useEffect(() => {
         if (flash.success) {
             toast.success(flash.success);
         }
-    }, [flash.success]);
+    }, [toast.success]);
 
     // Apply dark mode class to the root HTML element
     useEffect(() => {

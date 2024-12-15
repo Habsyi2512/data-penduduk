@@ -1,30 +1,47 @@
-import { InputPendudukProps } from '@/interface/interface';
-import React from 'react';
+import { router } from '@inertiajs/react';
+import React, { useState, useEffect } from 'react';
 
-interface IdProps {
-    id: string; // properti id yang Anda ingin masukkan
-}
+const Debug: React.FC = () => {
+    const [queries, setQueries] = useState<string[]>(['']);
 
-export type DebugPendudukProps = InputPendudukProps & IdProps; // Menggabungkan IdProps ke dalam InputPendudukProps
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+        const newQueries = [...queries];
+        newQueries[index] = e.target.value;
+        setQueries(newQueries);
+    };
 
-interface DebugProps {
-    data_penduduk: DebugPendudukProps[]; // Gunakan DebugPendudukProps di sini
-}
+    useEffect(() => {
+        const query = queries.join('&'); // Assume you want to join the queries
+        const currentRoute = route().current(); // Get current route
 
-const Debug: React.FC<DebugProps> = ({ data_penduduk }) => {
+        if (currentRoute) { // Ensure the route is valid
+            router.get(route(currentRoute), { search: query }, {
+                preserveState: true,
+                replace: true,
+            });
+        } else {
+            console.error("Current route is not valid");
+        }
+    }, [queries]);
+
     return (
-        <div>
-            <h1>Debug Data</h1>
-            {data_penduduk.map((penduduk) => (
-                <ul key={penduduk.id}>
-                    <li>ID: {penduduk.id}</li>
-                    <li>Nama: {penduduk.nama}</li>
-                    <li>kelamin: {penduduk.jenis_kelamin.jenis_kelamin}</li>
-                    <li>id golongan darah: {penduduk.gol_darahs.id}</li>
-                    <li>golongan darah: {penduduk.gol_darahs.gol_darah}</li>
-                </ul>
+        <>
+            <h1 className='mb-10'>Halaman Debug</h1>
+            {queries.map((item, index) => (
+                <form key={index}>
+                    <input
+                        type="text"
+                        value={item}
+                        onChange={(e) => handleInputChange(e, index)}
+                    />
+                </form>
             ))}
-        </div>
+            <button
+                onClick={() => setQueries([...queries, ''])} // Add a new input field
+            >
+                Add Input
+            </button>
+        </>
     );
 };
 

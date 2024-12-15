@@ -73,10 +73,8 @@ export default function EditPenduduk({
     return (
         <Authenticated>
             <Formik
-                validationSchema={validationSchemaEdit}
                 initialValues={getInitialValues()}
                 onSubmit={handleSubmit}
-                validateOnChange={true}
             >
                 {(formikProps) => (
                     <FieldArray name="forms">
@@ -131,7 +129,7 @@ export default function EditPenduduk({
             </Formik>
 
             <div className="mt-4 space-x-5">
-                <Button onClick={() => setIsOpenSubmitModal(true)}>
+                <Button className='shadow' onClick={() => setIsOpenSubmitModal(true)}>
                     Simpan
                 </Button>
             </div>

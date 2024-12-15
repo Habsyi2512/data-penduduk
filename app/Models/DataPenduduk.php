@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class DataPenduduk extends Model
 {
     protected $fillable = ['nik', 'nama', 'tempat_lahir', 'tanggal_lahir', 'kelamin_id', 'agama_id', 'pekerjaan_id', 'gol_darah_id', 'status_kawin_id', 'kewarganegaraan_id', 'alamat_id'];
+    protected $with = ['agama', 'jenis_kelamin', 'pekerjaan', 'gol_darah', 'status_kawin', 'kewarganegaraan', 'alamat.village.district.regency'];
 
     
     protected $casts = [
@@ -50,5 +53,9 @@ class DataPenduduk extends Model
 
     public function alamat(){
         return $this->belongsTo(Alamat::class, 'alamat_id', 'id');
+    }
+
+    public function scopeFilter(Builder $query): void{
+        $query->where('nama', 'like', '%' . request('search') . '%');
     }
 }
