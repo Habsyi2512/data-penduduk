@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('status_hubungan_keluargas', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_status');
             $table->timestamps();
         });
     }

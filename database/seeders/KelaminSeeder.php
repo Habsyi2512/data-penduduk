@@ -17,7 +17,6 @@ class KelaminSeeder extends Seeder
             ['jenis_kelamin' => 'Laki - laki'],
             ['jenis_kelamin' => 'Perempuan'],
         ];
-
         DB::table('jenis_kelamins')->insert($data);
     }
 }

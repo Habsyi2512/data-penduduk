@@ -18,9 +18,7 @@ class GolonganDarahSeeder extends Seeder
             ['gol_darah' => 'B'],
             ['gol_darah' => 'AB'],
             ['gol_darah' => 'O'],
-
         ];
-
         DB::table('gol_darahs')->insert($data);
     }
 }

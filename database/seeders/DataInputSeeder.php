@@ -13,6 +13,19 @@ class DataInputSeeder extends Seeder
      */
     public function run(): void
     {
+        // Menonaktifkan foreign key check sementara
+        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        // Melakukan truncate pada tabel
+        \DB::table('jenis_kelamins')->truncate();
+        \DB::table('agamas')->truncate();
+        \DB::table('gol_darahs')->truncate();
+        \DB::table('kewarganegaraans')->truncate();
+        \DB::table('pekerjaans')->truncate();
+        \DB::table('status_kawins')->truncate();
+        \DB::table('status_hubungan_keluargas')->truncate();
+
+        // Menjalankan seeder lainnya
         $this->call([
             AgamaSeeder::class,
             KelaminSeeder::class,
@@ -20,6 +33,10 @@ class DataInputSeeder extends Seeder
             KewarganegaraanSeeder::class,
             PekerjaanSeeder::class,
             StatusKawinSeeder::class,
+            StatusHubunganKeluargaSeeder::class,
         ]);
+
+        // Mengaktifkan kembali foreign key check
+        \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

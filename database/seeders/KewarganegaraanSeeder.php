@@ -17,7 +17,6 @@ class KewarganegaraanSeeder extends Seeder
             ['kewarganegaraan' => 'WNI'],
             ['kewarganegaraan' => 'WNA'],
         ];
-
         DB::table('kewarganegaraans')->insert($data);
     }
 }

@@ -104,7 +104,6 @@ class PekerjaanSeeder extends Seeder
             ['pekerjaan' => 'Wiraswasta'],
             ['pekerjaan' => 'Lainnya'],
         ];
-
         DB::table('pekerjaans')->insert($data);
     }
 }

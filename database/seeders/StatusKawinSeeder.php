@@ -20,7 +20,6 @@ class StatusKawinSeeder extends Seeder
             ['status' => 'Cerai Hidup', 'created_at' => now(), 'updated_at' => now()],
             ['status' => 'Cerai Mati', 'created_at' => now(), 'updated_at' => now()],
         ];
-
         DB::table('status_kawins')->insert($data);
     }
 }

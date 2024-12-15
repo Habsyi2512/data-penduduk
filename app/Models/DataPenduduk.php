@@ -55,6 +55,10 @@ class DataPenduduk extends Model
         return $this->belongsTo(Alamat::class, 'alamat_id', 'id');
     }
 
+    public function status_hubungan_keluarga(){
+        return $this->belongsTo(StatusHubunganKeluarga::class, 'status_hubungan_id', 'id');
+    }
+
     public function scopeFilter(Builder $query): void{
         $query->where('nama', 'like', '%' . request('search') . '%');
     }
