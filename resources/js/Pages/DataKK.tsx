@@ -1,7 +1,6 @@
 import Box from '@/Components/box/Box';
 import Button from '@/Components/button/Button';
 import { ArrowPathIcon } from '@/Components/icons/ArrowPathIcon';
-import { PencilSquareIcon } from '@/Components/icons/PencilSquareIcon';
 import DetailKKModal from '@/Components/modal/DetailKKModal';
 import PaginationLinks from '@/Components/pagination/PaginationLinks';
 import Table from '@/Components/table/Table';
@@ -11,6 +10,7 @@ import Td from '@/Components/table/Td';
 import Th from '@/Components/table/Th';
 import Tr from '@/Components/table/Tr';
 import TooltipDemo from '@/Components/tooltip/TooltipDemo';
+import { dataKabupaten } from '@/data/dataKabupaten';
 import { dataDefaultSelectedModal } from '@/data/dataSelectedModal';
 import { DataKKProps } from '@/interface/pageprops/tabel-kk-props/interface';
 import { PaginatedKK } from '@/interface/pagination/interface';
@@ -21,9 +21,11 @@ import SearchForm from './Form/search/SearchForm';
 
 interface PopulationDataProps {
     data: PaginatedKK;
+    filters: {kabupaten:string};
 }
 
-export default function DataKK({ data }: PopulationDataProps) {
+export default function DataKK({ data, filters }: PopulationDataProps) {
+    console.log('filter = ', filters);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const [dataSelectedModal, setDataSelectedModal] = useState<DataKKProps>(
         dataDefaultSelectedModal,
@@ -89,14 +91,28 @@ export default function DataKK({ data }: PopulationDataProps) {
                     </h1>
                 </div>
                 <div className="mb-2 flex items-center justify-between space-x-5">
-                    <button
-                        onClick={handleEditButton}
-                        disabled={selectedIds.length < 1}
-                        className="flex items-center justify-center space-x-2 rounded bg-blue-500 p-1 px-3 text-white shadow hover:bg-blue-600 active:bg-blue-500 disabled:cursor-not-allowed disabled:bg-gray-300"
-                    >
-                        <PencilSquareIcon className="size-4" />
-                        <span>Edit</span>
-                    </button>
+                    <form method="GET" className="flex items-center space-x-2">
+                        <select
+                            name="kabupaten"
+                            className="rounded border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            defaultValue={filters['kabupaten'] || ''}
+                        >
+                            <option value="" >
+                                Semua
+                            </option>
+                            {dataKabupaten.map((kabupaten) => (
+                                <option key={kabupaten.id} value={kabupaten.id}>
+                                    {kabupaten.nama}
+                                </option>
+                            ))}
+                        </select>
+                        <button
+                            type="submit"
+                            className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                        >
+                            Filter
+                        </button>
+                    </form>
                     <div className="flex items-center space-x-2">
                         <Button
                             onClick={(
@@ -114,7 +130,7 @@ export default function DataKK({ data }: PopulationDataProps) {
                                 value={<ArrowPathIcon className="w-5" />}
                             />
                         </Button>
-                        <SearchForm />
+                        <SearchForm placeHolder="Ketikkan no. kk" queryKey='no_kk' route='/dashboard/data-kk'/>
                     </div>
                 </div>
                 <Table>

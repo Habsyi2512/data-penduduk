@@ -2,7 +2,15 @@ import { MagnifyingGlassIcon } from '@/Components/icons/MagnifyGlassIcon';
 import { router } from '@inertiajs/react';
 import React, { useState } from 'react';
 
-const SearchForm = () => {
+const SearchForm = ({
+    queryKey = 'search',
+    route = 'population',
+    placeHolder = 'Ketikkan Nama...'
+}: {
+    queryKey?: string;
+    placeHolder?: string;
+    route?: string;
+}) => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,8 +19,8 @@ const SearchForm = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        router.get('population', {
-            search: searchTerm,
+        router.get(route, {
+            [queryKey]: searchTerm,
         });
     };
 
@@ -28,7 +36,7 @@ const SearchForm = () => {
                         id="search"
                         type="search"
                         name="search"
-                        placeholder="Ketikkan Nama..."
+                        placeholder={placeHolder}
                         className="border-none bg-transparent ring-0 focus:ring-0"
                         value={searchTerm}
                         onChange={handleSearchChange}
