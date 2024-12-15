@@ -7,6 +7,7 @@ use App\Http\Controllers\DebugController;
 use App\Http\Controllers\GolDarahController;
 use App\Http\Controllers\KewarganegaraanController;
 use App\Http\Controllers\PekerjaanController;
+use App\Http\Controllers\PemohonController;
 use App\Http\Controllers\PendudukFormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
@@ -62,6 +63,9 @@ Route::middleware('auth')->group(function () {
     // Route Kewarganegaraan
     Route::get('/dashboard/data-kewarganegaraan', [KewarganegaraanController::class, 'index'])->name('data-kewarganegaraan');
     Route::post('/dashboard/data-kewarganegaraan', [KewarganegaraanController::class, 'store'])->name('data-kewarganegaraan.store');
+
+    // Route Permohonan
+    Route::get('/dashboard/permohonan',[PemohonController::class, 'index'])->name('permohonan');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

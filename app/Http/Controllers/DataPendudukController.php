@@ -16,9 +16,23 @@ class DataPendudukController extends Controller
 {
     public function index(Request $request)
     {
+        //Menampilkan Jumlah Penduduk
+        $total_penduduk = DataPenduduk::count();
+
+        //Menampilkan Jumlah Penduduk Tidak Bekerja
+        $jumlahTidakBekerja = DataPenduduk::whereNull('pekerjaan_id')->orWhere('pekerjaan_id', '==', 1)->count();
+        $persentaseTidakBekerja = $total_penduduk > 0 ? ($jumlahTidakBekerja / $total_penduduk) * 100 : 0;
+
+        //Menampilkan Jumlah Penduduk Berdasarkan Jenis Kelamin
+        $jumlahLakiLaki = DataPenduduk::where('kelamin_id', 1)->count();
+        $jumlahPerempuan = DataPenduduk::where('kelamin_id', 2)->count();
 
         return Inertia::render('Population_data', [
             'data_penduduk' => DataPenduduk::filter()->paginate(5),
+            'total_penduduk' => $total_penduduk,
+            'persentaseTidakBekerja' => $persentaseTidakBekerja,
+            'jumlahLakiLaki' => $jumlahLakiLaki,
+            'jumlahPerempuan' => $jumlahPerempuan,
             'csrf_token' => csrf_token(),
         ]);
     }

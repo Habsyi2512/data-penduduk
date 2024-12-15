@@ -67,7 +67,6 @@ export interface DataPendudukProps {
     alamat: Alamat; // Menambahkan alamat ke data penduduk
 }
 
-
 // Gunakan tipe dengan InputPendudukProps
 export type PaginatedPenduduk = PaginatedData<DataPendudukProps>;
 export type PaginatedKK = PaginatedData<DataKKProps>;

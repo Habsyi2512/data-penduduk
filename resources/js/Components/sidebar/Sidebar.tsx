@@ -46,7 +46,7 @@ export default function Sidebar({
             ],
         },
         {
-            title:'Managemen Data',
+            title: 'Managemen Data',
             url: '',
             subMenu: [
                 {
@@ -54,7 +54,7 @@ export default function Sidebar({
                     url: '/dashboard/data-agama',
                 },
                 {
-                    title: ' Data Golongan Darah', 
+                    title: ' Data Golongan Darah',
                     url: '/dashboard/data-gol-darah',
                 },
                 {
@@ -66,10 +66,28 @@ export default function Sidebar({
                     url: '/dashboard/data-pekerjaan',
                 },
                 {
-                    title:' Data Warganegara',
+                    title: ' Data Warganegara',
                     url: '/dashboard/data-kewarganegaraan',
-                }
-            ]
+                },
+            ],
+        },
+        {
+            title: 'Data Pindah',
+            url: '/pengaturan',
+            subMenu: [
+                {
+                    title: 'Pindah KK',
+                    url: '/dashboard/pindah-kk',
+                },
+                {
+                    title: 'Buat KK',
+                    url: '/dashboard/buat-kk',
+                },
+            ],
+        },
+        {
+            title: 'Permohonan',
+            url: '/dashboard/permohonan',
         },
         {
             title: 'Laporan',
