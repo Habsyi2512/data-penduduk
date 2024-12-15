@@ -1,3 +1,5 @@
+import { DataKKProps } from "../pageprops/tabel-kk-props/interface";
+
 export interface PaginationLink {
     url: string | null;
     label: string;
@@ -68,6 +70,7 @@ export interface DataPendudukProps {
 
 // Gunakan tipe dengan InputPendudukProps
 export type PaginatedPenduduk = PaginatedData<DataPendudukProps>;
+export type PaginatedKK = PaginatedData<DataKKProps>;
 
 export type PaginatePekerjaan = PaginatedData<{
     id: number;

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgamaController;
+use App\Http\Controllers\DataKKController;
 use App\Http\Controllers\DataPendudukController;
 use App\Http\Controllers\DebugController;
 use App\Http\Controllers\GolDarahController;
@@ -32,6 +33,9 @@ Route::middleware('auth')->group(function () {
     // Route Dashboard
     Route::get('/dashboard/tambah-penduduk', [PendudukFormController::class, 'index'])->name('tambah-penduduk');
     Route::post('/dashboard/tambah-penduduk/tambah', [PendudukFormController::class, 'store'])->name('penduduk.store');
+
+    // route data KK
+    Route::get('/dashboard/data-kk', [DataKKController::class, 'index'])->name('display-kk');
 
     // edit data
     Route::get('/dashboard/penduduk/edit', [PendudukFormController::class, 'edit'])->name('penduduk.edit');

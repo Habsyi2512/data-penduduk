@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alamat;
+use App\Models\MasterKK;
 use App\Models\Village;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -10,6 +11,9 @@ use Inertia\Inertia;
 class DebugController extends Controller
 {
     public function index(){
-        return Inertia::render('Debug/Debug');
+        $data = MasterKK::with(['data_penduduk', 'alamat.village.district.regency'])->get();
+        return Inertia::render('Debug/Debug', [
+            'data'=>$data
+        ]);
     }
 }

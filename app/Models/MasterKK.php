@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class MasterKK extends Model
 {
     //
+    protected $table = 'master_kk';
     protected $fillable = ['no_kk', 'alamat_id'];
 
     public function data_penduduk(){

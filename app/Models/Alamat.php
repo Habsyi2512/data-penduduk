@@ -15,6 +15,6 @@ class Alamat extends Model
     }
 
     public function KK(){
-        return $this->hasMany(MasterKK::class, 'alamat_id', 'id');
+        return $this->hasOne(MasterKK::class, 'kelurahan_id', 'keluarahan_id');
     }
 }
