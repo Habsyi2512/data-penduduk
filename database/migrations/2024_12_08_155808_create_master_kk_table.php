@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('master_kk', function (Blueprint $table) {
-            $table->id();
+            $table->char('no_kk', 16);
+            $table->unsignedBigInteger('alamat_id');
+
+            $table->foreign('alamat_id')->references('id')->on('alamats');
             $table->timestamps();
         });
     }
