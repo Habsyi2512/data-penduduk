@@ -34,7 +34,7 @@ return new class extends Migration
             $table->foreign('pekerjaan_id')->references('id')->on('pekerjaans');
             $table->foreign('kewarganegaraan_id')->references('id')->on('kewarganegaraans');
             $table->foreign('status_hubungan_id')->references('id')->on('status_hubungan_keluargas');
-            $table->foreign('no_kk')->references('no_kk')->on('master_kk');
+            $table->foreign('no_kk')->references('no_kk')->on('master_kk')->onDelete('cascade'); // Relasi dengan master_kk
             
             $table->timestamps();
             });
