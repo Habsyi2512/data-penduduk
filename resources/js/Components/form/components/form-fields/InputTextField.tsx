@@ -13,7 +13,7 @@ interface InputTextFieldProps {
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     parentClassName?: string;
     formik?: CommonFormikProps;
-    children?: React.ReactNode; // Menambahkan props children
+    children?: React.ReactNode;
     [key: string]: any;
 }
 
