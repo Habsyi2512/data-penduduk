@@ -16,6 +16,7 @@ class DataPendudukController extends Controller
 {
     public function index(Request $request)
     {
+        $data_penduduk = DataPenduduk::filter()->paginate(5);
         //Menampilkan Jumlah Penduduk
         $total_penduduk = DataPenduduk::count();
 
@@ -28,7 +29,7 @@ class DataPendudukController extends Controller
         $jumlahPerempuan = DataPenduduk::where('kelamin_id', 2)->count();
 
         return Inertia::render('Population_data', [
-            'data_penduduk' => DataPenduduk::filter()->paginate(5),
+            'data_penduduk' => $data_penduduk,
             'total_penduduk' => $total_penduduk,
             'persentaseTidakBekerja' => $persentaseTidakBekerja,
             'jumlahLakiLaki' => $jumlahLakiLaki,

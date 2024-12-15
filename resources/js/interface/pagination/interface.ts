@@ -58,13 +58,14 @@ export interface DataPendudukProps {
     nama: string;
     tempat_lahir: string;
     tanggal_lahir: string;
+    no_kk: {id:string, no_kk: string};
+    status_hubungan: {id:string, status_hubungan: string};
     jenis_kelamin: { id: string; jenis_kelamin: string };
     gol_darah: { id: string; gol_darah: string };
     agama: { id: string; agama: string };
     status_kawin: { id: string; status: string };
     pekerjaan: { id: string; pekerjaan: string };
     kewarganegaraan: { id: string; kewarganegaraan: string };
-    alamat: Alamat; // Menambahkan alamat ke data penduduk
 }
 
 // Gunakan tipe dengan InputPendudukProps

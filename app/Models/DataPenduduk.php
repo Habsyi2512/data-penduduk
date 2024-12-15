@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class DataPenduduk extends Model
 {
+
     protected $fillable = ['nik', 'nama', 'tempat_lahir', 'tanggal_lahir', 'no_kk', 'kelamin_id', 'agama_id', 'pekerjaan_id', 'gol_darah_id', 'status_kawin_id', 'kewarganegaraan_id'];
     protected $with = ['agama', 'jenis_kelamin', 'pekerjaan', 'gol_darah', 'status_kawin', 'kewarganegaraan', 'KK', 'status_hubungan_keluarga'];
 
-    
+
     protected $casts = [
         'tanggal_lahir' => 'date',
     ];
@@ -51,15 +52,18 @@ class DataPenduduk extends Model
         return $this->belongsTo(Kewarganegaraan::class, 'kewarganegaraan_id');
     }
 
-    public function KK() {
+    public function KK()
+    {
         return $this->belongsTo(MasterKK::class, 'no_kk', 'no_kk');
     }
 
-    public function status_hubungan_keluarga(){
+    public function status_hubungan_keluarga()
+    {
         return $this->belongsTo(StatusHubunganKeluarga::class, 'status_hubungan_id', 'id');
     }
 
-    public function scopeFilter(Builder $query): void{
+    public function scopeFilter(Builder $query): void
+    {
         $query->where('nama', 'like', '%' . request('search') . '%');
     }
 }
