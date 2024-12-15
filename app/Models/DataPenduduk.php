@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DataPenduduk extends Model
 {
-    protected $fillable = ['nik', 'nama', 'tempat_lahir', 'tanggal_lahir', 'kelamin_id', 'agama_id', 'pekerjaan_id', 'gol_darah_id', 'status_kawin_id', 'kewarganegaraan_id', 'alamat_id'];
+    protected $fillable = ['nik', 'nama', 'tempat_lahir', 'tanggal_lahir', 'no_kk', 'kelamin_id', 'agama_id', 'pekerjaan_id', 'gol_darah_id', 'status_kawin_id', 'kewarganegaraan_id'];
     protected $with = ['agama', 'jenis_kelamin', 'pekerjaan', 'gol_darah', 'status_kawin', 'kewarganegaraan', 'alamat.village.district.regency'];
 
     
@@ -51,8 +51,8 @@ class DataPenduduk extends Model
         return $this->belongsTo(Kewarganegaraan::class, 'kewarganegaraan_id');
     }
 
-    public function alamat(){
-        return $this->belongsTo(Alamat::class, 'alamat_id', 'id');
+    public function KK() {
+        return $this->belongsTo(MasterKK::class, 'no_kk', 'no_kk');
     }
 
     public function status_hubungan_keluarga(){

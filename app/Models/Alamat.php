@@ -14,7 +14,7 @@ class Alamat extends Model
         return $this->belongsTo(Village::class, 'kelurahan_id', 'id');
     }
 
-    public function data_penduduk(){
-        return $this->hasMany(DataPenduduk::class, 'alamat_id', 'id');
+    public function KK(){
+        return $this->hasMany(MasterKK::class, 'alamat_id', 'id');
     }
 }
