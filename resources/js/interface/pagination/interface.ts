@@ -1,4 +1,4 @@
-import { DataKKProps } from "../pageprops/tabel-kk-props/interface";
+import { DataKKPageProps, DataKKProps } from "../pageprops/tabel-kk-props/interface";
 
 export interface PaginationLink {
     url: string | null;

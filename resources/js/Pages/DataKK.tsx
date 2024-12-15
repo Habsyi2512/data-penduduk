@@ -2,6 +2,7 @@ import Box from '@/Components/box/Box';
 import Button from '@/Components/button/Button';
 import { ArrowPathIcon } from '@/Components/icons/ArrowPathIcon';
 import { PencilSquareIcon } from '@/Components/icons/PencilSquareIcon';
+import DetailKKModal from '@/Components/modal/DetailKKModal';
 import PaginationLinks from '@/Components/pagination/PaginationLinks';
 import Table from '@/Components/table/Table';
 import TableBody from '@/Components/table/TableBody';
@@ -10,6 +11,8 @@ import Td from '@/Components/table/Td';
 import Th from '@/Components/table/Th';
 import Tr from '@/Components/table/Tr';
 import TooltipDemo from '@/Components/tooltip/TooltipDemo';
+import { dataDefaultSelectedModal } from '@/data/dataSelectedModal';
+import { DataKKProps } from '@/interface/pageprops/tabel-kk-props/interface';
 import { PaginatedKK } from '@/interface/pagination/interface';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { Link, router } from '@inertiajs/react';
@@ -22,9 +25,23 @@ interface PopulationDataProps {
 
 export default function DataKK({ data }: PopulationDataProps) {
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
+    const [dataSelectedModal, setDataSelectedModal] = useState<DataKKProps>(
+        dataDefaultSelectedModal,
+    );
+    const [openModalDetailKK, setOpenModalDetailKK] = useState(false);
 
     const currentPage = data.current_page;
     const perPage = data.per_page;
+
+    const openModal = (data: DataKKProps) => {
+        setOpenModalDetailKK(true);
+        setDataSelectedModal(data);
+    };
+
+    const closeModal = () => {
+        setOpenModalDetailKK(false);
+        setDataSelectedModal(dataDefaultSelectedModal);
+    };
 
     // Fungsi untuk menangani perubahan seleksi
     const handleSelect = (id: string) => {
@@ -61,6 +78,10 @@ export default function DataKK({ data }: PopulationDataProps) {
 
     return (
         <Authenticated>
+            {openModalDetailKK && (
+                <DetailKKModal onClose={closeModal} data={dataSelectedModal} />
+            )}
+
             <Box className="p-2">
                 <div className="px-5">
                     <h1 className="mb-3 py-2 font-inter text-2xl font-bold text-blue-500">
@@ -147,8 +168,8 @@ export default function DataKK({ data }: PopulationDataProps) {
                                 <Tr
                                     className="bg-slate-100 transition-colors duration-200 ease-in-out hover:bg-slate-200"
                                     key={penduduk.no_kk}
-                                    onClick={() => {
-                                        alert('halo' + penduduk.no_kk);
+                                    onDoubleClick={() => {
+                                        openModal(penduduk);
                                     }}
                                 >
                                     <Td className="text-center">

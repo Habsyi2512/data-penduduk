@@ -1,6 +1,6 @@
 import { Alamat } from "@/interface/pagination/interface";
 
-interface DataPendudukProps {
+export interface DataPendudukProps {
     id: number;
     nik: string;
     nama: string;
@@ -12,7 +12,7 @@ interface DataPendudukProps {
     status_kawin: { id: string; status: string };
     pekerjaan: { id: string; pekerjaan: string };
     kewarganegaraan: { id: string; kewarganegaraan: string };
-    alamat: Alamat; // Menambahkan alamat ke data penduduk
+    status_hubungan_keluarga: { id: string; nama_status: string };
 }
 
 export interface DataKKProps{
@@ -22,7 +22,8 @@ export interface DataKKProps{
     data_penduduk: DataPendudukProps[];
 }
 
-export interface DataKKProps {
+// untuk halaman debug
+export interface DataKKPageProps {
     data: DataKKProps[];
 }
 
