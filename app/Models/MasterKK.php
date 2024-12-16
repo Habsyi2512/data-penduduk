@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +11,26 @@ class MasterKK extends Model
     //
     protected $table = 'master_kk';
     protected $fillable = ['no_kk', 'alamat_id'];
+    // protected $with = ['data_penduduk'];
+
+    public static function generateNoKK($regency, $district)
+    {
+        // Kode wilayah berdasarkan inputan
+        $provinsi_code = '21';
+
+        // Tanggal pemasukan data
+        $tanggal = Carbon::now()->format('d'); // Tanggal (DD)
+        $bulan = Carbon::now()->format('m');   // Bulan (MM)
+        $tahun = Carbon::now()->format('y');   // Tahun (YY)
+
+        // Nomor urut penerbitan KK dengan angka acak antara 1000 dan 9999
+        $random_number = mt_rand(1000, 9999);
+
+        // Gabungkan semua bagian
+        $no_kk = $provinsi_code . $regency . $district . $tanggal . $bulan . $tahun . $random_number;
+
+        return $no_kk;
+    }
 
     public function data_penduduk(){
         return $this->hasMany(DataPenduduk::class, 'no_kk', 'no_kk');
@@ -19,14 +40,7 @@ class MasterKK extends Model
         return $this->belongsTo(Alamat::class, 'alamat_id', 'id');
     }
 
-//     public function scopeFilter(Builder $query)
-// {
-//     if ($kabupatenId = request('kabupaten')) {
-//         $query->whereHas('alamat.village.district.regency', function ($query) use ($kabupatenId) {
-//             $query->where('id', $kabupatenId);
-//         });
-//     }
-// }
+
 
 // Di dalam Model MasterKK
     public function scopeFilter(Builder $query, array $filters){

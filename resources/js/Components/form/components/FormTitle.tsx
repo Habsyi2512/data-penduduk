@@ -3,8 +3,8 @@ export default function FormTitle({
     index = 0,
     showIndex = true,
 }: {
-    title: string;
-    index: number;
+    title?: string;
+    index?: number;
     showIndex?: boolean;
 }) {
     return (

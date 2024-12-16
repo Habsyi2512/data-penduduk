@@ -10,7 +10,7 @@ export default function Box({
     return (
         <div
             {...props}
-            className={`${className} w-full relative z-0 overflow-auto rounded-lg border border-blue-200 bg-white/70 dark:bg-white/20 shadow-md backdrop-blur-md dark:border-gray-500/50`}
+            className={`${className} w-full relative z-0 rounded-lg border border-blue-200 bg-white/70 dark:bg-white/20 shadow-md backdrop-blur-md dark:border-gray-500/50`}
         >
             {children}
         </div>

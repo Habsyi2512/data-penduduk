@@ -7,7 +7,7 @@ import { router } from '@inertiajs/react';
 import { FieldArray, Formik } from 'formik';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
-import { formField } from './FormatData';
+import { formFieldBiodata } from './FormatData';
 import { validationSchema } from './validation';
 
 export default function AddPenduduk({
@@ -57,7 +57,7 @@ export default function AddPenduduk({
         <Authenticated>
             <Formik
                 initialValues={{
-                    forms: [formField],
+                    forms: [formFieldBiodata],
                 }}
                 onSubmit={handleSubmit}
                 validationSchema={validationSchema} // Apply Yup validation schema
@@ -77,7 +77,7 @@ export default function AddPenduduk({
                                             dataPekerjaan,
                                             dataStatusKawin,
                                         }}
-                                        formField={formField}
+                                        formField={formFieldBiodata}
                                         setOpenByIdx={setOpenByIdx}
                                         toggleAccordion={toggleAccordion}
                                         formik={formikProps}

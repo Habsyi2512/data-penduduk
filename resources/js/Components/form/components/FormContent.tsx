@@ -3,7 +3,7 @@ export default function FormContent({
     isOpen,
 }: {
     children: React.ReactNode;
-    isOpen: boolean;
+    isOpen?: boolean;
 }) {
     return (
         <div

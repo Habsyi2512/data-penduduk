@@ -1,8 +1,8 @@
 import { ButtonHTMLAttributes } from 'react';
 
 interface BlueButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    isOpen: boolean; // Status apakah accordion terbuka atau tertutup
-    onClick: () => void; // Callback fungsi untuk klik tombol
+    isOpen?: boolean; // Status apakah accordion terbuka atau tertutup
+    onClick?: () => void; // Callback fungsi untuk klik tombol
 }
 
 export default function BlueButton({

@@ -32,8 +32,12 @@ export default function Sidebar({
             url: '/population',
             subMenu: [
                 {
-                    title: 'Data Penduduk',
+                    title: 'Biodata',
                     url: '/population',
+                },
+                {
+                    title: 'Data KK',
+                    url: '/dashboard/data-kk',
                 },
                 {
                     title: 'Tambah Penduduk',

@@ -14,7 +14,7 @@ export default function DetailKKModal({
             <div className="w-full max-w-5xl rounded-lg border bg-white text-gray-700">
                 <div className="flex items-center justify-between p-5">
                     <h1 className="text-xl font-bold text-blue-500">
-                       DETAIL KARTU KELUARGA
+                        DETAIL KARTU KELUARGA
                     </h1>
                     <button
                         onClick={onClose}
@@ -76,15 +76,20 @@ export default function DetailKKModal({
                     <h1 className="mb-5 text-xl font-bold text-blue-500">
                         Anggota Keluarga
                     </h1>
-                    <ul className="grid grid-cols-2 gap-3 max-h-[300px] overflow-y-auto">
-
-                        {data.data_penduduk.map((item, index) => {
+                    <ul className="grid max-h-[300px] grid-cols-2 gap-3 overflow-y-auto">
+                        {data.data_penduduk.map((item) => {
+                            let backgroundColor = 'bg-gray-100';
+                            if (item.status_hubungan_keluarga.id == '1') {
+                                backgroundColor = 'bg-gray-300';
+                            }
                             return (
                                 <li
                                     key={item.nik}
                                     className="font-inter font-medium"
                                 >
-                                    <div className="rounded border bg-gray-100 px-3 py-2 text-sm">
+                                    <div
+                                        className={`rounded border ${backgroundColor} px-3 py-2 text-sm`}
+                                    >
                                         <p>
                                             <span className="inline-block w-[100px] font-medium text-blue-500">
                                                 Nik
@@ -107,7 +112,11 @@ export default function DetailKKModal({
                                             </span>
                                             <span className="pr-2">:</span>
                                             <span className="">
-                                                {item.status_hubungan_keluarga.nama_status}
+                                                {
+                                                    item
+                                                        .status_hubungan_keluarga
+                                                        .nama_status
+                                                }
                                             </span>
                                         </p>
                                     </div>

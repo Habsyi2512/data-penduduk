@@ -101,3 +101,24 @@ export const validationSchemaEdit = Yup.object({
         })
     ),
 });
+
+export const validationSchemaBuatKK = Yup.object().shape({
+    alamat: Yup.string()
+        .required('Alamat wajib diisi.')
+        .min(10, 'Alamat minimal 10 karakter.'),
+    kelurahan: Yup.object().shape({
+        name: Yup.string()
+            .required('Nama kelurahan/desa wajib diisi.')
+            .min(3, 'Nama kelurahan/desa minimal 3 karakter.'),
+    }),
+    kecamatan: Yup.object().shape({
+        name: Yup.string()
+            .required('Nama kecamatan wajib diisi.')
+            .min(3, 'Nama kecamatan minimal 3 karakter.'),
+    }),
+    kabupaten: Yup.object().shape({
+        name: Yup.string()
+            .required('Nama kabupaten wajib diisi.')
+            .min(3, 'Nama kabupaten minimal 3 karakter.'),
+    }),
+});

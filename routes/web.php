@@ -4,6 +4,7 @@ use App\Http\Controllers\AgamaController;
 use App\Http\Controllers\DataKKController;
 use App\Http\Controllers\DataPendudukController;
 use App\Http\Controllers\DebugController;
+use App\Http\Controllers\FormKKController;
 use App\Http\Controllers\GolDarahController;
 use App\Http\Controllers\KewarganegaraanController;
 use App\Http\Controllers\PekerjaanController;
@@ -35,8 +36,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/tambah-penduduk', [PendudukFormController::class, 'index'])->name('tambah-penduduk');
     Route::post('/dashboard/tambah-penduduk/tambah', [PendudukFormController::class, 'store'])->name('penduduk.store');
 
-    // route data KK
-    Route::get('/dashboard/data-kk', [DataKKController::class, 'index'])->name('display-kk');
+    // route KK
+    Route::get('/dashboard/data-kk', [DataKKController::class, 'index'])->name('kk.display');
+    Route::get('/dashboard/buat-kk', [FormKKController::class, 'index'])->name('kk.display.form');
+    Route::post('/dashboard/buat-kk', [FormKKController::class, 'store'])->name('kk.store.form');
 
     // edit data
     Route::get('/dashboard/penduduk/edit', [PendudukFormController::class, 'edit'])->name('penduduk.edit');
@@ -83,6 +86,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::get('/debug', [DebugController::class, 'index']);
 Route::get('/search-desa', [SearchController::class, 'searchDesa']);
+Route::get('/search-kepala-keluarga', [SearchController::class, 'searchKepalaKeluraga']);
+
+
+
 Route::get('/api/search-village', [DebugController::class, 'search']);
 
 require __DIR__ . '/auth.php';
