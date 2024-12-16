@@ -65,7 +65,7 @@ class FormKKController extends Controller
             ]);
         }
     
-        return to_route('kk.display')->with('success', '');
+        return to_route('kk.display')->with('success', 'Berhasil Membuat KK');
     }
     
 }

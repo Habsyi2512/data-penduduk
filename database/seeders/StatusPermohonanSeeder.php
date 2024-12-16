@@ -13,7 +13,11 @@ class StatusPermohonanSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = [['status_permohonan' => 'Belum diproses', 'created_at' => now(), 'updated_at' => now()], ['status_permohonan' => 'Diproses', 'created_at' => now(), 'updated_at' => now()]];
+        $data = [
+            ['status_permohonan' => 'Belum diproses', 'created_at' => now(), 'updated_at' => now()], 
+            ['status_permohonan' => 'Diproses', 'created_at' => now(), 'updated_at' => now()],
+            ['status_permohonan' => 'Berhasil', 'created_at' => now(), 'updated_at' => now()]
+        ];
 
         DB::table('status_permohonans')->insert($data);
     }
