@@ -11,7 +11,6 @@ class MasterKK extends Model
     //
     protected $table = 'master_kk';
     protected $fillable = ['no_kk', 'alamat_id'];
-    // protected $with = ['data_penduduk'];
 
     public static function generateNoKK($regency, $district)
     {

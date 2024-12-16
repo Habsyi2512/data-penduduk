@@ -16,8 +16,16 @@ import { DataKKProps } from '@/interface/pageprops/tabel-kk-props/interface';
 import { PaginatedKK } from '@/interface/pagination/interface';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { Link, router } from '@inertiajs/react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import SearchForm from './Form/search/SearchForm';
+
+// export interface PaginatedData<T> {
+//     data: T[];
+//     links: PaginationLink[];
+//     meta: PaginationMeta;
+//     current_page:number;
+//     per_page:number
+// }
 
 interface PopulationDataProps {
     data: PaginatedKK;
@@ -25,7 +33,7 @@ interface PopulationDataProps {
 }
 
 export default function DataKK({ data, filters }: PopulationDataProps) {
-    console.log('filter = ', filters);
+    // console.log('data = ', data);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const [dataSelectedModal, setDataSelectedModal] = useState<DataKKProps>(
         dataDefaultSelectedModal,
@@ -57,26 +65,6 @@ export default function DataKK({ data, filters }: PopulationDataProps) {
             }
         });
     };
-
-    const handleEditButton = () => {
-        router.get(
-            route('penduduk.edit'),
-            { id: selectedIds },
-            {
-                replace: true,
-            },
-        );
-    };
-
-    function formatDate(dateString: string) {
-        const options: Intl.DateTimeFormatOptions = {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-        };
-        const date = new Date(dateString);
-        return date.toLocaleDateString('id-ID', options);
-    }
 
     return (
         <Authenticated>
@@ -201,9 +189,7 @@ export default function DataKK({ data, filters }: PopulationDataProps) {
                                         />
                                     </Td>
                                     <Td className="text-center">
-                                        {index +
-                                            1 +
-                                            (currentPage - 1) * perPage}
+                                        {penduduk.globalIndex}
                                     </Td>
                                     <Td className="">{penduduk.no_kk}</Td>
                                     <Td className="border border-black">

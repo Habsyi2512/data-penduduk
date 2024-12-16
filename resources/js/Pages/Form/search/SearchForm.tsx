@@ -21,6 +21,8 @@ const SearchForm = ({
         e.preventDefault();
         router.get(route, {
             [queryKey]: searchTerm,
+        },{
+            preserveState:true,
         });
     };
 

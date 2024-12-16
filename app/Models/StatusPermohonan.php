@@ -9,6 +9,6 @@ class StatusPermohonan extends Model
     protected $fillable = ['id', 'status_permohonan'];
 
     public function pemohon(){
-        return $this->hasMany(Pemohon::class,'status_permohonan_id');
+        return $this->hasMany(Pemohon::class,'status_permohonan', 'id');
     }
 }

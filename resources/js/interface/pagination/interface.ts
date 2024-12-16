@@ -17,12 +17,13 @@ export interface PaginationMeta {
 }
 
 export interface PaginatedData<T> {
-    data: T[];
+    data: (T & { globalIndex: number })[]; // Menambahkan globalIndex pada setiap item data
     links: PaginationLink[];
     meta: PaginationMeta;
-    current_page:number;
-    per_page:number
+    current_page: number;
+    per_page: number;
 }
+
 
 export interface Regency {
     id: string;

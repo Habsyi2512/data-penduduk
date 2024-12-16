@@ -8,7 +8,7 @@ export default function DetailKKModal({
     data: DataKKProps;
     onClose: () => void;
 }) {
-    console.log('data', data);
+    const sortedData = data.data_penduduk.sort((a, b) => Number(a.status_hubungan_keluarga.id) - Number(b.status_hubungan_keluarga.id));
     return (
         <div className="fixed left-0 top-0 z-10 flex h-screen w-full items-center justify-center bg-white/20 px-5 font-inter shadow backdrop-blur-sm">
             <div className="w-full max-w-5xl rounded-lg border bg-white text-gray-700">
@@ -77,7 +77,8 @@ export default function DetailKKModal({
                         Anggota Keluarga
                     </h1>
                     <ul className="grid max-h-[300px] grid-cols-2 gap-3 overflow-y-auto">
-                        {data.data_penduduk.map((item) => {
+                        {
+                        sortedData.map((item) => {
                             let backgroundColor = 'bg-gray-100';
                             if (item.status_hubungan_keluarga.id == '1') {
                                 backgroundColor = 'bg-gray-300';
