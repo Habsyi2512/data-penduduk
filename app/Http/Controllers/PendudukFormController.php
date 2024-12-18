@@ -123,6 +123,7 @@ public function update(Request $request)
 
     public function edit(Request $request){
         $selectedId = $request->input('id');
+        // dd($selectedId);
         $data_penduduk = DataPenduduk::with([
             'agama',
             'jenis_kelamin',
@@ -130,7 +131,6 @@ public function update(Request $request)
             'gol_darah',
             'status_kawin',
             'kewarganegaraan',
-            'alamat.village.district.regency'
             ])->whereIn('id', $selectedId )->get();
         
         $formatDataPenduduk = $data_penduduk->map(fn($item) => PendudukHelper::formatPendudukData($item));

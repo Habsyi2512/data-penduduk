@@ -60,7 +60,6 @@ export interface InputPendudukProps {
     status_kawin: StatusKawinType;
     pekerjaan: PekerjaanType;
     kewarganegaraan: KewarganegaraanType;
-    alamat: Address;
 }
 
 // Kepala Keluarga Type

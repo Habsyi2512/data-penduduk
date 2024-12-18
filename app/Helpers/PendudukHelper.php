@@ -37,15 +37,7 @@ class PendudukHelper
             'kewarganegaraan' => [
                 'id' => $item->kewarganegaraan->id,
                 'kewarganegaraan' => $item->kewarganegaraan->kewarganegaraan,
-            ],
-            'alamat' => [
-                'id' => $item->alamat->id,
-                'alamat' => $item->alamat->alamat,
-                'kelurahan_id' => $item->alamat->kelurahan_id,
-                'kelurahan_nama' => $item->alamat->village->name,
-                'kecamatan_nama' => $item->alamat->village->district->name,
-                'kabupaten_nama' => $item->alamat->village->district->regency->name,
-            ],
+            ]
         ];
     }
 }

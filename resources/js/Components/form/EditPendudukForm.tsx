@@ -187,46 +187,6 @@ export default function EditPendudukForm({
                                     />
                                 </div>
 
-                                {/* Wilayah */}
-                                <div className="col-span-2 grid grid-cols-3 gap-x-6">
-                                    <InputTextField
-                                        label="Kabupaten"
-                                        formik={formik}
-                                        name={`forms.${index}.alamat.kabupaten_nama`}
-                                        disabled={true}
-                                    />
-
-                                    <InputTextField
-                                        label="Kecamatan"
-                                        formik={formik}
-                                        name={`forms.${index}.alamat.kecamatan_nama`}
-                                        disabled={true}
-                                    />
-
-                                    <InputTextField
-                                        onChange={(
-                                            e: React.ChangeEvent<HTMLInputElement>,
-                                        ) => {
-                                            handleInputChange(e, index, formik);
-                                        }}
-                                        label="Kelurahan/Desa"
-                                        formik={formik}
-                                        parentClassName="relative flex-1"
-                                        name={`forms.${index}.alamat.kelurahan_nama`}
-                                        placeholder="Ketikkan Nama Kelurahan"
-                                    >
-                                        <SuggestionList
-                                            queries={queries}
-                                            index={index} // Gunakan index yang sesuai
-                                            formik={formik}
-                                            handleSuggestionClick={
-                                                handleSuggestionClick
-                                            }
-                                            suggestions={suggestions}
-                                        />
-                                    </InputTextField>
-                                </div>
-
                                 {/* Alamat */}
                                 <InputTextField
                                     label="Alamat"

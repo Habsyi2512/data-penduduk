@@ -18,7 +18,6 @@ export default function AddPenduduk({
     dataPekerjaan,
     dataStatusKawin,
 }: AddPendudukProps) {
-    const [loading, setLoading] = useState(false);
     const [openByIdx, setOpenByIdx] = useState<boolean[]>([true]);
     const [idx, setIdx] = useState<number>(0);
     const [isOpenSubmitModal, setIsOpenSubmitModal] = useState(false);
@@ -33,7 +32,6 @@ export default function AddPenduduk({
 
     const handleSubmit = async (values: any) => {
         try {
-            setLoading(true);
             router.post(
                 route('penduduk.store'),
                 { forms: values.forms },

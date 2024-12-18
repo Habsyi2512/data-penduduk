@@ -1,13 +1,13 @@
 import { FormikProps } from 'formik';
 import { SetStateAction } from 'react';
 import {
-    agamaType,
-    golDarahType,
+    AgamaType,
+    GolDarahType,
     InputPendudukProps,
-    jenisKelaminType,
-    kewarganegaraanType,
-    pekerjaanType,
-    statusKawinType,
+    JenisKelaminType,
+    KewarganegaraanType,
+    PekerjaanType,
+    StatusKawinType,
 } from '../interface';
 
 // Type untuk properti yang sering digunakan
@@ -29,12 +29,12 @@ type AccordionHandlers = {
 
 // Type untuk data tambahan yang dibutuhkan
 export interface AddPendudukProps {
-    agama: agamaType[];
-    dataKelamin: jenisKelaminType[];
-    dataGolDarah: golDarahType[];
-    dataStatusKawin: statusKawinType[];
-    dataPekerjaan: pekerjaanType[];
-    dataKewarganegaraan: kewarganegaraanType[];
+    agama: AgamaType[];
+    dataKelamin: JenisKelaminType[];
+    dataGolDarah: GolDarahType[];
+    dataStatusKawin: StatusKawinType[];
+    dataPekerjaan: PekerjaanType[];
+    dataKewarganegaraan: KewarganegaraanType[];
 }
 
 // Base interface untuk form penduduk

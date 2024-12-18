@@ -19,29 +19,17 @@ import { Link, router } from '@inertiajs/react';
 import React, { useState } from 'react';
 import SearchForm from './Form/search/SearchForm';
 
-// export interface PaginatedData<T> {
-//     data: T[];
-//     links: PaginationLink[];
-//     meta: PaginationMeta;
-//     current_page:number;
-//     per_page:number
-// }
-
 interface PopulationDataProps {
     data: PaginatedKK;
     filters: {kabupaten:string};
 }
 
 export default function DataKK({ data, filters }: PopulationDataProps) {
-    // console.log('data = ', data);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const [dataSelectedModal, setDataSelectedModal] = useState<DataKKProps>(
         dataDefaultSelectedModal,
     );
     const [openModalDetailKK, setOpenModalDetailKK] = useState(false);
-
-    const currentPage = data.current_page;
-    const perPage = data.per_page;
 
     const openModal = (data: DataKKProps) => {
         setOpenModalDetailKK(true);

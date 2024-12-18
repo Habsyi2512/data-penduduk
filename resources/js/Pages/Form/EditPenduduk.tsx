@@ -8,7 +8,6 @@ import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { handleSubmit } from '@/services/edit-router/routerService';
 import { FieldArray, Formik } from 'formik';
 import { useEffect, useMemo, useState } from 'react';
-import { validationSchemaEdit } from './validation';
 
 interface EditPendudukProps extends AddPendudukProps {
     data_penduduk: InputPendudukProps[];
@@ -59,23 +58,12 @@ export default function EditPenduduk({
             status_kawin: penduduk.status_kawin,
             pekerjaan: penduduk.pekerjaan,
             kewarganegaraan: penduduk.kewarganegaraan,
-            alamat: {
-                id: penduduk.alamat.id.toString(),
-                alamat: penduduk.alamat.alamat,
-                kelurahan_id: penduduk.alamat.kelurahan_id,
-                kelurahan_nama: penduduk.alamat.kelurahan_nama,
-                kecamatan_nama: penduduk.alamat.kecamatan_nama,
-                kabupaten_nama: penduduk.alamat.kabupaten_nama,
-            },
         })),
     });
 
     return (
         <Authenticated>
-            <Formik
-                initialValues={getInitialValues()}
-                onSubmit={handleSubmit}
-            >
+            <Formik initialValues={getInitialValues()} onSubmit={handleSubmit}>
                 {(formikProps) => (
                     <FieldArray name="forms">
                         {({ push, remove }) => {
@@ -129,7 +117,10 @@ export default function EditPenduduk({
             </Formik>
 
             <div className="mt-4 space-x-5">
-                <Button className='shadow' onClick={() => setIsOpenSubmitModal(true)}>
+                <Button
+                    className="shadow"
+                    onClick={() => setIsOpenSubmitModal(true)}
+                >
                     Simpan
                 </Button>
             </div>
