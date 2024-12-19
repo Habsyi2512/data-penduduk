@@ -1,4 +1,8 @@
-import { TypeFormFieldBuatKK, TypeKepalaKeluarga, Village } from '@/interface/interface';
+import {
+    TypeFormFieldBuatKK,
+    TypeKepalaKeluarga,
+    Village,
+} from '@/interface/interface';
 import { validationSchemaBuatKK } from '@/Pages/Form/validation';
 import { Link, router } from '@inertiajs/react';
 import {
@@ -12,6 +16,7 @@ import React, { useState } from 'react';
 import Box from '../box/Box';
 import Button from '../button/Button';
 import { ChevronRightIcon } from '../icons/ChevronRightIcon';
+import InputTextField from './components/form-fields/InputTextField';
 import { FormHeader, FormTitle } from './components/FormComponents';
 import Label from './components/Label';
 
@@ -28,8 +33,10 @@ const AddKartuKeluargaForm = () => {
     }>({ desa: [], kepalaKeluarga: [] });
 
     const formFieldBuatKK: TypeFormFieldBuatKK = {
-        noKK: '',
+        no_kk: '',
         alamat: '',
+        rt: '',
+        rw: '',
         kepala_keluarga_nik: '',
         no_kk_semula: '',
         kelurahan: { id: 0, name: '' },
@@ -82,12 +89,12 @@ const AddKartuKeluargaForm = () => {
         e: React.ChangeEvent<HTMLInputElement>,
         formik: FormikProps<TypeFormFieldBuatKK>,
     ) => {
-        const { value } = e.target;
+        const { value, name } = e.target;
         if (value == '') {
             formik.setFieldValue('kecamatan.name', '');
             formik.setFieldValue('kabupaten.name', '');
         }
-        formik.setFieldValue('kelurahan.name', value);
+        formik.setFieldValue(name, value);
         fetchSuggestions(value, 'desa');
     };
 
@@ -121,19 +128,20 @@ const AddKartuKeluargaForm = () => {
         });
     };
 
-    
-
     const handleSubmitFormBuatKK = (
         values: TypeFormFieldBuatKK,
         { setSubmitting, resetForm }: FormikHelpers<TypeFormFieldBuatKK>,
     ) => {
+        console.log(values);
         router.post(
             route('kk.store.form'),
             {
-                noKK: '',
+                no_kk: '',
                 no_kk_semula:values.no_kk_semula,
                 kepala_keluarga_nik: values.kepala_keluarga_nik,
                 alamat: values.alamat,
+                rt: values.rt,
+                rw: values.rw,
                 kelurahan_id: values.kelurahan.id,
                 kecamatan_id: values.kecamatan.id.toString().slice(-2),
                 kabupaten_id: values.kabupaten.id.toString().slice(-2),
@@ -288,77 +296,77 @@ const AddKartuKeluargaForm = () => {
                                             className="text-sm text-red-500"
                                         />
                                     </div>
-                                    <div className="relative">
-                                        <Label htmlFor="kelurahan">
-                                            Kelurahan/Desa
-                                        </Label>
-                                        <Field
-                                            id="kelurahan"
-                                            name="kelurahan.name"
-                                            autoComplete="off"
-                                            value={formik.values.kelurahan.name}
-                                            onChange={(
-                                                e: React.ChangeEvent<HTMLInputElement>,
-                                            ) =>
-                                                handleVillageInputChange(
-                                                    e,
-                                                    formik,
-                                                )
-                                            }
-                                            placeholder="Masukkan Kelurahan/Desa"
-                                            className="w-full resize-none rounded-md border border-blue-200 p-2"
-                                            list="village-suggestions"
-                                        />
+
+                                    <InputTextField<TypeFormFieldBuatKK>
+                                        parentClassName="relative"
+                                        formik={formik}
+                                        name="kelurahan.name"
+                                        label="Kelurahan/Desa"
+                                        placeholder="Ketikkan Nama Desa disini"
+                                        onChange={(
+                                            e: React.ChangeEvent<HTMLInputElement>,
+                                        ) =>
+                                            handleVillageInputChange(e, formik)
+                                        }
+                                    >
                                         <ul className="absolute left-0 top-[70px] rounded-md border border-blue-200 bg-white shadow">
-                                            {suggestions.desa.length>0&&suggestions.desa.map((village) => (
-                                                <li
-                                                    key={village.id}
-                                                    value={village.name}
-                                                    onClick={() =>
-                                                        handleVillageSelect(
-                                                            village,
-                                                            formik,
-                                                        )
-                                                    }
-                                                    className="cursor-pointer p-2 text-sm text-gray-600 transition-colors duration-200 hover:bg-blue-200"
-                                                >
-                                                    <span className="block font-bold">
-                                                        {village.name}
-                                                    </span>
-                                                    <span className="text-xs">
-                                                        {village.name} -{' '}
-                                                        {village.district.name},{' '}
-                                                        {
-                                                            village.district
-                                                                .regency.name
-                                                        }
-                                                    </span>
-                                                </li>
-                                            ))}
+                                            {suggestions.desa.length > 0 &&
+                                                suggestions.desa.map(
+                                                    (village) => (
+                                                        <li
+                                                            key={village.id}
+                                                            value={village.name}
+                                                            onClick={() =>
+                                                                handleVillageSelect(
+                                                                    village,
+                                                                    formik,
+                                                                )
+                                                            }
+                                                            className="cursor-pointer p-2 text-sm text-gray-600 transition-colors duration-200 hover:bg-blue-200"
+                                                        >
+                                                            <span className="block font-bold">
+                                                                {village.name}
+                                                            </span>
+                                                            <span className="text-xs">
+                                                                {village.name} -{' '}
+                                                                {
+                                                                    village
+                                                                        .district
+                                                                        .name
+                                                                }
+                                                                ,{' '}
+                                                                {
+                                                                    village
+                                                                        .district
+                                                                        .regency
+                                                                        .name
+                                                                }
+                                                            </span>
+                                                        </li>
+                                                    ),
+                                                )}
                                         </ul>
-                                        <ErrorMessage
-                                            name="kelurahan.name"
-                                            component="div"
-                                            className="text-sm text-red-500"
-                                        />
-                                    </div>
+                                    </InputTextField>
                                 </div>
-                                <div className="col-span-2 grid grid-cols-2">
-                                    <div>
-                                        <Label htmlFor="alamat">Alamat</Label>
-                                        <Field
-                                            as="textarea"
-                                            id="alamat"
-                                            name="alamat"
-                                            value={formik.values.alamat}
-                                            onChange={formik.handleChange}
-                                            placeholder="Masukkan alamat"
-                                            className="h-32 w-full resize-none rounded-md border border-blue-200 p-2"
+                                <div className="col-span-2 grid grid-cols-2 gap-3">
+                                    <InputTextField<TypeFormFieldBuatKK>
+                                        placeholder="Masukkan Alamat"
+                                        as="textarea"
+                                        className="h-44 resize-none"
+                                        formik={formik}
+                                        name="alamat"
+                                        label="alamat"
+                                    />
+                                    <div className="flex gap-x-3">
+                                        <InputTextField<TypeFormFieldBuatKK>
+                                            formik={formik}
+                                            name="rt"
+                                            label="RT"
                                         />
-                                        <ErrorMessage
-                                            name="alamat"
-                                            component="div"
-                                            className="text-sm text-red-500"
+                                        <InputTextField<TypeFormFieldBuatKK>
+                                            formik={formik}
+                                            name="rw"
+                                            label="RW"
                                         />
                                     </div>
                                 </div>

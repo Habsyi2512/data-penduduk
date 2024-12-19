@@ -21,6 +21,8 @@ class FormKKController extends Controller
         $nik_input = $request->input('kepala_keluarga_nik');
         $kecamatan_id = $request->input('kecamatan_id');
         $kabupaten_id = $request->input('kabupaten_id');
+        $rt = $request->input('rt');
+        $rw = $request->input('rw');
         $no_kk = $request->input('no_kk');
         $no_kk_semula = $request->input('no_kk_semula');
     
@@ -30,18 +32,15 @@ class FormKKController extends Controller
     
         // Update data penduduk berdasarkan NIK
         $data_nik = DataPenduduk::where('nik', $nik_input)->first();
-        
     
-        // Membuat alamat baru
-        $alamat_baru = Alamat::create([
-            'alamat'=> $alamat,
-            'kelurahan_id'=> $kelurahan_id,
-        ]);
     
         // Membuat MasterKK baru
         $kk_baru = MasterKK::create([
             'no_kk' => $generate_kk,
-            'alamat_id' => $alamat_baru->id,
+            'alamat'=> $alamat,
+            'kelurahan_id'=> $kelurahan_id,
+            'rt' => $rt,
+            'rw' => $rw,
         ]);
     
         // Mengupdate data penduduk dengan no_kk baru

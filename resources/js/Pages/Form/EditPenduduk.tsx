@@ -67,10 +67,6 @@ export default function EditPenduduk({
                 {(formikProps) => (
                     <FieldArray name="forms">
                         {({ push, remove }) => {
-                            console.log(
-                                'data edit penduduk',
-                                formikProps.values.forms,
-                            );
                             return (
                                 <>
                                     <EditPendudukForm

@@ -1,65 +1,82 @@
-import { CommonFormikProps } from '@/interface/pageprops/interface';
-import { ErrorMessage } from 'formik';
+import { ErrorMessage, FormikProps } from 'formik';
 import React from 'react';
 import InputText from '../InputText';
 import Label from '../Label';
 
-interface InputTextFieldProps {
+interface InputTextFieldProps<T> {
     label: string;
-    name: string;
+    as?:string;
+    name: keyof T | `${string}`; // Nama properti mengikuti key dari Formik values
     disabled?: boolean;
-    type?: 'hidden' | 'text';
+    type?: React.HTMLInputTypeAttribute;
     className?: string;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     parentClassName?: string;
-    formik?: CommonFormikProps;
+    formik?: FormikProps<T>; // FormikProps menggunakan tipe data dinamis T
+    validationMessage?: string;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
     children?: React.ReactNode;
     [key: string]: any;
 }
 
-const InputTextField: React.FC<InputTextFieldProps> = ({
+const InputTextField = <T,>({
     label,
+    as='input',
     name,
     disabled = false,
+    type = 'text',
     className = '',
     parentClassName = '',
-    type = 'text',
-    children,
-    onChange,
     formik,
+    validationMessage,
+    onChange,
+    onBlur,
+    children,
     ...rest
-}) => {
+}: InputTextFieldProps<T>) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (formik) {
+        if (formik?.handleChange) {
             formik.handleChange(e);
         }
         if (onChange) {
             onChange(e);
         }
     };
+
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+        if (formik?.handleBlur) {
+            formik.handleBlur(e);
+        }
+        if (onBlur) {
+            onBlur(e);
+        }
+    };
+
     return (
         <div className={`${parentClassName} ${type}`}>
-            <Label htmlFor={name}>{label}</Label>
+            <Label htmlFor={name as string}>{label}</Label>
             <InputText
                 autoComplete="off"
                 type={type}
-                name={name}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    handleChange(e);
-                }}
+                name={name as string}
+                as={as}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 disabled={disabled}
                 className={`mb-2 block w-full rounded-md ${
-                    disabled &&
-                    'disabled:cursor-not-allowed disabled:bg-gray-200'
+                    disabled ? 'disabled:cursor-not-allowed disabled:bg-gray-200' : ''
                 } ${className}`}
                 {...rest}
             />
-            <ErrorMessage
-                name={name}
-                component="div"
-                className="text-sm text-red-500"
-            />
-            {/* Render komponen tambahan secara dinamis */}
+            {validationMessage ? (
+                <div className="text-sm text-red-500">{validationMessage}</div>
+            ) : (
+                <ErrorMessage
+                    name={name as string}
+                    component="div"
+                    className="text-sm text-red-500"
+                />
+            )}
             {children}
         </div>
     );

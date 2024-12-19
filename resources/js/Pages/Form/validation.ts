@@ -121,4 +121,6 @@ export const validationSchemaBuatKK = Yup.object().shape({
             .required('Nama kabupaten wajib diisi.')
             .min(3, 'Nama kabupaten minimal 3 karakter.'),
     }),
+    rt: Yup.string().max(3, 'Maksimal 3 karakter'),
+    rw: Yup.string().max(3, 'Maksimal 3 karakter'),
 });

@@ -67,8 +67,10 @@ export interface TypeKepalaKeluarga {
 
 // Form Field for KK Creation
 export interface TypeFormFieldBuatKK {
-    noKK: string;
+    no_kk: string;
     alamat: string;
+    rt:string;
+    rw:string;
     kepala_keluarga_nik: string;
     no_kk_semula: string;
     kelurahan: BaseEntity;

@@ -2,7 +2,6 @@ import { useFormHooks } from '@/hooks/FormHooks';
 import { EditPendudukFormProps } from '@/interface/pageprops/interface';
 import { Link } from '@inertiajs/react';
 import { ErrorMessage, Field, Form } from 'formik';
-import { useEffect } from 'react';
 import Box from '../box/Box';
 import { ChevronRightIcon } from '../icons/ChevronRightIcon';
 import Divider from '../ui/Divider';
@@ -12,7 +11,6 @@ import {
     FormHeader,
     FormHeaderAction,
     FormTitle,
-    SuggestionList,
 } from './components/FormComponents';
 import Label from './components/Label';
 import InputDateField from './components/form-fields/InputDateField';
@@ -25,14 +23,7 @@ export default function EditPendudukForm({
     openByIdx,
     toggleAccordion,
 }: EditPendudukFormProps) {
-    const {
-        suggestions,
-        queries,
-        setDistrict,
-        setRegency,
-        handleInputChange,
-        handleSuggestionClick,
-    } = useFormHooks();
+
     const {
         agama,
         dataKelamin,
@@ -60,13 +51,6 @@ export default function EditPendudukForm({
             formik.setFieldValue(name.name, '');
         }
     };
-
-    useEffect(() => {
-        if (!Object.keys(queries).length) {
-            setDistrict(0, { district_id: '', district_name: '' });
-            setRegency(0, { regency_id: '', regency_name: '' });
-        }
-    }, [queries]);
 
     return (
         <>
@@ -186,14 +170,6 @@ export default function EditPendudukForm({
                                         options={dataStatusKawin}
                                     />
                                 </div>
-
-                                {/* Alamat */}
-                                <InputTextField
-                                    label="Alamat"
-                                    formik={formik}
-                                    name={`forms.${index}.alamat.alamat`}
-                                    placeholder="Contoh: Jl. Merdeka No. 123, RT 04/03, Jakarta"
-                                />
 
                                 {/* Jenis Kelamin */}
                                 <div className="col-span-2">

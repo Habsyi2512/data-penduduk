@@ -105,7 +105,6 @@ public function update(Request $request)
                         'status_kawin_id' => $form['status_kawin']['id'],
                         'pekerjaan_id' => $form['pekerjaan']['id'],
                         'kewarganegaraan_id' => $form['kewarganegaraan']['id'],
-                        'alamat_id' => $form['alamat']['id'],
                     ]);
 
                     $penduduk->alamat->update([
