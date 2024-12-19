@@ -30,15 +30,6 @@ export default function AddPendudukForm({
     setIsOpenDiscardModal,
     setIdx,
 }: AddPendudukFormProps) {
-    const {
-        suggestions,
-        queries,
-        setDistrict,
-        setRegency,
-        handleAddForm,
-        handleInputChange,
-        handleSuggestionClick,
-    } = useFormHooks();
 
     const { handleConfirmModal } = ModalHooks();
 
@@ -66,21 +57,6 @@ export default function AddPendudukForm({
             formik.setFieldValue(name.name, selectedData[key]);
         }
     };
-
-    useEffect(() => {
-        if (Object.keys(queries).length === 0) {
-            Object.keys(queries).forEach((index) => {
-                setDistrict(parseInt(index), {
-                    district_id: '',
-                    district_name: '',
-                });
-                setRegency(parseInt(index), {
-                    regency_id: '',
-                    regency_name: '',
-                });
-            });
-        }
-    }, [queries]);
 
     return (
         <Form>
@@ -447,39 +423,11 @@ export default function AddPendudukForm({
                         </div>
 
                         {/* Button to remove the current form */}
-                        <button
-                            type="button"
-                            onClick={() => {
-                                if (setIdx && setIsOpenDiscardModal) {
-                                    handleConfirmModal(
-                                        remove,
-                                        index,
-                                        formik,
-                                        setIdx, // Pastikan setIdx sudah didefinisikan
-                                        setIsOpenDiscardModal,
-                                    );
-                                }
-                            }}
-                            disabled={formik.values.forms.length === 1}
-                            className="mt-8 rounded-md bg-red-500 px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-500"
-                        >
-                            Hapus
-                        </button>
                     </FormContent>
                 </Box>
             ))}
 
             <div className="space-x-5">
-                <button
-                    type="button"
-                    onClick={() =>
-                        handleAddForm(push, setOpenByIdx, formField, formik)
-                    }
-                    className="mt-4 rounded-md bg-blue-500 px-4 py-2 text-white"
-                >
-                    Tambah Formulir
-                </button>
-
                 <button
                     type="button"
                     onClick={async () => {

@@ -50,7 +50,7 @@ export interface Alamat {
     kelurahan_id: string;
     created_at: string;
     updated_at: string;
-    village: Village;
+    
 }
 
 export interface DataPendudukProps {

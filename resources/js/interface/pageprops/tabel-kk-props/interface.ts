@@ -1,3 +1,4 @@
+import { Village } from "@/interface/interface";
 import { Alamat } from "@/interface/pagination/interface";
 
 export interface DataPendudukProps {
@@ -17,9 +18,12 @@ export interface DataPendudukProps {
 
 export interface DataKKProps{
     no_kk: string;
-    alamat: Alamat;
-    alamat_id: string;
+    alamat:string;
+    rt:string;
+    rw:string;
+    kelurahan_id: string;
     data_penduduk: DataPendudukProps[];
+    village: Village;
 }
 
 // untuk halaman debug

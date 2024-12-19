@@ -28,24 +28,34 @@ export default function Sidebar({
             url: '/dashboard',
         },
         {
-            title: 'Penduduk',
-            url: '/population',
+            title: 'Data',
+            url: '',
             subMenu: [
                 {
                     title: 'Biodata',
                     url: '/population',
                 },
                 {
-                    title: 'Data KK',
+                    title: 'Kartu Keluarga',
                     url: '/dashboard/data-kk',
                 },
+            ],
+        },
+        {
+            title: 'Layanan Kependudukan',
+            url: '',
+            subMenu: [
                 {
-                    title: 'Tambah Penduduk',
+                    title: 'Registrasi KTP',
                     url: '/dashboard/tambah-penduduk',
                 },
                 {
-                    title: 'Hapus Penduduk',
-                    url: '/dashboard/hapus-penduduk',
+                    title: 'Registrasi KK',
+                    url: '/dashboard/buat-kk',
+                },
+                {
+                    title: 'Registrasi KTP dan KK',
+                    url: '/',
                 },
             ],
         },
@@ -77,16 +87,13 @@ export default function Sidebar({
         },
         {
             title: 'Data Pindah',
-            url: '/pengaturan',
+            url: '',
             subMenu: [
                 {
                     title: 'Pindah KK',
                     url: '/dashboard/pindah-kk',
                 },
-                {
-                    title: 'Buat KK',
-                    url: '/dashboard/buat-kk',
-                },
+                
             ],
         },
         {
@@ -143,7 +150,7 @@ export default function Sidebar({
                                     </span>
                                 </button>
                                 <ul
-                                    className={`overflow-y-auto pl-6 transition-all duration-300 ease-in-out ${
+                                    className={`overflow-y-auto pl-3 transition-all duration-300 ease-in-out ${
                                         openSubMenuIndex === index
                                             ? 'max-h-40 mt-2 opacity-100'
                                             : 'max-h-0 opacity-0'
@@ -153,7 +160,7 @@ export default function Sidebar({
                                         <li key={subIndex} className='mb-2'>
                                             <Link
                                                 href={subMenu.url}
-                                                className={`inline-block ${subMenu.url == url && ' bg-blue-800 dark:bg-gray-700'} w-full rounded px-3 py-2 hover:bg-blue-700 dark:hover:bg-gray-600`}
+                                                className={`inline-block ${subMenu.url == url && ' bg-blue-800 dark:bg-gray-700'} w-full text-xs rounded px-3 py-2 hover:bg-blue-700 dark:hover:bg-gray-600`}
                                             >
                                                 {subMenu.title}
                                             </Link>

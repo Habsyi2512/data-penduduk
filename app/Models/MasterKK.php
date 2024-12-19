@@ -10,7 +10,8 @@ class MasterKK extends Model
 {
     //
     protected $table = 'master_kk';
-    protected $fillable = ['no_kk', 'alamat_id'];
+    protected $primaryKey = 'no_kk';
+    protected $fillable = ['no_kk', 'alamat','rt', 'rw', 'kelurahan_id'];
 
     public static function generateNoKK($regency, $district)
     {
@@ -35,8 +36,8 @@ class MasterKK extends Model
         return $this->hasMany(DataPenduduk::class, 'no_kk', 'no_kk');
     }
     
-    public function alamat(){
-        return $this->belongsTo(Alamat::class, 'alamat_id', 'id');
+    public function village(){
+        return $this->belongsTo(Village::class, 'kelurahan_id', 'id');
     }
 
 

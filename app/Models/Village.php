@@ -10,8 +10,8 @@ class Village extends Model
         return $this->belongsTo(District::class);
     }
 
-    public function alamats()
-{
-    return $this->hasMany(Alamat::class, 'kelurahan_id', 'id');
-}
+    public function master_kk()
+    {
+        return $this->hasMany(MasterKK::class,'kelurahan_id', 'id');
+    }
 }

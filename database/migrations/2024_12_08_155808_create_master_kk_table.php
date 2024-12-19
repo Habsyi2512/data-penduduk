@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('master_kk', function (Blueprint $table) {
             $table->char('no_kk', 16)->primary();
-            $table->unsignedBigInteger('alamat_id');
+            $table->string('alamat');
+            $table->string('rt');
+            $table->string('rw');
+            $table->char('kelurahan_id', 10)->collation('utf8_unicode_ci');
 
-            $table->foreign('alamat_id')->references('id')->on('alamats');
+            $table->foreign('kelurahan_id')->references('id')->on('villages')->onDelete('cascade');
             $table->timestamps();
         });
     }
