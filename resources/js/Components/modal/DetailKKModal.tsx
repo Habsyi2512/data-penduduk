@@ -35,11 +35,20 @@ export default function DetailKKModal({
                         </p>
                         <p>
                             <span className="inline-block w-[190px] font-semibold text-blue-500">
+                                RT/RW
+                            </span>
+                            <span className="pr-2">:</span>
+                            <span className="font-medium">
+                                {data.rt}/{data.rw}
+                            </span>
+                        </p>
+                        <p>
+                            <span className="inline-block w-[190px] font-semibold text-blue-500">
                                 Alamat
                             </span>
                             <span className="pr-2">:</span>
                             <span className="font-medium">
-                                {data.alamat.alamat}
+                                {data.alamat}
                             </span>
                         </p>
                         <p>
@@ -48,7 +57,7 @@ export default function DetailKKModal({
                             </span>
                             <span className="pr-2">:</span>
                             <span className="font-medium">
-                                {data.alamat.village.name}
+                                {data.village.name}
                             </span>
                         </p>
                         <p>
@@ -57,7 +66,7 @@ export default function DetailKKModal({
                             </span>
                             <span className="pr-2">:</span>
                             <span className="font-medium">
-                                {data.alamat.village.district.name}
+                                {data.village.district.name}
                             </span>
                         </p>
                         <p>
@@ -66,7 +75,7 @@ export default function DetailKKModal({
                             </span>
                             <span className="pr-2">:</span>
                             <span className="font-medium">
-                                {data.alamat.village.district.regency.name}
+                                {data.village.district.regency.name}
                             </span>
                         </p>
                     </div>

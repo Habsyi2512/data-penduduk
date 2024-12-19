@@ -11,7 +11,7 @@ import Th from '@/Components/table/Th';
 import Tr from '@/Components/table/Tr';
 import TooltipDemo from '@/Components/tooltip/TooltipDemo';
 import { dataKabupaten } from '@/data/dataKabupaten';
-import { dataDefaultSelectedModal } from '@/data/dataSelectedModal';
+import { dataKK } from '@/data/dataKK';
 import { DataKKProps } from '@/interface/pageprops/tabel-kk-props/interface';
 import { PaginatedKK } from '@/interface/pagination/interface';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
@@ -21,14 +21,13 @@ import SearchForm from './Form/search/SearchForm';
 
 interface PopulationDataProps {
     data: PaginatedKK;
-    filters: {kabupaten:string};
+    filters: { kabupaten: string };
 }
 
 export default function DataKK({ data, filters }: PopulationDataProps) {
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
-    const [dataSelectedModal, setDataSelectedModal] = useState<DataKKProps>(
-        dataDefaultSelectedModal,
-    );
+    const [dataSelectedModal, setDataSelectedModal] =
+        useState<DataKKProps>(dataKK);
     const [openModalDetailKK, setOpenModalDetailKK] = useState(false);
 
     const openModal = (data: DataKKProps) => {
@@ -38,7 +37,7 @@ export default function DataKK({ data, filters }: PopulationDataProps) {
 
     const closeModal = () => {
         setOpenModalDetailKK(false);
-        setDataSelectedModal(dataDefaultSelectedModal);
+        setDataSelectedModal(dataKK);
     };
 
     // Fungsi untuk menangani perubahan seleksi
@@ -73,9 +72,7 @@ export default function DataKK({ data, filters }: PopulationDataProps) {
                             className="rounded border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             defaultValue={filters['kabupaten'] || ''}
                         >
-                            <option value="" >
-                                Semua
-                            </option>
+                            <option value="">Semua</option>
                             {dataKabupaten.map((kabupaten) => (
                                 <option key={kabupaten.id} value={kabupaten.id}>
                                     {kabupaten.nama}
@@ -106,7 +103,11 @@ export default function DataKK({ data, filters }: PopulationDataProps) {
                                 value={<ArrowPathIcon className="w-5" />}
                             />
                         </Button>
-                        <SearchForm placeHolder="Ketikkan no. kk" queryKey='no_kk' route='/dashboard/data-kk'/>
+                        <SearchForm
+                            placeHolder="Ketikkan no. kk"
+                            queryKey="no_kk"
+                            route="/dashboard/data-kk"
+                        />
                     </div>
                 </div>
                 <Table>
@@ -181,25 +182,20 @@ export default function DataKK({ data, filters }: PopulationDataProps) {
                                     </Td>
                                     <Td className="">{penduduk.no_kk}</Td>
                                     <Td className="border border-black">
-                                        {
-                                            penduduk.alamat.village.district
-                                                .regency.name
-                                        }
+                                        {penduduk.village.district.regency.name}
                                     </Td>
                                     <Td className="">
                                         <TooltipDemo
                                             content={
-                                                penduduk.alamat.village.district
-                                                    .name
+                                                penduduk.village.district.name
                                             }
                                             value={
-                                                penduduk.alamat.village.district
-                                                    .name
+                                                penduduk.village.district.name
                                             }
                                         />
                                     </Td>
                                     <Td className="">
-                                        {penduduk.alamat.village.name}
+                                        {penduduk.village.name}
                                     </Td>
                                 </Tr>
                             ))
