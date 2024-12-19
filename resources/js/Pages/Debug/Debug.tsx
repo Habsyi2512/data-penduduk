@@ -4,7 +4,6 @@ import {
 } from '@/interface/pageprops/tabel-kk-props/interface';
 
 export default function Debug({ data }: DataKKPageProps) {
-    
     return (
         <div>
             <h1 className="text-center text-3xl font-semibold text-gray-700">
@@ -18,7 +17,7 @@ export default function Debug({ data }: DataKKPageProps) {
                             alamat: {item.alamat}, {item.village.name},{' '}
                             {item.village.district.name}
                         </li>
-                        <li>anggota:</li>
+                        <li>da sis</li>
                         {item.data_penduduk.map((item, index) => {
                             return (
                                 <div key={item.nik}>

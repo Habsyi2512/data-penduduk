@@ -114,7 +114,7 @@ export default function Sidebar({
         <motion.aside
             initial={{ width: 250 }}
             animate={{ width: isOpenSidebar ? 250 : 0 }}
-            className="h-full overflow-hidden border-r border-gray-200 bg-blue-900 text-white shadow-lg transition-colors duration-500 dark:border-gray-500/50 dark:bg-gray-800 dark:text-gray-300"
+            className="h-full hidden xl:block overflow-hidden border-r border-gray-200 bg-blue-900 text-white shadow-lg transition-colors duration-500 dark:border-gray-500/50 dark:bg-gray-800 dark:text-gray-300"
         >
             <nav className="flex items-center justify-between px-4 py-4">
                 <button

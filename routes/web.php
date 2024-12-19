@@ -89,7 +89,4 @@ Route::get('/search-desa', [SearchController::class, 'searchDesa']);
 Route::get('/search-kepala-keluarga', [SearchController::class, 'searchKepalaKeluraga']);
 
 
-
-Route::get('/api/search-village', [DebugController::class, 'search']);
-
 require __DIR__ . '/auth.php';

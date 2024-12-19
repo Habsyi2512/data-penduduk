@@ -4,11 +4,7 @@ export type BaseEntity = {
     name: string;
 };
 
-export type Province = BaseEntity;
-
-export type Regency = BaseEntity & {
-    province: Province;
-};
+export type Regency = BaseEntity ;
 
 export type District = BaseEntity & {
     regency: Regency;
