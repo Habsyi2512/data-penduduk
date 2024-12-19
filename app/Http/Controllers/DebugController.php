@@ -11,7 +11,7 @@ use Inertia\Inertia;
 class DebugController extends Controller
 {
     public function index(){
-        $data = MasterKK::with(['data_penduduk', 'village.district.regency'])->get();
+        $data = MasterKK::get();
         return Inertia::render('Debug/Debug', [
             'data'=>$data
         ]);

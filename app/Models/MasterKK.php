@@ -12,6 +12,7 @@ class MasterKK extends Model
     protected $table = 'master_kk';
     protected $primaryKey = 'no_kk';
     protected $fillable = ['no_kk', 'alamat','rt', 'rw', 'kelurahan_id'];
+    // protected $with = ['data_penduduk', 'village.district.regency'];
 
     public static function generateNoKK($regency, $district)
     {
@@ -46,7 +47,7 @@ class MasterKK extends Model
     public function scopeFilter(Builder $query, array $filters){
         // Filter berdasarkan kabupaten
         if (!empty($filters['kabupaten'])) {
-            $query->whereHas('alamat.village.district.regency', function ($query) use ($filters) {
+            $query->whereHas('village.district.regency', function ($query) use ($filters) {
                 $query->where('id', $filters['kabupaten']);
             });
         }

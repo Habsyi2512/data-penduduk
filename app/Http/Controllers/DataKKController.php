@@ -14,9 +14,7 @@ class DataKKController extends Controller
         $filters = $request->only(['kabupaten', 'no_kk']); // Bisa ditambahkan filter lainnya sesuai kebutuhan
 
         // Ambil data dari MasterKK dengan filter dan relasi
-        $data = MasterKK::with(['data_penduduk', 'village.district.regency']) // Load relasi
-            ->filter($filters) // Terapkan filter dari array
-            ->paginate(5); // Batasi hasil dengan pagination
+        $data = MasterKK::with(['data_penduduk', 'village.district.regency'])->filter($filters)->paginate(5);
 
         // Menambahkan globalIndex ke data
         $data->getCollection()->transform(function ($item, $key) use ($data) {
