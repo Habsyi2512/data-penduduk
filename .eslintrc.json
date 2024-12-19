@@ -18,11 +18,42 @@
     "rules": {
         "react/react-in-jsx-scope": "off",
         "react/prop-types": "off",
-        "react/no-unescaped-entities": "off"
+        "react/no-unescaped-entities": "off",
+        "prettier/prettier": [
+            "detect",
+            {
+                "singleQuote": true,
+                "printWidth": 200,
+                "tabWidth": 4,
+                "useTabs": false,
+                "semi": true
+            }
+        ],
+        "max-len": [
+            "error",
+            {
+                "code": 320,
+                "ignoreUrls": true,
+                "ignoreStrings": true,
+                "ignoreTemplateLiterals": true,
+                "ignoreRegExpLiterals": true
+            }
+        ],
+        "overrides": [
+            {
+                "files": [
+                    "*.test.tsx",
+                    "*.spec.tsx"
+                ],
+                "rules": {
+                    "max-len": "off"
+                }
+            }
+        ]
     },
     "settings": {
         "react": {
             "version": "detect"
         }
-    },
+    }
 }
