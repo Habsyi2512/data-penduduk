@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\JenisKelamin;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -44,6 +45,12 @@ class DataInputSeeder extends Seeder
 
         // Mengaktifkan kembali foreign key check
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        User::create([
+            'name' => 'Habsyi Ganzz',
+            'email' => 'habsyimubarak@gmail.com',
+            'password' => bcrypt('123123123') // Gunakan bcrypt untuk mengenkripsi password
+        ]);
 
     }
 }

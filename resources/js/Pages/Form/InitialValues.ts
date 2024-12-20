@@ -11,20 +11,13 @@ export const formFieldBiodata: InputPendudukProps = {
     status_kawin: { id: '', status: '' },
     pekerjaan: { id: '', pekerjaan: '' },
     kewarganegaraan: { id: '', kewarganegaraan: '' },
-    alamat: {
-        id: '',
-        alamat: '',
-        kelurahan_id: '',
-        kelurahan_nama: '',
-        kecamatan_nama: '',
-        kabupaten_nama: '',
-    },
 };
 
 export const formFieldBuatKK: TypeFormFieldBuatKK = {
-    noKK: '',
     alamat: '',
     kepala_keluarga_nik: '',
+    rt: '',
+    rw: '',
     no_kk_semula: '',
     kelurahan: { id: '', name: '' },
     kecamatan: { id: '', name: '' },

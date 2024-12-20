@@ -16,43 +16,38 @@ class FormKKController extends Controller
     }
 
     public function store(Request $request){
-        $alamat = $request->input('alamat');
-        $kelurahan_id = $request->input('kelurahan_id');
         $nik_input = $request->input('kepala_keluarga_nik');
+        $kelurahan_id = $request->input('kelurahan_id');
         $kecamatan_id = $request->input('kecamatan_id');
         $kabupaten_id = $request->input('kabupaten_id');
+        $no_kk_semula = $request->input('no_kk_semula');
+        $alamat = $request->input('alamat');
         $rt = $request->input('rt');
         $rw = $request->input('rw');
-        $no_kk = $request->input('no_kk');
-        $no_kk_semula = $request->input('no_kk_semula');
-    
-        if($no_kk == ''){
-            $generate_kk = MasterKK::generateNoKK($kabupaten_id, $kecamatan_id);
-        }
-    
-        // Update data penduduk berdasarkan NIK
+        $generate_kk = MasterKK::generateNoKK($kabupaten_id, $kecamatan_id);
         $data_nik = DataPenduduk::where('nik', $nik_input)->first();
-    
-    
-        // Membuat MasterKK baru
+
         $kk_baru = MasterKK::create([
             'no_kk' => $generate_kk,
-            'alamat'=> $alamat,
-            'kelurahan_id'=> $kelurahan_id,
+            'alamat' => $alamat,
             'rt' => $rt,
             'rw' => $rw,
+            'kelurahan_id' => $kelurahan_id,
         ]);
-    
+
         // Mengupdate data penduduk dengan no_kk baru
-        if($data_nik){
-            if ($data_nik->status_hubungan_id != 1) {
-                $data_nik->update(['status_hubungan_id' => 1]);
-            }
-            $data_nik->update([
-                'no_kk' => $kk_baru->no_kk,
-            ]);
+        if($kk_baru->no_kk){
+                $data_nik->no_kk = $kk_baru->no_kk; 
+                $data_nik->refresh();
         }
-        $data_kk_lama = MasterKK::with(['data_penduduk', 'alamat.village.district.regency'])
+        if ($data_nik) {
+            if ($data_nik->status_hubungan_id != 1) {
+                $data_nik->status_hubungan_id = 1;
+                $data_nik->refresh();
+            }
+        }
+
+        $data_kk_lama = MasterKK::with(['data_penduduk', 'village.district.regency'])
                         ->where('no_kk', $no_kk_semula)
                         ->first();
         if ($data_kk_lama->data_penduduk->count() > 1) {
@@ -76,7 +71,7 @@ class FormKKController extends Controller
             ]);
         }
     
-        // return to_route('kk.display')->with('success', 'Berhasil Membuat KK');
+        return to_route('kk.display')->with('success', 'Berhasil Membuat KK');
     }
     
 }

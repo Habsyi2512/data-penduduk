@@ -11,6 +11,8 @@ class MasterKK extends Model
     //
     protected $table = 'master_kk';
     protected $primaryKey = 'no_kk';
+    public $incrementing = false;     // Karena no_kk bukan auto increment
+    protected $keyType = 'string';    // Karena no_kk adalah string
     protected $fillable = ['no_kk', 'alamat','rt', 'rw', 'kelurahan_id'];
     // protected $with = ['data_penduduk', 'village.district.regency'];
 

@@ -1,10 +1,9 @@
-
 export type BaseEntity = {
-    id: number|string;
+    id: number | string;
     name: string;
 };
 
-export type Regency = BaseEntity ;
+export type Regency = BaseEntity;
 
 export type District = BaseEntity & {
     regency: Regency;
@@ -20,19 +19,18 @@ export type DebugProps = {
 
 // Enumerated Types
 export type EnumType<T extends string> = {
-    id: number|string;
+    id: number | string;
 } & {
     [key in T]: string;
 };
 
-
 // Specific Enum Definitions
-export type JenisKelaminType = EnumType<"jenis_kelamin">;
-export type GolDarahType = EnumType<"gol_darah">;
-export type AgamaType = EnumType<"agama">;
-export type StatusKawinType = EnumType<"status">;
-export type PekerjaanType = EnumType<"pekerjaan">;
-export type KewarganegaraanType = EnumType<"kewarganegaraan">;
+export type JenisKelaminType = EnumType<'jenis_kelamin'>;
+export type GolDarahType = EnumType<'gol_darah'>;
+export type AgamaType = EnumType<'agama'>;
+export type StatusKawinType = EnumType<'status'>;
+export type PekerjaanType = EnumType<'pekerjaan'>;
+export type KewarganegaraanType = EnumType<'kewarganegaraan'>;
 
 // Address Type
 export type Address = {
@@ -67,13 +65,17 @@ export interface TypeKepalaKeluarga {
 
 // Form Field for KK Creation
 export interface TypeFormFieldBuatKK {
-    no_kk: string;
     alamat: string;
-    rt:string;
-    rw:string;
+    rt: string;
+    rw: string;
     kepala_keluarga_nik: string;
     no_kk_semula: string;
     kelurahan: BaseEntity;
     kecamatan: BaseEntity;
     kabupaten: BaseEntity;
+}
+
+export interface TypeSuggestions {
+    desa: Village[];
+    kepalaKeluarga: TypeKepalaKeluarga[];
 }

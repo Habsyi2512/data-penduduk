@@ -13,8 +13,7 @@ return new class extends Migration
     {
         if (!Schema::hasTable('data_penduduks')) {
         Schema::create('data_penduduks', function (Blueprint $table) {
-            $table->id();
-            $table->char('nik', 16);
+            $table->char('nik', 16)->primary();
             $table->string('nama');
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');

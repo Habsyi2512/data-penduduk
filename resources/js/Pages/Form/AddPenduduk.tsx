@@ -7,7 +7,7 @@ import { router } from '@inertiajs/react';
 import { FieldArray, Formik } from 'formik';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
-import { formFieldBiodata } from './FormatData';
+import { formFieldBiodata } from './InitialValues';
 import { validationSchema } from './validation';
 
 export default function AddPenduduk({
