@@ -3,7 +3,6 @@ import { router } from '@inertiajs/react';
 import { FormikHelpers } from 'formik';
 
 export const handleSubmitFormBuatKK = (values: TypeFormFieldBuatKK, { setSubmitting, resetForm }: FormikHelpers<TypeFormFieldBuatKK>) => {
-    console.log('values', values);
     router.post(
         route('kk.store.form'),
         {

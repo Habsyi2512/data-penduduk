@@ -22,7 +22,7 @@ class PendudukFormController extends Controller
         return [
             'agama' => Agama::all(),
             'dataKelamin' => JenisKelamin::all(),
-            'dataGolDarah' => GolDarah::all(),
+            'dataGolDarah' => GolDarah::get(),
             'dataStatusKawin' => StatusKawin::all(),
             'dataPekerjaan' => Pekerjaan::all(),
             'dataKewarganegaraan' => Kewarganegaraan::all(),

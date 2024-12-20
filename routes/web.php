@@ -85,8 +85,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::get('/debug', [DebugController::class, 'index']);
-Route::get('/search-desa', [SearchController::class, 'searchDesa']);
-Route::get('/search-kepala-keluarga', [SearchController::class, 'searchKepalaKeluraga']);
+
+Route::prefix('search')->group(function(){
+    // Route::get('/searchDesa', [SearchController::class, 'searchDesa']);
+    Route::get('/searchNIK', [SearchController::class, 'searchNIK']);
+    Route::get('/searchKK', [SearchController::class, 'searchKK']);
+});
 
 
 require __DIR__ . '/auth.php';

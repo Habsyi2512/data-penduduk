@@ -1,19 +1,9 @@
 import { FormikProps } from 'formik';
 import { SetStateAction } from 'react';
-import {
-    AgamaType,
-    GolDarahType,
-    InputPendudukProps,
-    JenisKelaminType,
-    KewarganegaraanType,
-    PekerjaanType,
-    StatusKawinType,
-} from '../interface';
+import { AgamaType, GolDarahType, InputPendudukProps, JenisKelaminType, KewarganegaraanType, PekerjaanType, StatusKawinType } from '../interface';
 
 // Type untuk properti yang sering digunakan
-export type CommonFormikProps = FormikProps<{
-    forms: InputPendudukProps[];
-}>;
+export type CommonFormikProps = FormikProps<{ forms: InputPendudukProps[] }>;
 
 type CommonModalHandlers = {
     setIsOpenDiscardModal?: React.Dispatch<SetStateAction<boolean>>;
@@ -43,11 +33,7 @@ interface BasePendudukFormProps {
     data: AddPendudukProps;
     push: <X = any>(obj: X) => void;
     remove: <X = any>(index: number) => X | undefined;
-    handleConfirmModal?: (
-        remove: <X = any>(index: number) => X | undefined,
-        index: number,
-        formik: CommonFormikProps,
-    ) => void;
+    handleConfirmModal?: (remove: <X = any>(index: number) => X | undefined, index: number, formik: CommonFormikProps) => void;
 }
 
 // Interface untuk form Add Penduduk

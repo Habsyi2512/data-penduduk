@@ -45,18 +45,24 @@ const AddKartuKeluargaForm = () => {
                                     name="kepala_keluarga_nik"
                                     onClose={() => {
                                         setSuggestions((prev) => {
-                                            return { ...prev, kepalaKeluarga: [] };
+                                            return { ...prev, NIK: [] };
                                         });
                                     }}
                                     label="NIK Kepala Keluarga/NIK Pemohon"
                                     placeholder="Masukkan NIK"
                                     value={formik.values.kepala_keluarga_nik}
-                                    handleInputChange={(e: React.ChangeEvent<HTMLInputElement>) => handleKepalaKeluargaInputChange(e, formik)}
+                                    handleInputChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                        handleKepalaKeluargaInputChange(e, formik, () => {
+                                            if (e.target.value == '') {
+                                                formik.setFieldValue('no_kk_semula', '');
+                                            }
+                                        })
+                                    }
                                     handleComboboxChange={(value: string) => {
                                         handleComboboxChangeNIK(value, formik, suggestions, setSuggestions);
                                     }}
                                 >
-                                    {suggestions.kepalaKeluarga.map((person) => (
+                                    {suggestions.NIK.map((person) => (
                                         <ComboboxOption key={person.nik} value={person.nik} className="group w-full gap-2 bg-white p-2 data-[focus]:bg-gray-200">
                                             <p className="font-inter font-bold text-gray-600">{person.nik}</p>
                                             <span className="inline-block text-xs">{person.name}</span>

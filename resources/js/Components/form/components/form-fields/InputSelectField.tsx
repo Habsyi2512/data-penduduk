@@ -9,27 +9,13 @@ interface InputSelectFieldProps<T> {
     name: string;
     options: T[];
     dataKey?: keyof T;
-    onChange: (
-        value: string,
-        data: T[],
-        key: keyof T,
-        name: { id: string; name: string },
-    ) => void;
+    onChange: (value: string, data: T[], key: keyof T, name: { id: string; name: string }) => void;
     className?: string;
     index: number;
     [key: string]: any;
 }
 
-const InputSelectField = <T extends { id: string | number }>({
-    label,
-    name,
-    options,
-    dataKey = 'id',
-    onChange,
-    className = '',
-    index,
-    ...rest
-}: InputSelectFieldProps<T>) => {
+const InputSelectField = <T extends { id: string | number }>({ label, name, options, dataKey = 'id', onChange, className = '', index, ...rest }: InputSelectFieldProps<T>) => {
     return (
         <div>
             <Label htmlFor={name}>{label}</Label>
@@ -39,10 +25,9 @@ const InputSelectField = <T extends { id: string | number }>({
                 id={name}
                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                     const updatedName = name.replace(/(\.[^\.]+)$/, '.id');
-                    console.log(updatedName);
 
                     // Jika nilai kosong dipilih, beri nilai null atau nilai default
-                    const value = e.target.value === '' ? "tidak ada" : e.target.value;
+                    const value = e.target.value === '' ? 'tidak ada' : e.target.value;
 
                     onChange(value, options, dataKey, {
                         id: updatedName,
@@ -59,11 +44,7 @@ const InputSelectField = <T extends { id: string | number }>({
                     </option>
                 ))}
             </Field>
-            <ErrorMessage
-                name={name}
-                component="div"
-                className="text-sm text-red-500"
-            />
+            <ErrorMessage name={name} component="div" className="text-sm text-red-500" />
         </div>
     );
 };

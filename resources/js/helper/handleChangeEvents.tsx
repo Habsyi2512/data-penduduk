@@ -4,19 +4,34 @@ import { FormikProps } from 'formik';
 import React, { useState } from 'react';
 
 export default function useHandleChangeEvents() {
-    const [suggestions, setSuggestions] = useState<TypeSuggestions>({ desa: [], kepalaKeluarga: [] });
+    const [suggestions, setSuggestions] = useState<TypeSuggestions>({ desa: [], NIK: [], KK: [] });
     const { fetchSuggestions } = useSearchSuggestions();
-    const handleKepalaKeluargaInputChange = async (e: React.ChangeEvent<HTMLInputElement>, formik: FormikProps<TypeFormFieldBuatKK>) => {
-        const { value } = e.target;
-        if (value == '') {
-            formik.setFieldValue('no_kk_semula', '');
+    React.useEffect(() => {
+        console.log('suggestions', suggestions);
+    }, [suggestions]);
+
+    const handleKepalaKeluargaInputChange = async <T = TypeFormFieldBuatKK,>(e: React.ChangeEvent<HTMLInputElement>, formik: FormikProps<T>, callBack?: () => void) => {
+        const { value, name } = e.target;
+        console.log('name = ', name);
+        if (callBack) {
+            callBack();
         }
-        formik.setFieldValue('kepala_keluarga_nik', value);
-        const data = await fetchSuggestions(value, 'kepalaKeluarga');
-        setSuggestions((prev) => {
-            return { ...prev, kepalaKeluarga: data };
-        });
+        formik.setFieldValue(name, value);
+        const data = await fetchSuggestions(value, 'searchNIK');
+        setSuggestions((prev) => ({ ...prev, NIK: data }));
     };
+
+    const handleKKInputChange = async <T = TypeFormFieldBuatKK,>(e: React.ChangeEvent<HTMLInputElement>, formik: FormikProps<T>, callBack?: () => void) => {
+        const { value, name } = e.target;
+
+        if (callBack) {
+            callBack();
+        }
+        formik.setFieldValue(name, value);
+        const data = await fetchSuggestions(value, 'searchKK');
+        setSuggestions((prev) => ({ ...prev, KK: data }));
+    };
+
     const handleVillageInputChange = async (e: React.ChangeEvent<HTMLInputElement>, formik: FormikProps<TypeFormFieldBuatKK>) => {
         const { value, name } = e.target;
         if (value == '') {
@@ -24,10 +39,8 @@ export default function useHandleChangeEvents() {
             formik.setFieldValue('kabupaten.name', '');
         }
         formik.setFieldValue(name, value);
-        const data = await fetchSuggestions(value, 'desa');
-        setSuggestions((prev) => {
-            return { ...prev, desa: data };
-        });
+        const data = await fetchSuggestions(value, 'searchDesa');
+        setSuggestions((prev) => ({ ...prev, desa: data }));
     };
-    return { handleKepalaKeluargaInputChange, handleVillageInputChange, suggestions, setSuggestions };
+    return { handleKepalaKeluargaInputChange, handleKKInputChange, handleVillageInputChange, suggestions, setSuggestions };
 }

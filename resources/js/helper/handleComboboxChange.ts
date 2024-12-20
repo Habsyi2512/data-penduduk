@@ -1,4 +1,5 @@
 import { TypeFormFieldBuatKK, TypeSuggestions } from '@/interface/interface';
+import { CommonFormikProps } from '@/interface/pageprops/interface';
 import { FormikProps } from 'formik';
 
 export const handleComboboxChangeDesa = (value: string, formik: FormikProps<TypeFormFieldBuatKK>, suggestions: TypeSuggestions, setSuggestions: React.Dispatch<React.SetStateAction<TypeSuggestions>>) => {
@@ -19,8 +20,8 @@ export const handleComboboxChangeDesa = (value: string, formik: FormikProps<Type
     });
 };
 
-export const handleComboboxChangeNIK = (value: string, formik: FormikProps<TypeFormFieldBuatKK>, suggestions: TypeSuggestions, setSuggestions: React.Dispatch<React.SetStateAction<TypeSuggestions>>) => {
-    const selectedPerson = suggestions.kepalaKeluarga.find((person) => person.nik === value);
+export const handleComboboxChangeNIK = <T = TypeFormFieldBuatKK>(value: string, formik: FormikProps<T>, suggestions: TypeSuggestions, setSuggestions: React.Dispatch<React.SetStateAction<TypeSuggestions>>) => {
+    const selectedPerson = suggestions.NIK.find((person) => person.nik === value);
     if (selectedPerson) {
         formik.setFieldValue('kepala_keluarga_nik', selectedPerson.nik);
         formik.setFieldValue('no_kk_semula', selectedPerson.no_kk);
@@ -30,6 +31,21 @@ export const handleComboboxChangeNIK = (value: string, formik: FormikProps<TypeF
 
     setSuggestions((prev: TypeSuggestions) => ({
         ...prev,
-        kepalaKeluarga: [],
+        NIK: [],
+    }));
+};
+
+export const handleComboboxChangeKK = <T = CommonFormikProps>(value: string, formik: FormikProps<T>, suggestions: TypeSuggestions, setSuggestions: React.Dispatch<React.SetStateAction<TypeSuggestions>>) => {
+    const selectedData = suggestions.KK.find((data) => data.no_kk === value);
+    // if (selectedData) {
+    //     formik.setFieldValue('kepala_keluarga_nik', selectedData.no_kk);
+    //     formik.setFieldValue('no_kk_semula', selectedData.no_kk);
+    //     formik.setFieldTouched('kepala_keluarga_nik', false, true);
+    //     formik.setFieldTouched('no_kk_semula', false, true);
+    // }
+
+    setSuggestions((prev: TypeSuggestions) => ({
+        ...prev,
+        KK: [],
     }));
 };

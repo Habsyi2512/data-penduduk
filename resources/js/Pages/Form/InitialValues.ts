@@ -1,7 +1,7 @@
 import { InputPendudukProps, TypeFormFieldBuatKK } from '@/interface/interface';
 
 export const formFieldBiodata: InputPendudukProps = {
-    nik: '',
+    no_kk: '',
     nama: '',
     tempat_lahir: '',
     tanggal_lahir: '',

@@ -10,6 +10,6 @@ class JenisKelamin extends Model
 
     public function data_penduduk()
     {
-        return $this->hasMany(DataPenduduk::class, 'jenis_kelamin_id');
+        return $this->hasMany(DataPenduduk::class, 'kelamin_id');
     }
 }

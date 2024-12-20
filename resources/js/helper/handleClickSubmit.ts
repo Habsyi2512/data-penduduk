@@ -6,7 +6,7 @@ export const handleClickSubmitFormik = async <T = any>(formik: FormikProps<T>, s
 
     // Jika ada error, set errors dan tampilkan pesan error di UI
     if (Object.keys(error).length > 0) {
-        console.log(error);
+        // console.log(error);
         formik.handleSubmit();
     } else {
         // Jika tidak ada error, buka modal konfirmasi

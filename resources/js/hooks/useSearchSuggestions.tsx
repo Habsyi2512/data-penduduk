@@ -1,15 +1,17 @@
-import { TypeSuggestions } from '@/interface/interface';
-import { useState } from 'react';
+export type QueryType = 'searchDesa' | 'searchKK' | 'searchNIK';
 
 export default function useSearchSuggestions() {
-    
-    const fetchSuggestions = async (query: string, type: 'desa' | 'kepalaKeluarga') => {
+    const fetchSuggestions = async (query: string, type: QueryType) => {
         if (query.length < 3) {
             return [];
         }
         try {
-            const url = type === 'desa' ? `/search-desa?searchDesa=${query}` : `/search-kepala-keluarga?searchKepalaKeluarga=${query}`;
+            const url = `/search/${type}?${type}=${query}`;
+            // /search/searchKK?searchKK=2105
+            // /search/searchNIK?searchNIK=2105
+            console.log('url', url);
             const response = await fetch(url);
+            console.log('status', response.status);
             const data = await response.json();
             return data;
         } catch (error) {

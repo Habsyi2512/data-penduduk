@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 export const validationSchema = Yup.object({
     forms: Yup.array().of(
         Yup.object({
-            nik: Yup.string().required('NIK Wajib diisi').length(16, 'NIK harus berisi 16 karakter berupa angka'),
+            no_kk: Yup.string().required('Nomor KK Wajib diisi').length(16, 'NIK harus berisi 16 karakter berupa angka'),
             nama: Yup.string().required('Nama wajib diisi'),
             tempat_lahir: Yup.string().required('Tempat lahir wajib diisi'),
             tanggal_lahir: Yup.string()
@@ -32,13 +32,6 @@ export const validationSchema = Yup.object({
             kewarganegaraan: Yup.object({
                 kewarganegaraan: Yup.string().required('Kewarganegaraan wajib diisi'),
             }).required('Kewarganegaraan wajib diisi'),
-            alamat: Yup.object({
-                alamat: Yup.string().required('Alamat wajib diisi'),
-                kelurahan_id: Yup.string().required('Kelurahan wajib diisi'),
-                kelurahan_nama: Yup.string().required('Kelurahan wajib diisi'),
-                kecamatan_nama: Yup.string().required('Kecamatan wajib diisi'),
-                kabupaten_nama: Yup.string().required('Kabupaten wajib diisi'),
-            }).required('Alamat wajib diisi'),
         })
     ),
 });
@@ -46,7 +39,7 @@ export const validationSchema = Yup.object({
 export const validationSchemaEdit = Yup.object({
     forms: Yup.array().of(
         Yup.object({
-            nik: Yup.string().required('NIK Wajib diisi').length(16, 'NIK harus berisi 16 karakter berupa angka'),
+            no_kk: Yup.string().required('Nomor KK Wajib diisi').length(16, 'NIK harus berisi 16 karakter berupa angka'),
             nama: Yup.string().required('Nama wajib diisi'),
             tempat_lahir: Yup.string().required('Tempat lahir wajib diisi'),
             tanggal_lahir: Yup.string()
@@ -73,29 +66,9 @@ export const validationSchemaEdit = Yup.object({
             kewarganegaraan: Yup.object({
                 kewarganegaraan: Yup.string().required('Kewarganegaraan wajib diisi'),
             }).required('Kewarganegaraan wajib diisi'),
-            alamat: Yup.object({
-                id: Yup.string().required('ID Alamat wajib diisi'),
-                alamat: Yup.string().required('Alamat wajib diisi'),
-                kelurahan_id: Yup.string().required('Kelurahan wajib diisi'),
-                kelurahan_nama: Yup.string().required('Kelurahan wajib diisi'),
-                kecamatan_nama: Yup.string().required('Kecamatan wajib diisi'),
-                kabupaten_nama: Yup.string().required('Kabupaten wajib diisi'),
-            }).required('Alamat wajib diisi'),
         })
     ),
 });
-
-// export interface TypeFormFieldBuatKK {
-//     no_kk: string;
-//     alamat: string;
-//     rt:string;
-//     rw:string;
-//     kepala_keluarga_nik: string;
-//     no_kk_semula: string;
-//     kelurahan: BaseEntity;
-//     kecamatan: BaseEntity;
-//     kabupaten: BaseEntity;
-// }
 
 export const validationSchemaBuatKK = Yup.object()
     .shape({
