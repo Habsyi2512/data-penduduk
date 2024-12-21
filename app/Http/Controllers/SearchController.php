@@ -12,6 +12,9 @@ class SearchController extends Controller
     public function searchDesa(Request $request)
     {
         $search = $request->input('searchDesa');
+        if (!$search) {
+            return response()->json(['message' => 'Masukkan kata kunci untuk pencarian'], 400);
+        }
 
         // Pastikan provinsi adalah Kepulauan Riau
         $results = Village::where('name', 'like', "%$search%")
@@ -25,33 +28,40 @@ class SearchController extends Controller
 
         return response()->json($results); // Kirim hasil sebagai JSON
     }
+
+
     public function searchNIK(Request $request)
     {
         $searchQuery = $request->input('searchNIK');
-
-        // Lakukan pencarian di database atau logika lain untuk menemukan kepala keluarga
+    
+        if (!$searchQuery) {
+            return response()->json(['message' => 'Masukkan kata kunci untuk pencarian'], 400);
+        }
+    
         $result = DataPenduduk::where('nik', 'like', "%$searchQuery%")
             ->orWhere('nama', 'like', "%$searchQuery%")
             ->take(5)
             ->get();
-
-        // Menggunakan map untuk mengembalikan hanya nik dan nama
-        $mappedResult = $result->map(function($item) {
+    
+        $mappedResult = $result->map(function ($item) {
             return [
                 'nik' => $item->nik,
                 'name' => $item->nama,
-                'no_kk'=> $item->no_kk,
+                'no_kk' => $item->no_kk,
             ];
         });
-
+    
         return response()->json($mappedResult);
     }
+    
 
     public function searchKK(Request $request)
     {
         $searchQuery = $request->input('searchKK');
         
-
+        if (!$searchQuery) {
+            return response()->json(['message' => 'Masukkan kata kunci untuk pencarian'], 400);
+        }
 
         // Lakukan pencarian di database atau logika lain untuk menemukan kepala keluarga
         $result = MasterKK::with(['data_penduduk', 'village.district.regency'])
@@ -60,16 +70,6 @@ class SearchController extends Controller
             ->get();
             // dd($result);
         
-
-        // Menggunakan map untuk mengembalikan hanya nik dan nama
-        // no_kk: string;
-        // alamat:string;
-        // rt:string;
-        // rw:string;
-        // kelurahan_id: string;
-        // data_penduduk: DataPendudukProps[];
-        // village: Village;
-        // created_at: string;
         $mappedResult = $result->map(function($item) {
             return [
                 'no_kk'=> $item->no_kk,
@@ -82,9 +82,8 @@ class SearchController extends Controller
                 'created_at'=> $item->created_at,
             ];
         });
-        // dd($mappedResult);
 
-        return response()->json($mappedResult);
+        return response()->json($mappedResult, 200, );
     }
 }
 

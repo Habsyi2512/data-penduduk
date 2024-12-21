@@ -1,6 +1,7 @@
-import { TypeFormFieldBuatKK } from '@/interface/interface';
+import { InputPendudukProps, TypeFormFieldBuatKK } from '@/interface/interface';
 import { router } from '@inertiajs/react';
 import { FormikHelpers } from 'formik';
+import toast from 'react-hot-toast';
 
 export const handleSubmitFormBuatKK = (values: TypeFormFieldBuatKK, { setSubmitting, resetForm }: FormikHelpers<TypeFormFieldBuatKK>) => {
     router.post(
@@ -26,4 +27,28 @@ export const handleSubmitFormBuatKK = (values: TypeFormFieldBuatKK, { setSubmitt
             onFinish: () => setSubmitting(false),
         }
     );
+};
+
+export const handleSubmitTambahPenduduk = async (values: any, { setSubmitting, resetForm }: FormikHelpers<{ forms: InputPendudukProps[] }>, setState: React.Dispatch<React.SetStateAction<boolean>>) => {
+    setState(true);
+    try {
+        router.post(
+            route('penduduk.store'),
+            { forms: values.forms },
+            {
+                onSuccess: (message) => {
+                    console.log('Success submitting form:', message);
+                    const successMessage = message.props.flash.success;
+                    toast.success(successMessage);
+                    router.get(route('population_data'));
+                    // resetForm();
+                },
+                onError: (errors) => {
+                    console.error('Error submitting form:', errors);
+                },
+            }
+        );
+    } catch (error) {
+        console.error('Form submit error:', error);
+    }
 };

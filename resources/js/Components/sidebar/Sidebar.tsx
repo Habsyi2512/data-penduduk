@@ -1,22 +1,13 @@
-import { usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import Bars3Icon from '../icons/Bars3Icon';
 import { ChevronDownIcon } from '../icons/ChevronDownIcon';
 import { ChevronRightIcon } from '../icons/ChevronRightIcon';
-import {Link} from '@inertiajs/react';
 
-export default function Sidebar({
-    isOpenSidebar,
-    setIsOpenSidebar,
-}: {
-    isOpenSidebar: boolean;
-    setIsOpenSidebar: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+export default function Sidebar({ isOpenSidebar, setIsOpenSidebar }: { isOpenSidebar: boolean; setIsOpenSidebar: React.Dispatch<React.SetStateAction<boolean>> }) {
     const { url } = usePage();
-    const [openSubMenuIndex, setOpenSubMenuIndex] = useState<number | null>(
-        null,
-    );
+    const [openSubMenuIndex, setOpenSubMenuIndex] = useState<number | null>(null);
 
     const menus: {
         title: string;
@@ -93,7 +84,6 @@ export default function Sidebar({
                     title: 'Pindah KK',
                     url: '/dashboard/pindah-kk',
                 },
-                
             ],
         },
         {
@@ -114,13 +104,10 @@ export default function Sidebar({
         <motion.aside
             initial={{ width: 250 }}
             animate={{ width: isOpenSidebar ? 250 : 0 }}
-            className="h-full hidden xl:block overflow-hidden border-r border-gray-200 bg-blue-900 text-white shadow-lg transition-colors duration-500 dark:border-gray-500/50 dark:bg-gray-800 dark:text-gray-300"
+            className="hidden h-full overflow-hidden border-r border-gray-200 bg-blue-900 text-white shadow-lg transition-colors duration-500 dark:border-gray-500/50 dark:bg-gray-800 dark:text-gray-300 xl:block"
         >
             <nav className="flex items-center justify-between px-4 py-4">
-                <button
-                    className="rounded-lg p-2 text-blue-600 hover:bg-blue-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
-                    onClick={() => setIsOpenSidebar((prev) => !prev)}
-                >
+                <button className="rounded-lg p-2 text-blue-600 hover:bg-blue-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600" onClick={() => setIsOpenSidebar((prev) => !prev)}>
                     <Bars3Icon className="h-6 w-6 text-gray-300" />
                 </button>
             </nav>
@@ -131,37 +118,17 @@ export default function Sidebar({
                             <>
                                 <button
                                     onClick={() => handleToggleSubMenu(index)}
-                                    className={`flex truncate w-full items-center justify-between rounded px-3 py-2 hover:bg-blue-800 dark:hover:bg-gray-700 ${
-                                        menu.url === url ||
-                                        menu.subMenu?.some(
-                                            (subMenu) => subMenu.url === url,
-                                        )
-                                            ? 'bg-blue-800 dark:bg-gray-700'
-                                            : ''
+                                    className={`flex w-full items-center justify-between truncate rounded px-3 py-2 hover:bg-blue-800 dark:hover:bg-gray-700 ${
+                                        menu.url === url || menu.subMenu?.some((subMenu) => subMenu.url === url) ? 'bg-blue-800 dark:bg-gray-700' : ''
                                     }`}
                                 >
                                     {menu.title}
-                                    <span>
-                                        {openSubMenuIndex === index ? (
-                                            <ChevronDownIcon className="w-3" />
-                                        ) : (
-                                            <ChevronRightIcon className="w-3" />
-                                        )}
-                                    </span>
+                                    <span>{openSubMenuIndex === index ? <ChevronDownIcon className="w-3" /> : <ChevronRightIcon className="w-3" />}</span>
                                 </button>
-                                <ul
-                                    className={`overflow-y-auto pl-3 transition-all duration-300 ease-in-out ${
-                                        openSubMenuIndex === index
-                                            ? 'max-h-40 mt-2 opacity-100'
-                                            : 'max-h-0 opacity-0'
-                                    }`}
-                                >
+                                <ul className={`overflow-y-auto pl-3 transition-all duration-300 ease-in-out ${openSubMenuIndex === index ? 'mt-2 max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
                                     {menu.subMenu.map((subMenu, subIndex) => (
-                                        <li key={subIndex} className='mb-2'>
-                                            <Link
-                                                href={subMenu.url}
-                                                className={`inline-block ${subMenu.url == url && ' bg-blue-800 dark:bg-gray-700'} w-full text-xs rounded px-3 py-2 hover:bg-blue-700 dark:hover:bg-gray-600`}
-                                            >
+                                        <li key={subIndex} className="mb-2">
+                                            <Link href={subMenu.url} className={`inline-block ${subMenu.url == url && 'bg-blue-800 dark:bg-gray-700'} w-full rounded px-3 py-2 text-xs hover:bg-blue-700 dark:hover:bg-gray-600`}>
                                                 {subMenu.title}
                                             </Link>
                                         </li>
@@ -169,10 +136,7 @@ export default function Sidebar({
                                 </ul>
                             </>
                         ) : (
-                            <Link
-                                href={menu.url}
-                                className={`inline-block w-full rounded px-3 py-2 hover:bg-blue-800 dark:hover:bg-gray-700 ${url == menu.url && 'bg-blue-800 dark:bg-gray-700'}`}
-                            >
+                            <Link href={menu.url} className={`inline-block w-full rounded px-3 py-2 hover:bg-blue-800 dark:hover:bg-gray-700 ${url == menu.url && 'bg-blue-800 dark:bg-gray-700'}`}>
                                 {menu.title}
                             </Link>
                         )}

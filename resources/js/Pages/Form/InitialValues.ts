@@ -11,6 +11,7 @@ export const formFieldBiodata: InputPendudukProps = {
     status_kawin: { id: '', status: '' },
     pekerjaan: { id: '', pekerjaan: '' },
     kewarganegaraan: { id: '', kewarganegaraan: '' },
+    status_hubungan: { id: '', nama_status: '' },
 };
 
 export const formFieldBuatKK: TypeFormFieldBuatKK = {

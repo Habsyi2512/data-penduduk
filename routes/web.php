@@ -87,7 +87,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::get('/debug', [DebugController::class, 'index']);
 
 Route::prefix('search')->group(function(){
-    // Route::get('/searchDesa', [SearchController::class, 'searchDesa']);
+    Route::get('/searchDesa', [SearchController::class, 'searchDesa']);
     Route::get('/searchNIK', [SearchController::class, 'searchNIK']);
     Route::get('/searchKK', [SearchController::class, 'searchKK']);
 });

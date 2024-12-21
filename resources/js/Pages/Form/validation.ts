@@ -1,9 +1,9 @@
 import * as Yup from 'yup';
 
-export const validationSchema = Yup.object({
+export const validationSchemabuatKTP = Yup.object({
     forms: Yup.array().of(
         Yup.object({
-            no_kk: Yup.string().required('Nomor KK Wajib diisi').length(16, 'NIK harus berisi 16 karakter berupa angka'),
+            no_kk: Yup.string().required('Nomor KK Wajib diisi').length(16, 'Nomor KK harus berisi 16 karakter berupa angka'),
             nama: Yup.string().required('Nama wajib diisi'),
             tempat_lahir: Yup.string().required('Tempat lahir wajib diisi'),
             tanggal_lahir: Yup.string()
@@ -32,6 +32,9 @@ export const validationSchema = Yup.object({
             kewarganegaraan: Yup.object({
                 kewarganegaraan: Yup.string().required('Kewarganegaraan wajib diisi'),
             }).required('Kewarganegaraan wajib diisi'),
+            status_hubungan: Yup.object({
+                nama_status: Yup.string().required('Status hubungan wajib diisi'),
+            }).required('Status hubungan wajib diisi'),
         })
     ),
 });

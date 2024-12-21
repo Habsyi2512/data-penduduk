@@ -3,18 +3,19 @@ import ConfirmDiscardModal from '@/Components/modal/ConfirmDiscardModal';
 import ConfirmSubmitModal from '@/Components/modal/ConfirmSubmitModal';
 import { AddPendudukProps } from '@/interface/pageprops/interface';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
-import { router } from '@inertiajs/react';
+import { handleSubmitTambahPenduduk } from '@/services/form/routerService';
 import { FieldArray, Formik } from 'formik';
 import { useState } from 'react';
-import toast from 'react-hot-toast';
+import { Mosaic } from 'react-loading-indicators';
 import { formFieldBiodata } from './InitialValues';
-import { validationSchema } from './validation';
+import { validationSchemabuatKTP } from './validation';
 
-export default function AddPenduduk({ agama, dataKelamin, dataGolDarah, dataKewarganegaraan, dataPekerjaan, dataStatusKawin }: AddPendudukProps) {
+export default function AddPenduduk({ agama, dataKelamin, dataGolDarah, dataKewarganegaraan, dataPekerjaan, dataStatusKawin, dataStatusHubungan }: AddPendudukProps) {
     const [openByIdx, setOpenByIdx] = useState<boolean[]>([true]);
     const [idx, setIdx] = useState<number>(0);
     const [isOpenSubmitModal, setIsOpenSubmitModal] = useState(false);
     const [isOpenDiscardModal, setisOpenDiscardModal] = useState<boolean>(false);
+    const [loading, setLoading] = useState(false);
 
     const toggleAccordion = (index: number) => {
         const newOpenByIdx = [...openByIdx];
@@ -22,35 +23,19 @@ export default function AddPenduduk({ agama, dataKelamin, dataGolDarah, dataKewa
         setOpenByIdx(newOpenByIdx);
     };
 
-    const handleSubmit = async (values: any) => {
-        // console.log('Form tambah penduduk:', values);
-        // try {
-        //     router.post(
-        //         route('penduduk.store'),
-        //         { forms: values.forms },
-        //         {
-        //             onSuccess: () => {
-        //                 toast.success('Berhasil input data');
-        //                 router.visit('/population');
-        //             },
-        //             onError: (errors) => {
-        //                 console.error('Error submitting form:', errors);
-        //             },
-        //         }
-        //     );
-        // } catch (error) {
-        //     console.error('Form submit error:', error);
-        // }
-    };
-
     return (
         <Authenticated>
+            {loading && (
+                <div className="fixed left-0 right-0 top-0 z-50 flex h-full items-center justify-center  bg-white/20 backdrop-blur-sm">
+                    <Mosaic color={"#3b82f6"} />
+                </div>
+            )}
             <Formik
                 initialValues={{
                     forms: [formFieldBiodata],
                 }}
-                onSubmit={handleSubmit}
-                validationSchema={validationSchema} // Apply Yup validation schema
+                onSubmit={(values, formikHelpers) => handleSubmitTambahPenduduk(values, formikHelpers, setLoading)}
+                validationSchema={validationSchemabuatKTP}
             >
                 {(formikProps) => {
                     return (
@@ -58,6 +43,8 @@ export default function AddPenduduk({ agama, dataKelamin, dataGolDarah, dataKewa
                             {({ push, remove }) => (
                                 <>
                                     <AddPendudukForm
+                                        loading={loading}
+                                        setIsOpenDiscardModal={setisOpenDiscardModal}
                                         data={{
                                             agama,
                                             dataKelamin,
@@ -65,6 +52,7 @@ export default function AddPenduduk({ agama, dataKelamin, dataGolDarah, dataKewa
                                             dataKewarganegaraan,
                                             dataPekerjaan,
                                             dataStatusKawin,
+                                            dataStatusHubungan,
                                         }}
                                         formField={formFieldBiodata}
                                         setOpenByIdx={setOpenByIdx}
@@ -76,8 +64,8 @@ export default function AddPenduduk({ agama, dataKelamin, dataGolDarah, dataKewa
                                         setIsOpenSubmitModal={setIsOpenSubmitModal}
                                         setIdx={setIdx}
                                     />
-                                    {isOpenDiscardModal && <ConfirmDiscardModal isOpenConfirmModal={isOpenDiscardModal} index={idx} setIsOpenConfirmModal={setisOpenDiscardModal} remove={remove} />}
-                                    {isOpenSubmitModal && <ConfirmSubmitModal formik={formikProps} isOpenSubmitModal={isOpenSubmitModal} index={idx} setIsOpenSubmitModal={setIsOpenSubmitModal} />}
+                                    <ConfirmDiscardModal isOpenConfirmModal={isOpenDiscardModal} index={idx} setIsOpenConfirmModal={setisOpenDiscardModal} remove={remove} />
+                                    <ConfirmSubmitModal formik={formikProps} isOpenSubmitModal={isOpenSubmitModal} index={idx} setIsOpenSubmitModal={setIsOpenSubmitModal} />
                                 </>
                             )}
                         </FieldArray>

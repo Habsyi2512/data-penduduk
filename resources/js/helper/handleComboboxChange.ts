@@ -1,5 +1,6 @@
 import { TypeFormFieldBuatKK, TypeSuggestions } from '@/interface/interface';
 import { CommonFormikProps } from '@/interface/pageprops/interface';
+import { DataKKProps } from '@/interface/pageprops/tabel-kk-props/interface';
 import { FormikProps } from 'formik';
 
 export const handleComboboxChangeDesa = (value: string, formik: FormikProps<TypeFormFieldBuatKK>, suggestions: TypeSuggestions, setSuggestions: React.Dispatch<React.SetStateAction<TypeSuggestions>>) => {
@@ -35,14 +36,21 @@ export const handleComboboxChangeNIK = <T = TypeFormFieldBuatKK>(value: string, 
     }));
 };
 
-export const handleComboboxChangeKK = <T = CommonFormikProps>(value: string, formik: FormikProps<T>, suggestions: TypeSuggestions, setSuggestions: React.Dispatch<React.SetStateAction<TypeSuggestions>>) => {
+export const handleComboboxChangeKK = <T = CommonFormikProps>(
+    value: string, 
+    formik: FormikProps<T>, 
+    suggestions: TypeSuggestions, 
+    setSuggestions: React.Dispatch<React.SetStateAction<TypeSuggestions>>, 
+    name: string,
+    callBack?: (data:DataKKProps)=>void,
+) => {
     const selectedData = suggestions.KK.find((data) => data.no_kk === value);
-    // if (selectedData) {
-    //     formik.setFieldValue('kepala_keluarga_nik', selectedData.no_kk);
-    //     formik.setFieldValue('no_kk_semula', selectedData.no_kk);
-    //     formik.setFieldTouched('kepala_keluarga_nik', false, true);
-    //     formik.setFieldTouched('no_kk_semula', false, true);
-    // }
+    if (selectedData) {
+        formik.setFieldValue(name, selectedData.no_kk);
+        if (callBack) {
+            callBack(selectedData);
+        }
+    }
 
     setSuggestions((prev: TypeSuggestions) => ({
         ...prev,

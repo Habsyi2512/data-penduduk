@@ -1,18 +1,15 @@
 import useSearchSuggestions from '@/hooks/useSearchSuggestions';
 import { TypeFormFieldBuatKK, TypeSuggestions } from '@/interface/interface';
+import { CommonFormikProps } from '@/interface/pageprops/interface';
 import { FormikProps } from 'formik';
 import React, { useState } from 'react';
 
 export default function useHandleChangeEvents() {
     const [suggestions, setSuggestions] = useState<TypeSuggestions>({ desa: [], NIK: [], KK: [] });
     const { fetchSuggestions } = useSearchSuggestions();
-    React.useEffect(() => {
-        console.log('suggestions', suggestions);
-    }, [suggestions]);
 
     const handleKepalaKeluargaInputChange = async <T = TypeFormFieldBuatKK,>(e: React.ChangeEvent<HTMLInputElement>, formik: FormikProps<T>, callBack?: () => void) => {
         const { value, name } = e.target;
-        console.log('name = ', name);
         if (callBack) {
             callBack();
         }
@@ -21,9 +18,8 @@ export default function useHandleChangeEvents() {
         setSuggestions((prev) => ({ ...prev, NIK: data }));
     };
 
-    const handleKKInputChange = async <T = TypeFormFieldBuatKK,>(e: React.ChangeEvent<HTMLInputElement>, formik: FormikProps<T>, callBack?: () => void) => {
+    const handleKKInputChange = async <T = CommonFormikProps,>(e: React.ChangeEvent<HTMLInputElement>, formik: FormikProps<T>, callBack?: () => void) => {
         const { value, name } = e.target;
-
         if (callBack) {
             callBack();
         }

@@ -25,7 +25,7 @@ export default function AuthenticatedHeader({
     const user = usePage().props.auth.user;
     return (
         <>
-            <header className="sticky left-0 top-0 flex items-center justify-between bg-blue-100/30 px-6 py-4 shadow-md backdrop-blur-lg transition-colors duration-500 dark:bg-gray-800/30">
+            <header className="sticky left-0 z-10 top-0 flex items-center justify-between bg-blue-100/30 px-6 py-4 shadow-md backdrop-blur-lg transition-colors duration-500 dark:bg-gray-800/30">
                 <div className="flex items-center gap-x-5">
                     {!isOpenSidebar && (
                         <button

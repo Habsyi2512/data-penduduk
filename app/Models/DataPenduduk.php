@@ -13,8 +13,28 @@ class DataPenduduk extends Model
     protected $primaryKey = 'nik';
     public $incrementing = false;     // Karena no_kk bukan auto increment
     protected $keyType = 'string';
-    protected $fillable = ['nik', 'nama', 'tempat_lahir', 'tanggal_lahir', 'no_kk', 'kelamin_id', 'agama_id', 'pekerjaan_id', 'gol_darah_id', 'status_kawin_id', 'kewarganegaraan_id'];
+    protected $fillable = ['nik', 'nama', 'tempat_lahir', 'tanggal_lahir', 'no_kk', 'kelamin_id', 'agama_id', 'pekerjaan_id', 'gol_darah_id', 'status_kawin_id', 'kewarganegaraan_id', 'status_hubungan_id'];
     protected $with = ['agama', 'jenis_kelamin', 'pekerjaan', 'gol_darah', 'status_kawin', 'kewarganegaraan', 'KK', 'status_hubungan_keluarga'];
+
+    public static function generateNIK($district)
+    {
+        // Kode wilayah berdasarkan inputan
+        $provinsi_code = '21';
+
+        // Tanggal pemasukan data
+        $tanggal = Carbon::now()->format('d'); // Tanggal (DD)
+        $bulan = Carbon::now()->format('m');   // Bulan (MM)
+        $tahun = Carbon::now()->format('y');   // Tahun (YY)
+
+        // Nomor urut penerbitan KK dengan angka acak antara 1000 dan 9999
+        $random_number = mt_rand(1000, 9999);
+
+        // Gabungkan semua bagian
+        $nik =  substr($district, 0, 6) . $tanggal . $bulan . $tahun . $random_number;
+        // dd($nik);
+
+        return $nik;
+    }
 
 
     protected $casts = [

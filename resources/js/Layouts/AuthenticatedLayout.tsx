@@ -10,11 +10,11 @@ export default function Authenticated({ children }: PropsWithChildren<{}>) {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const { flash } = usePage<PageProps>().props;
 
-    useEffect(() => {
-        if (flash.success) {
-            toast.success(flash.success);
-        }
-    }, [toast.success]);
+    // useEffect(() => {
+    //     if (flash.success) {
+    //         toast.success(flash.success);
+    //     }
+    // }, [flash.success]);
 
     // Apply dark mode class to the root HTML element
     useEffect(() => {
@@ -43,29 +43,14 @@ export default function Authenticated({ children }: PropsWithChildren<{}>) {
     };
 
     return (
-        <div className="h-screen w-full bg-blue-50 transition-colors duration-500 dark:bg-gray-900">
+        <div className="h-screen w-full transition-colors duration-500 dark:bg-gray-900">
+            
             <Toaster position="top-center" />
             <div className="flex h-full w-full">
-                {/* Sidebar */}
-                <Sidebar
-                    setIsOpenSidebar={setIsOpenSidebar}
-                    isOpenSidebar={isOpenSidebar}
-                />
-
-                {/* Main Content */}
+                <Sidebar setIsOpenSidebar={setIsOpenSidebar} isOpenSidebar={isOpenSidebar} />
                 <div className="flex h-full flex-1 flex-col">
-                    {/* Header */}
-                    <AuthenticatedHeader
-                        isDarkMode={isDarkMode}
-                        toggleDarkMode={toggleDarkMode}
-                        isOpenSidebar={isOpenSidebar}
-                        setIsOpenSidebar={setIsOpenSidebar}
-                    />
-
-                    {/* Scrollable Main Content */}
-                    <main className="flex-1 overflow-y-auto bg-blue-100 px-5 py-6 transition-colors duration-500 dark:bg-gray-800">
-                        {children}
-                    </main>
+                    <AuthenticatedHeader isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} isOpenSidebar={isOpenSidebar} setIsOpenSidebar={setIsOpenSidebar} />
+                    <main className="flex-1 overflow-y-auto bg-blue-100 px-5 py-6 transition-colors duration-500 dark:bg-gray-800">{children}</main>
                 </div>
             </div>
         </div>

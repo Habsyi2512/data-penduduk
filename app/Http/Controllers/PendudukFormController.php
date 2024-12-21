@@ -8,7 +8,9 @@ use App\Models\DataPenduduk;
 use App\Models\GolDarah;
 use App\Models\JenisKelamin;
 use App\Models\Kewarganegaraan;
+use App\Models\MasterKK;
 use App\Models\Pekerjaan;
+use App\Models\StatusHubunganKeluarga;
 use App\Models\StatusKawin;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -26,6 +28,7 @@ class PendudukFormController extends Controller
             'dataStatusKawin' => StatusKawin::all(),
             'dataPekerjaan' => Pekerjaan::all(),
             'dataKewarganegaraan' => Kewarganegaraan::all(),
+            'dataStatusHubungan' => StatusHubunganKeluarga::all(),
         ];
     }
 
@@ -33,39 +36,46 @@ class PendudukFormController extends Controller
         return Inertia::render('Form/AddPenduduk', $this->getMasterData());
     }
 
-    public function store(Request $request)
-{
-    // Ambil data dari request tanpa validasi
-    $forms = $request->input('forms');
-    // dd($forms);
+    public function store(Request $request, DataPenduduk $data) 
+    {
+        // dd($data);
+        // Ambil data dari request tanpa validasi
+        $forms = $request->input('forms');
 
-    // Iterasi setiap data
-    foreach ($forms as $form) {
-        // Simpan data alamat terlebih dahulu
-        $alamat = \App\Models\Alamat::create([
-            'alamat' => $form['alamat']['alamat'],
-            'kelurahan_id' => $form['alamat']['kelurahan_id'],
-        ]);
+        // Iterasi setiap data
+        foreach ($forms as $form) {
+            // Simpan data alamat terlebih dahulu
+            $data_kk = MasterKK::with(['village.district.regency'])
+                ->where('no_kk', $form['no_kk'])
+                ->first();
+            $data_kecamatan = $data_kk->village->district;
+            // dd($form['status_hubungan']);
+            $generateNIK = DataPenduduk::generateNIK($data_kecamatan->id);
 
-        // Setelah alamat disimpan, gunakan ID-nya untuk data penduduk
-        DataPenduduk::create([
-            'nik' => $form['nik'],
-            'nama' => $form['nama'],
-            'tempat_lahir' => $form['tempat_lahir'],
-            'tanggal_lahir' => $form['tanggal_lahir'],
-            'kelamin_id' => $form['jenis_kelamin']['id'],
-            'gol_darah_id' => $form['gol_darahs']['id'],
-            'agama_id' => $form['agama']['id'],
-            'status_kawin_id' => $form['status_kawin']['id'],
-            'pekerjaan_id' => $form['pekerjaan']['id'],
-            'kewarganegaraan_id' => $form['kewarganegaraan']['id'],
-            'alamat_id' => $alamat->id,
-            
-        ]);
+            // Setelah alamat disimpan, gunakan ID-nya untuk data penduduk
+            if($generateNIK){
+                DataPenduduk::create([
+                    'nik' => $generateNIK,
+                    'nama' => $form['nama'],
+                    'tempat_lahir' => $form['tempat_lahir'],
+                    'tanggal_lahir' => $form['tanggal_lahir'],
+                    'no_kk' => $form['no_kk'], 
+                    'kelamin_id' => $form['jenis_kelamin']['id'],
+                    'gol_darah_id' => $form['gol_darahs']['id'],
+                    'agama_id' => $form['agama']['id'],
+                    'status_kawin_id' => $form['status_kawin']['id'],
+                    'pekerjaan_id' => $form['pekerjaan']['id'],
+                    'kewarganegaraan_id' => $form['kewarganegaraan']['id'],
+                    'status_hubungan_id' => $form['status_hubungan']['id'],
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
+            $data->refresh();
+        }
+
+        return redirect()->route('tambah-penduduk')->with('success', count($forms) . ' Data berhasil ditambahkan. browww');
     }
-
-    return to_route('population_data');
-}
 
 public function getPendudukData(Request $request)
 {

@@ -33,6 +33,7 @@ export type AgamaType = EnumType<'agama'>;
 export type StatusKawinType = EnumType<'status'>;
 export type PekerjaanType = EnumType<'pekerjaan'>;
 export type KewarganegaraanType = EnumType<'kewarganegaraan'>;
+export type StatusHubunganType = EnumType<'nama_status'>;
 
 
 // InputPendudukProps
@@ -47,6 +48,7 @@ export interface InputPendudukProps {
     status_kawin: StatusKawinType;
     pekerjaan: PekerjaanType;
     kewarganegaraan: KewarganegaraanType;
+    status_hubungan: StatusHubunganType;
 }
 
 // Kepala Keluarga Type

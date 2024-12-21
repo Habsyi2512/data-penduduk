@@ -1,14 +1,14 @@
 import { FormikProps } from 'formik';
 import { SetStateAction } from 'react';
-import { AgamaType, GolDarahType, InputPendudukProps, JenisKelaminType, KewarganegaraanType, PekerjaanType, StatusKawinType } from '../interface';
+import { AgamaType, GolDarahType, InputPendudukProps, JenisKelaminType, KewarganegaraanType, PekerjaanType, StatusHubunganType, StatusKawinType } from '../interface';
 
 // Type untuk properti yang sering digunakan
 export type CommonFormikProps = FormikProps<{ forms: InputPendudukProps[] }>;
 
 type CommonModalHandlers = {
-    setIsOpenDiscardModal?: React.Dispatch<SetStateAction<boolean>>;
+    setIsOpenDiscardModal: React.Dispatch<SetStateAction<boolean>>;
     setIsOpenSubmitModal: React.Dispatch<SetStateAction<boolean>>;
-    setIdx?: React.Dispatch<SetStateAction<number>> | undefined;
+    setIdx: React.Dispatch<SetStateAction<number>>;
 };
 
 type AccordionHandlers = {
@@ -25,6 +25,7 @@ export interface AddPendudukProps {
     dataStatusKawin: StatusKawinType[];
     dataPekerjaan: PekerjaanType[];
     dataKewarganegaraan: KewarganegaraanType[];
+    dataStatusHubungan: StatusHubunganType[];
 }
 
 // Base interface untuk form penduduk
@@ -38,6 +39,7 @@ interface BasePendudukFormProps {
 
 // Interface untuk form Add Penduduk
 export interface AddPendudukFormProps extends BasePendudukFormProps, AccordionHandlers, CommonModalHandlers {
+    loading: boolean;
     formField: InputPendudukProps; // Form field tunggal
 }
 

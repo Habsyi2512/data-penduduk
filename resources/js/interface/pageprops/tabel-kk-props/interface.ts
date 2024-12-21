@@ -1,4 +1,4 @@
-import { Village } from "@/interface/interface";
+import { JenisKelaminType, Village } from "@/interface/interface";
 
 export interface DataPendudukProps {
     id: number;
@@ -6,7 +6,7 @@ export interface DataPendudukProps {
     nama: string;
     tempat_lahir: string;
     tanggal_lahir: string;
-    jenis_kelamin: { id: string; jenis_kelamin: string };
+    jenis_kelamin: JenisKelaminType;
     gol_darah: { id: string; gol_darah: string };
     agama: { id: string; agama: string };
     status_kawin: { id: string; status: string };
