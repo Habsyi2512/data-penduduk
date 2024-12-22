@@ -5,9 +5,8 @@ import { AddPendudukProps } from '@/interface/pageprops/interface';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { handleSubmitTambahPenduduk } from '@/services/form/routerService';
 import { FieldArray, Formik } from 'formik';
-import React, { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Mosaic } from 'react-loading-indicators';
-import { useReactToPrint } from 'react-to-print';
 import { formFieldBiodata } from './InitialValues';
 import { validationSchemabuatKTP } from './validation';
 
@@ -41,7 +40,11 @@ export default function AddPenduduk({ agama, dataKelamin, dataGolDarah, dataKewa
                 initialValues={{
                     forms: [formFieldBiodata],
                 }}
-                onSubmit={(values, formikHelpers) => handleSubmitTambahPenduduk(values, formikHelpers, setLoading)}
+                onSubmit={(values) =>
+                    handleSubmitTambahPenduduk(values, () => {
+                        setLoading(true);
+                    })
+                }
                 validationSchema={validationSchemabuatKTP}
             >
                 {(formikProps) => {

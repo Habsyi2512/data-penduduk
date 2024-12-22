@@ -91,7 +91,7 @@ export default function AddPendudukForm({ formik, data, formField, push, remove,
                                     }}
                                 >
                                     {suggestions.KK.map((data) => (
-                                        <ComboboxOption key={data.no_kk} value={data.no_kk} className="group w-full gap-2 bg-white p-2 data-[focus]:bg-gray-200">
+                                        <ComboboxOption key={data.no_kk} value={data.no_kk} className="group cursor-pointer w-full gap-2 bg-white p-2 data-[focus]:bg-gray-200">
                                             <p className="font-inter font-bold text-gray-600">{data.no_kk}</p>
                                             <span className="inline-block text-xs">{data.alamat}</span>
                                         </ComboboxOption>
@@ -128,7 +128,17 @@ export default function AddPendudukForm({ formik, data, formField, push, remove,
                             </div>
                             <div className="col-span-2 grid grid-cols-3 gap-6">
                                 {/* Status Hubungan Keluarga */}
-                                <InputSelectField index={index} dataKey="nama_status" onChange={handleChange} name={`forms.${index}.status_hubungan.nama_status`} label="Status Hubungan Keluarga" options={dataStatusHubungan} />
+                                <InputSelectField
+                                    index={index}
+                                    dataKey="nama_status"
+                                    onChange={handleChange}
+                                    name={`forms.${index}.status_hubungan.nama_status`}
+                                    label="Status Hubungan Keluarga"
+                                    options={
+                                        dataStatusHubungan.filter((value) => value.nama_status !== 'Kepala Keluarga') // Filter data untuk menghilangkan 'Kepala Keluarga'
+                                    }
+                                    className="additional-classes"
+                                />
 
                                 {/* Jenis Kelamin */}
                                 <div className="col-span-2">
@@ -173,7 +183,7 @@ export default function AddPendudukForm({ formik, data, formField, push, remove,
 
             <div className="space-x-5">
                 <Button type="button" onClick={(e) => handleClickSubmitFormik<{ forms: InputPendudukProps[] }>(formik, setIsOpenSubmitModal)}>
-                    {loading?'Loading':'Kirim'}
+                    {loading ? 'Loading' : 'Kirim'}
                 </Button>
                 <Button
                     btnColor="green"

@@ -81,16 +81,6 @@ export default function Sidebar({ isOpenSidebar, setIsOpenSidebar }: { isOpenSid
             ],
         },
         {
-            title: 'Data Pindah',
-            url: '',
-            subMenu: [
-                {
-                    title: 'Pindah KK',
-                    url: '/dashboard/pindah-kk',
-                },
-            ],
-        },
-        {
             title: 'Permohonan',
             url: '/dashboard/permohonan',
         },

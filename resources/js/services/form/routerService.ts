@@ -29,8 +29,8 @@ export const handleSubmitFormBuatKK = (values: TypeFormFieldBuatKK, { setSubmitt
     );
 };
 
-export const handleSubmitTambahPenduduk = async (values: any, { setSubmitting, resetForm }: FormikHelpers<TypeFormFieldPindahKK>, setState: React.Dispatch<React.SetStateAction<boolean>>) => {
-    setState(true);
+export const handleSubmitTambahPenduduk = async (values: any, callBack?: () => void) => {
+    callBack && callBack();
     try {
         router.post(
             route('penduduk.store'),

@@ -10,12 +10,10 @@ export default function useHandleChangeEvents() {
 
     const handleKepalaKeluargaInputChange = async <T = TypeFormFieldBuatKK,>(e: React.ChangeEvent<HTMLInputElement>, formik: FormikProps<T>, callBack?: () => void) => {
         const { value, name } = e.target;
-        console.log('value', value)
-        console.log('name', name)
+        formik.setFieldValue(name, value);
         if (callBack) {
             callBack();
         }
-        formik.setFieldValue(name, value);
         const data = await fetchSuggestions(value, 'searchNIK');
         setSuggestions((prev) => ({ ...prev, NIK: data }));
     };
