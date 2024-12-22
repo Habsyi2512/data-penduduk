@@ -16,25 +16,48 @@ class DataPenduduk extends Model
     protected $fillable = ['nik', 'nama', 'tempat_lahir', 'tanggal_lahir', 'no_kk', 'kelamin_id', 'agama_id', 'pekerjaan_id', 'gol_darah_id', 'status_kawin_id', 'kewarganegaraan_id', 'status_hubungan_id'];
     protected $with = ['agama', 'jenis_kelamin', 'pekerjaan', 'gol_darah', 'status_kawin', 'kewarganegaraan', 'KK', 'status_hubungan_keluarga'];
 
-    public static function generateNIK($district)
+    public static function generateNIK($district, $date, $no_kk)
     {
-        // Kode wilayah berdasarkan inputan
-        $provinsi_code = '21';
-
-        // Tanggal pemasukan data
-        $tanggal = Carbon::now()->format('d'); // Tanggal (DD)
-        $bulan = Carbon::now()->format('m');   // Bulan (MM)
-        $tahun = Carbon::now()->format('y');   // Tahun (YY)
-
-        // Nomor urut penerbitan KK dengan angka acak antara 1000 dan 9999
-        $random_number = mt_rand(1000, 9999);
-
-        // Gabungkan semua bagian
-        $nik =  substr($district, 0, 6) . $tanggal . $bulan . $tahun . $random_number;
-        // dd($nik);
-
-        return $nik;
+        try {
+            // Kode wilayah berdasarkan inputan
+            $tanggal_lahir = Carbon::createFromFormat('Y-m-d', $date);
+            $data_kk = MasterKK::where('no_kk', '=', $no_kk)->first();
+        
+            // Ambil tanggal, bulan, dan tahun dari tanggal lahir
+            $tanggal = $tanggal_lahir->format('d'); // Tanggal (DD)
+            $bulan = $tanggal_lahir->format('m');   // Bulan (MM)
+            $tahun = $tanggal_lahir->format('y');   // Tahun (YY)
+        
+            // Nomor urut penerbitan KK dengan angka acak antara 1000 dan 9999
+            $random_number = mt_rand(1000, 9999);
+        
+            // Gabungkan bagian-bagian untuk membentuk NIK
+            $nik =  substr($district, 0, 6) . $tanggal . $bulan . $tahun . $random_number;
+        
+            // Cek apakah NIK sudah ada di database
+            $existingNIK = DataPenduduk::where('nik', 'like', substr($nik, 0, 12) . '%')
+                ->first();
+        
+            // Jika ada duplikasi, ubah digit pertama dari tanggal
+            if ($existingNIK) {
+                // Ubah digit pertama tanggal
+                $newTanggal = str_pad((intval(substr($tanggal, 0, 1)) + 1) . substr($tanggal, 1), 2, '0', STR_PAD_LEFT);
+        
+                // Generate NIK baru dengan tanggal yang sudah diubah
+                $nik =  substr($district, 0, 6) . $newTanggal . $bulan . $tahun . $random_number;
+                // Rekursif jika masih ada duplikasi
+                // return self::generateNIK($district, $date, $no_kk);
+            }
+        
+            return $nik;
+    
+        } catch (\Exception $e) {
+            // Menangkap error dan menampilkan pesan error
+            // \Log::error('Error generating NIK: ' . $e->getMessage());
+            return response()->json(['error' => 'Gagal menghasilkan NIK: ' . $e->getMessage()], 500);
+        }
     }
+    
 
 
     protected $casts = [

@@ -38,9 +38,9 @@ class PendudukFormController extends Controller
 
     public function store(Request $request, DataPenduduk $data) 
     {
-        // dd($data);
         // Ambil data dari request tanpa validasi
         $forms = $request->input('forms');
+        dd($forms);
 
         // Iterasi setiap data
         foreach ($forms as $form) {
@@ -49,8 +49,11 @@ class PendudukFormController extends Controller
                 ->where('no_kk', $form['no_kk'])
                 ->first();
             $data_kecamatan = $data_kk->village->district;
+            $tanggal_lahir = $form['tanggal_lahir'];
             // dd($form['status_hubungan']);
-            $generateNIK = DataPenduduk::generateNIK($data_kecamatan->id);
+            $generateNIK = DataPenduduk::generateNIK($data_kecamatan->id, $tanggal_lahir, $data_kk->no_kk);
+            // dd($generateNIK);
+            // dd('nik baru', $generateNIK);
 
             // Setelah alamat disimpan, gunakan ID-nya untuk data penduduk
             if($generateNIK){

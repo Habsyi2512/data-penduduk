@@ -37,9 +37,6 @@ export default function AddPenduduk({ agama, dataKelamin, dataGolDarah, dataKewa
                 }}
                 onSubmit={(values) =>
                     handleSubmitTambahPenduduk(values, {
-                        onLoading: () => {
-                            setLoading(true);
-                        },
                         onSuccess: () => {
                             setLoading(false);
                         },

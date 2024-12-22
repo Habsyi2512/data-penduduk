@@ -61,32 +61,35 @@ export const handleSubmitTambahPenduduk = async (values: any, { onLoading, onSuc
 
 export const handleSubmitPindahKK = async (values: TypeFormFieldPindahKK, { onLoading, onSuccess }: HandleSubmitOptions) => {
     console.log('values oi', values);
-    // onLoading && onLoading();
-    // setTimeout(() => {
-    //     try {
-    //         router.post(
-    //             route('kk.pindah.form'),
-    //             {
-    //                 nikPemohon: values.nikPemohon,
-    //                 noKKLama: values.noKKLama,
-    //                 noKKBaru: values.noKKBaru,
-    //             },
-    //             {
-    //                 onSuccess: (message) => {
-    //                     console.log('Success submitting form:', message);
-    //                     const successMessage = message.props.flash.success;
-    //                     toast.success(successMessage);
-    //                     onSuccess && onSuccess();
-    //                     router.get(route('population_data'));
-    //                     // resetForm();
-    //                 },
-    //                 onError: (errors) => {
-    //                     console.error('Error submitting form:', errors);
-    //                 },
-    //             }
-    //         );
-    //     } catch (error) {
-    //         console.error('Form submit error:', error);
-    //     }
-    // }, 400);
+    onLoading && onLoading();
+    setTimeout(() => {
+        try {
+            router.post(
+                route('kk.pindah.form'),
+                {
+                    namaPemohon: values.namaPemohon,
+                    nikPemohon: values.nikPemohon,
+                    noKKLama: values.noKKLama,
+                    noKKBaru: values.noKKBaru,
+                    statusHubunganLama: { id: values.statusHubunganLama.id, name: values.statusHubunganLama.name },
+                    statusHubunganBaru: { id: values.statusHubunganBaru.id, name: values.statusHubunganBaru.name },
+                },
+                {
+                    onSuccess: (message) => {
+                        console.log('Success submitting form:', message);
+                        const successMessage = message.props.flash.success;
+                        toast.success(successMessage);
+                        onSuccess && onSuccess();
+                        router.get(route('population_data'));
+                        // resetForm();
+                    },
+                    onError: (errors) => {
+                        console.error('Error submitting form:', errors);
+                    },
+                }
+            );
+        } catch (error) {
+            console.error('Form submit error:', error);
+        }
+    }, 400);
 };
