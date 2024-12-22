@@ -42,12 +42,18 @@ class SearchController extends Controller
             ->orWhere('nama', 'like', "%$searchQuery%")
             ->take(5)
             ->get();
+
+        // $result->load('status_hubungan_keluarga');
     
         $mappedResult = $result->map(function ($item) {
             return [
                 'nik' => $item->nik,
                 'name' => $item->nama,
                 'no_kk' => $item->no_kk,
+                'statusHubungan'=>[
+                    'id'=>$item->status_hubungan_keluarga->id,
+                    'name'=> $item->status_hubungan_keluarga->nama_status
+                ],
             ];
         });
     

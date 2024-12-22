@@ -63,7 +63,7 @@ const AddKartuKeluargaForm = () => {
                                     }}
                                 >
                                     {suggestions.NIK.map((person) => (
-                                        <ComboboxOption key={person.nik} value={person.nik} className="group cursor-pointer w-full gap-2 bg-white p-2 data-[focus]:bg-gray-200">
+                                        <ComboboxOption key={person.nik} value={person.nik} className="group w-full cursor-pointer gap-2 bg-white p-2 data-[focus]:bg-gray-200">
                                             <p className="font-inter font-bold text-gray-600">{person.nik}</p>
                                             <span className="inline-block text-xs">{person.name}</span>
                                         </ComboboxOption>
@@ -89,7 +89,7 @@ const AddKartuKeluargaForm = () => {
                                         }}
                                     >
                                         {suggestions.desa.map((village) => (
-                                            <ComboboxOption key={village.id} value={village.name} className="group cursor-pointer w-full cursor-pointer gap-2 bg-white p-2 data-[focus]:bg-gray-200">
+                                            <ComboboxOption key={village.id} value={village.name} className="group w-full cursor-pointer gap-2 bg-white p-2 data-[focus]:bg-gray-200">
                                                 <span className="block font-bold text-gray-600">{village.name}</span>
                                                 <span className="text-xs">
                                                     {village.name} - {village.district.name}, {village.district.regency.name}

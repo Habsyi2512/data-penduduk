@@ -7,6 +7,7 @@ use App\Http\Controllers\DebugController;
 use App\Http\Controllers\FormKKController;
 use App\Http\Controllers\GolDarahController;
 use App\Http\Controllers\KewarganegaraanController;
+use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\PekerjaanController;
 use App\Http\Controllers\PemohonController;
 use App\Http\Controllers\PendudukFormController;
@@ -93,6 +94,10 @@ Route::prefix('search')->group(function(){
     Route::get('/searchDesa', [SearchController::class, 'searchDesa']);
     Route::get('/searchNIK', [SearchController::class, 'searchNIK']);
     Route::get('/searchKK', [SearchController::class, 'searchKK']);
+});
+
+Route::prefix('api')->group(function(){
+    Route::get('/getStatusHubungan', [MasterDataController::class, 'getStatusHubungan']);
 });
 
 

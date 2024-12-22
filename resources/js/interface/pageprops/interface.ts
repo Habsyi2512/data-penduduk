@@ -39,7 +39,6 @@ interface BasePendudukFormProps {
 
 // Interface untuk form Add Penduduk
 export interface AddPendudukFormProps extends BasePendudukFormProps, AccordionHandlers, CommonModalHandlers {
-    loading: boolean;
     formField: InputPendudukProps; // Form field tunggal
 }
 

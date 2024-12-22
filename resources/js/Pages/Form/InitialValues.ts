@@ -1,5 +1,10 @@
 import { InputPendudukProps, TypeFormFieldBuatKK, TypeFormFieldPindahKK } from '@/interface/interface';
 
+const BaseEntity = {
+    id: '',
+    name: '',
+};
+
 export const formFieldBiodata: InputPendudukProps = {
     no_kk: '',
     nama: '',
@@ -20,13 +25,16 @@ export const formFieldBuatKK: TypeFormFieldBuatKK = {
     rt: '',
     rw: '',
     no_kk_semula: '',
-    kelurahan: { id: '', name: '' },
-    kecamatan: { id: '', name: '' },
-    kabupaten: { id: '', name: '' },
+    kelurahan: { ...BaseEntity },
+    kecamatan: { ...BaseEntity },
+    kabupaten: { ...BaseEntity },
 };
 
 export const formFieldPindahKK: TypeFormFieldPindahKK = {
     nikPemohon: '',
+    namaPemohon: '',
     noKKLama: '',
     noKKBaru: '',
-}
+    statusHubunganLama: { ...BaseEntity },
+    statusHubunganBaru: { ...BaseEntity },
+};

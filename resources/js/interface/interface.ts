@@ -55,6 +55,7 @@ export interface TypeKepalaKeluarga {
     nik: string;
     name: string;
     no_kk: string;
+    statusHubungan: BaseEntity;
 }
 
 // Form Field for KK Creation
@@ -71,8 +72,11 @@ export interface TypeFormFieldBuatKK {
 
 export interface TypeFormFieldPindahKK {
     nikPemohon: string;
+    namaPemohon: string;
     noKKLama: string;
     noKKBaru: string;
+    statusHubunganLama: BaseEntity;
+    statusHubunganBaru: BaseEntity;
 }
 
 export interface TypeSuggestions {

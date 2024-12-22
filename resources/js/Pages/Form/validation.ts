@@ -104,14 +104,11 @@ export const validationSchemaBuatKK = Yup.object()
         return true;
     });
 
-// nikPemohon: '',
-// noKKLama: '',
-// noKKBaru: '',
 export const validationSchemaPindahKK = Yup.object().shape({
     nikPemohon: Yup.string()
         .required('NIK Pemohon wajib diisi')
         .matches(/^\d{16}$/, 'NIK harus berupa 16 digit angka'),
-
+    namaPemohon: Yup.string().required('Nama Pemohon wajib diisi'),
     noKKLama: Yup.string()
         .required('No KK Lama wajib diisi')
         .matches(/^\d{16}$/, 'No KK Lama harus berupa 16 digit angka'),
@@ -119,4 +116,10 @@ export const validationSchemaPindahKK = Yup.object().shape({
     noKKBaru: Yup.string()
         .required('No KK Baru wajib diisi')
         .matches(/^\d{16}$/, 'No KK Baru harus berupa 16 digit angka'),
+    statusHubunganLama: Yup.object().shape({
+        name: Yup.string().required('Status Hubungan Keluarga Lama Wajib Diisi'),
+    }),
+    statusHubunganBaru: Yup.object().shape({
+        name: Yup.string().required('Status Hubungan Keluarga Baru Wajib Diisi'),
+    }),
 });

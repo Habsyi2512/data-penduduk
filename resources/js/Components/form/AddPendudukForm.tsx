@@ -1,7 +1,7 @@
+import { useLoadingContext } from '@/context/LoadingContext';
 import useHandleChangeEvents from '@/helper/handleChangeEvents';
 import { handleClickSubmitFormik } from '@/helper/handleClickSubmit';
 import { handleComboboxChangeKK } from '@/helper/handleComboboxChange';
-import ModalHooks from '@/hooks/ModalHooks';
 import { InputPendudukProps } from '@/interface/interface';
 import { AddPendudukFormProps, CommonFormikProps } from '@/interface/pageprops/interface';
 import { DataKKProps } from '@/interface/pageprops/tabel-kk-props/interface';
@@ -17,9 +17,8 @@ import DynamicCombobox from './components/form-fields/DynamicCombobox';
 import InputSelectField from './components/form-fields/InputSelectField';
 import InputTextField from './components/form-fields/InputTextField';
 
-export default function AddPendudukForm({ formik, data, formField, push, remove, openByIdx, setOpenByIdx, toggleAccordion, setIdx, setIsOpenSubmitModal, setIsOpenDiscardModal, loading }: AddPendudukFormProps) {
-    console.log('loading', loading);
-    const { handleConfirmModal } = ModalHooks();
+export default function AddPendudukForm({ formik, data, formField, push, remove, openByIdx, setOpenByIdx, toggleAccordion, setIdx, setIsOpenSubmitModal, setIsOpenDiscardModal }: AddPendudukFormProps) {
+    const { loading } = useLoadingContext();
     const { agama, dataKelamin, dataGolDarah, dataKewarganegaraan, dataPekerjaan, dataStatusKawin, dataStatusHubungan } = data;
     const { suggestions, setSuggestions, handleKKInputChange } = useHandleChangeEvents();
     const [detailKK, setDetailKK] = useState<DataKKProps | null>(null);
@@ -45,7 +44,7 @@ export default function AddPendudukForm({ formik, data, formField, push, remove,
         }
     }
 
-    const handleClickCombobox = (value: string, formik: CommonFormikProps, name: string) => {
+    const handleClickComboboxKK = (value: string, formik: CommonFormikProps, name: string) => {
         handleComboboxChangeKK(value, formik, suggestions, setSuggestions, name, (value: DataKKProps) => {
             setDetailKK(value);
         });
@@ -87,11 +86,11 @@ export default function AddPendudukForm({ formik, data, formField, push, remove,
                                     value={formik.values.forms[index].no_kk}
                                     handleInputChange={(e: React.ChangeEvent<HTMLInputElement>) => handleKKInputChange(e, formik)}
                                     handleComboboxChange={(value: string) => {
-                                        handleClickCombobox(value, formik, `forms.${index}.no_kk`);
+                                        handleClickComboboxKK(value, formik, `forms.${index}.no_kk`);
                                     }}
                                 >
                                     {suggestions.KK.map((data) => (
-                                        <ComboboxOption key={data.no_kk} value={data.no_kk} className="group cursor-pointer w-full gap-2 bg-white p-2 data-[focus]:bg-gray-200">
+                                        <ComboboxOption key={data.no_kk} value={data.no_kk} className="group w-full cursor-pointer gap-2 bg-white p-2 data-[focus]:bg-gray-200">
                                             <p className="font-inter font-bold text-gray-600">{data.no_kk}</p>
                                             <span className="inline-block text-xs">{data.alamat}</span>
                                         </ComboboxOption>

@@ -1,7 +1,6 @@
 import { InputPendudukProps } from '@/interface/interface';
 import { FormikProps } from 'formik';
-import { SetStateAction, useState } from 'react';
-
+import { SetStateAction } from 'react';
 
 export default function ModalHooks() {
     const handleConfirmModal = (
@@ -10,8 +9,8 @@ export default function ModalHooks() {
         formik: FormikProps<{
             forms: InputPendudukProps[];
         }>,
-        setIdx:React.Dispatch<SetStateAction<number>>,
-        setisOpenDiscardModal:React.Dispatch<SetStateAction<boolean>>
+        setIdx: React.Dispatch<SetStateAction<number>>,
+        setisOpenDiscardModal: React.Dispatch<SetStateAction<boolean>>
     ) => {
         setIdx(index);
         const formValues = formik.values.forms[index];
@@ -21,7 +20,7 @@ export default function ModalHooks() {
             }
             return value === '' || value === null;
         });
-    
+
         // Jika semua field kosong, langsung hapus
         if (isEmpty) {
             remove(index);
@@ -30,6 +29,6 @@ export default function ModalHooks() {
             setisOpenDiscardModal(true);
         }
     };
-    
-  return {handleConfirmModal}
+
+    return { handleConfirmModal };
 }

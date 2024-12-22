@@ -12,11 +12,12 @@ interface DynamicComboboxProps {
     handleComboboxChange?: (value: string) => void;
     handleInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onClose?: () => void;
+    parentClassName?: string;
 }
 
-const DynamicCombobox: React.FC<DynamicComboboxProps> = ({ children, label, value, handleComboboxChange, onClose, handleInputChange, name, placeholder }) => {
+const DynamicCombobox: React.FC<DynamicComboboxProps> = ({ children, parentClassName, label, value, handleComboboxChange, onClose, handleInputChange, name, placeholder }) => {
     return (
-        <div className="relative">
+        <div className={`relative ${parentClassName}`}>
             <Label htmlFor={name}>{label || 'Label Here'}</Label>
             <Combobox
                 value={value}

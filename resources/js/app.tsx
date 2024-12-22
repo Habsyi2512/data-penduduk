@@ -4,6 +4,7 @@ import './bootstrap';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot, hydrateRoot } from 'react-dom/client';
+import { LoadingContextProvider } from './context/LoadingContext'; // Import provider Anda
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -16,12 +17,13 @@ createInertiaApp({
         );
     },
     setup({ el, App, props }) {
+        // Bungkus aplikasi dengan LoadingContextProvider
         if (import.meta.env.SSR) {
-            hydrateRoot(el, <App {...props} />);
+            hydrateRoot(el, <LoadingContextProvider><App {...props} /></LoadingContextProvider>);
             return;
         }
 
-        createRoot(el).render(<App {...props} />);
+        createRoot(el).render(<LoadingContextProvider><App {...props} /></LoadingContextProvider>);
     },
     progress: {
         color: '#4B5563',
