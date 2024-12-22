@@ -1,4 +1,4 @@
-import { TypeFormFieldBuatKK, TypeSuggestions } from '@/interface/interface';
+import { TypeFormFieldBuatKK, TypeKepalaKeluarga, TypeSuggestions } from '@/interface/interface';
 import { CommonFormikProps } from '@/interface/pageprops/interface';
 import { DataKKProps } from '@/interface/pageprops/tabel-kk-props/interface';
 import { FormikProps } from 'formik';
@@ -21,13 +21,23 @@ export const handleComboboxChangeDesa = (value: string, formik: FormikProps<Type
     });
 };
 
-export const handleComboboxChangeNIK = <T = TypeFormFieldBuatKK>(value: string, formik: FormikProps<T>, suggestions: TypeSuggestions, setSuggestions: React.Dispatch<React.SetStateAction<TypeSuggestions>>) => {
+export const handleComboboxChangeNIK = <T = TypeFormFieldBuatKK>(
+    value: string,
+    formik: FormikProps<T>,
+    suggestions: TypeSuggestions,
+    setSuggestions: React.Dispatch<React.SetStateAction<TypeSuggestions>>,
+    callBack?: (suggestions: TypeKepalaKeluarga) => void
+) => {
     const selectedPerson = suggestions.NIK.find((person) => person.nik === value);
     if (selectedPerson) {
-        formik.setFieldValue('kepala_keluarga_nik', selectedPerson.nik);
-        formik.setFieldValue('no_kk_semula', selectedPerson.no_kk);
-        formik.setFieldTouched('kepala_keluarga_nik', false, true);
-        formik.setFieldTouched('no_kk_semula', false, true);
+        if (callBack) {
+            callBack(selectedPerson);
+        } else {
+            formik.setFieldValue('kepala_keluarga_nik', selectedPerson.nik);
+            formik.setFieldValue('no_kk_semula', selectedPerson.no_kk);
+            formik.setFieldTouched('kepala_keluarga_nik', false, true);
+            formik.setFieldTouched('no_kk_semula', false, true);
+        }
     }
 
     setSuggestions((prev: TypeSuggestions) => ({
@@ -37,12 +47,12 @@ export const handleComboboxChangeNIK = <T = TypeFormFieldBuatKK>(value: string, 
 };
 
 export const handleComboboxChangeKK = <T = CommonFormikProps>(
-    value: string, 
-    formik: FormikProps<T>, 
-    suggestions: TypeSuggestions, 
-    setSuggestions: React.Dispatch<React.SetStateAction<TypeSuggestions>>, 
+    value: string,
+    formik: FormikProps<T>,
+    suggestions: TypeSuggestions,
+    setSuggestions: React.Dispatch<React.SetStateAction<TypeSuggestions>>,
     name: string,
-    callBack?: (data:DataKKProps)=>void,
+    callBack?: (data: DataKKProps) => void
 ) => {
     const selectedData = suggestions.KK.find((data) => data.no_kk === value);
     if (selectedData) {

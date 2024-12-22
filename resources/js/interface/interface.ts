@@ -1,4 +1,4 @@
-import { DataKKProps } from "./pageprops/tabel-kk-props/interface";
+import { DataKKProps } from './pageprops/tabel-kk-props/interface';
 
 export type BaseEntity = {
     id: number | string;
@@ -35,7 +35,6 @@ export type PekerjaanType = EnumType<'pekerjaan'>;
 export type KewarganegaraanType = EnumType<'kewarganegaraan'>;
 export type StatusHubunganType = EnumType<'nama_status'>;
 
-
 // InputPendudukProps
 export interface InputPendudukProps {
     no_kk: string;
@@ -68,6 +67,12 @@ export interface TypeFormFieldBuatKK {
     kelurahan: BaseEntity;
     kecamatan: BaseEntity;
     kabupaten: BaseEntity;
+}
+
+export interface TypeFormFieldPindahKK {
+    nikPemohon: string;
+    noKKLama: string;
+    noKKBaru: string;
 }
 
 export interface TypeSuggestions {

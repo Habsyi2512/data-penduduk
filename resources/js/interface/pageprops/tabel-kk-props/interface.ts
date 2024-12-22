@@ -1,4 +1,5 @@
 import { JenisKelaminType, Village } from "@/interface/interface";
+import { PaginatedKK } from "@/interface/pagination/interface";
 
 export interface DataPendudukProps {
     id: number;
@@ -29,5 +30,10 @@ export interface DataKKProps{
 // untuk halaman debug
 export interface DataKKPageProps {
     data: DataKKProps[];
+}
+
+export interface PopulationDataProps {
+    data: PaginatedKK;
+    filters: { kabupaten: string };
 }
 

@@ -5,8 +5,9 @@ import { AddPendudukProps } from '@/interface/pageprops/interface';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { handleSubmitTambahPenduduk } from '@/services/form/routerService';
 import { FieldArray, Formik } from 'formik';
-import { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Mosaic } from 'react-loading-indicators';
+import { useReactToPrint } from 'react-to-print';
 import { formFieldBiodata } from './InitialValues';
 import { validationSchemabuatKTP } from './validation';
 
@@ -23,13 +24,19 @@ export default function AddPenduduk({ agama, dataKelamin, dataGolDarah, dataKewa
         setOpenByIdx(newOpenByIdx);
     };
 
+    // const printRef = useRef<HTMLDivElement>(null);
+
+    // const handlePrint = useReactToPrint({ contentRef: printRef });
+
     return (
         <Authenticated>
             {loading && (
-                <div className="fixed left-0 right-0 top-0 z-50 flex h-full items-center justify-center  bg-white/20 backdrop-blur-sm">
-                    <Mosaic color={"#3b82f6"} />
+                <div className="fixed left-0 right-0 top-0 z-50 flex h-full items-center justify-center bg-white/20 backdrop-blur-sm">
+                    <Mosaic color={'#3b82f6'} />
                 </div>
             )}
+
+            {/* <PrintComponent ref={printRef} /> */}
             <Formik
                 initialValues={{
                     forms: [formFieldBiodata],
@@ -75,3 +82,27 @@ export default function AddPenduduk({ agama, dataKelamin, dataGolDarah, dataKewa
         </Authenticated>
     );
 }
+
+// const PrintComponent = React.forwardRef<HTMLDivElement, {}>((props, ref) => (
+//     <div {...props} ref={ref} className="hidden bg-red-200 p-8" id="print-section">
+//         <div>
+//             <h1>Data Penduduk</h1>
+//             <p>Nama: John Doe</p>
+//             <p>Alamat: Jalan Kebon Kacang, Jakarta</p>
+//             <p>Usia: 30 Tahun</p>
+//         </div>
+//         <hr />
+//         <div>
+//             <h1>Data Penduduk</h1>
+//             <p>Nama: John Doe</p>
+//             <p>Alamat: Jalan Kebon Kacang, Jakarta</p>
+//             <p>Usia: 30 Tahun</p>
+//         </div>
+//         <div>
+//             <h1>Data Penduduk</h1>
+//             <p>Nama: John Doe</p>
+//             <p>Alamat: Jalan Kebon Kacang, Jakarta</p>
+//             <p>Usia: 30 Tahun</p>
+//         </div>
+//     </div>
+// ));

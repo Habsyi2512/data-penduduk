@@ -69,10 +69,10 @@ const AddKartuKeluargaForm = () => {
                                         </ComboboxOption>
                                     ))}
                                 </DynamicCombobox>
-                                <InputTextField<TypeFormFieldBuatKK> disabled={true} placeholder="Masukkan No. KK" formik={formik} name="no_kk_semula" label="No. KK" />
+                                <InputTextField<TypeFormFieldBuatKK> disabled={true} placeholder="No. KK" formik={formik} name="no_kk_semula" label="No. KK" />
                                 <div className="col-span-2 grid grid-cols-3 gap-3">
-                                    <InputTextField<TypeFormFieldBuatKK> disabled={true} placeholder="Masukkan Kabupaten" formik={formik} name="kabupaten.name" label="Kabupaten" />
-                                    <InputTextField<TypeFormFieldBuatKK> disabled={true} placeholder="Masukkan Kecamatan" formik={formik} name="kecamatan.name" label="Kecamatan" />
+                                    <InputTextField<TypeFormFieldBuatKK> disabled={true} placeholder="Kabupaten" formik={formik} name="kabupaten.name" label="Kabupaten" />
+                                    <InputTextField<TypeFormFieldBuatKK> disabled={true} placeholder="Kecamatan" formik={formik} name="kecamatan.name" label="Kecamatan" />
                                     <DynamicCombobox
                                         placeholder="Masukkan Nama Kelurahan/Desa"
                                         name="kelurahan.name"

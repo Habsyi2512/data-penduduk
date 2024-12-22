@@ -10,6 +10,7 @@ use App\Http\Controllers\KewarganegaraanController;
 use App\Http\Controllers\PekerjaanController;
 use App\Http\Controllers\PemohonController;
 use App\Http\Controllers\PendudukFormController;
+use App\Http\Controllers\PindahKKController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StatusKawinController;
@@ -40,7 +41,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/data-kk', [DataKKController::class, 'index'])->name('kk.display');
     Route::get('/dashboard/buat-kk', [FormKKController::class, 'index'])->name('kk.display.form');
     Route::post('/dashboard/buat-kk', [FormKKController::class, 'store'])->name('kk.store.form');
-
+    Route::get('/dashboard/pindah-kk', [PindahKKController::class, 'index'])->name('kk.pindah.display');
+    Route::post('/dashboard/pindah-kk', [PindahKKController::class, 'update'])->name('kk.pindah.form');
+    
     // edit data
     Route::get('/dashboard/penduduk/edit', [PendudukFormController::class, 'edit'])->name('penduduk.edit');
     Route::put('/dashboard/penduduk/update', [PendudukFormController::class, 'update'])->name('penduduk.update');

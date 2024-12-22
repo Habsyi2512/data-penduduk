@@ -16,6 +16,25 @@ class MasterKK extends Model
     protected $fillable = ['no_kk', 'alamat','rt', 'rw', 'kelurahan_id'];
     // protected $with = ['data_penduduk', 'village.district.regency'];
 
+    public static function getDataWithFilters(array $filters = [], $perPage = 5)
+    {
+        $query = self::with('village.district.regency')->filter($filters);
+
+        // Paginate data
+        $data = $query->paginate($perPage);
+
+        // Tambahkan globalIndex
+        $data->getCollection()->transform(function ($item, $key) use ($data) {
+            $item->globalIndex = ($data->currentPage() - 1) * $data->perPage() + $key + 1;
+            return $item;
+        });
+
+        // Load relasi tambahan setelah pagination
+        $data->load('data_penduduk');
+
+        return compact('data', 'filters');
+    }
+
     public static function generateNoKK($regency, $district)
     {
         // Kode wilayah berdasarkan inputan

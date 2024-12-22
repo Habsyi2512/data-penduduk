@@ -10,6 +10,8 @@ export default function useHandleChangeEvents() {
 
     const handleKepalaKeluargaInputChange = async <T = TypeFormFieldBuatKK,>(e: React.ChangeEvent<HTMLInputElement>, formik: FormikProps<T>, callBack?: () => void) => {
         const { value, name } = e.target;
+        console.log('value', value)
+        console.log('name', name)
         if (callBack) {
             callBack();
         }

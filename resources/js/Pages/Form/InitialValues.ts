@@ -1,4 +1,4 @@
-import { InputPendudukProps, TypeFormFieldBuatKK } from '@/interface/interface';
+import { InputPendudukProps, TypeFormFieldBuatKK, TypeFormFieldPindahKK } from '@/interface/interface';
 
 export const formFieldBiodata: InputPendudukProps = {
     no_kk: '',
@@ -24,3 +24,9 @@ export const formFieldBuatKK: TypeFormFieldBuatKK = {
     kecamatan: { id: '', name: '' },
     kabupaten: { id: '', name: '' },
 };
+
+export const formFieldPindahKK: TypeFormFieldPindahKK = {
+    nikPemohon: '',
+    noKKLama: '',
+    noKKBaru: '',
+}

@@ -46,7 +46,11 @@ export default function Sidebar({ isOpenSidebar, setIsOpenSidebar }: { isOpenSid
                 },
                 {
                     title: 'Registrasi KTP dan KK',
-                    url: '/',
+                    url: '/dashboard',
+                },
+                {
+                    title: 'Pindah KK',
+                    url: '/dashboard/pindah-kk',
                 },
             ],
         },

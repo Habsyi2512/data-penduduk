@@ -16,7 +16,7 @@ export default function InputText({
         <Field
             {...props}
             as={as}
-            className={`mt-1 block w-full rounded-md border border-blue-300/50 bg-white px-3 py-2 dark:border-gray-500/50 dark:bg-gray-700 dark:focus:ring-gray-800 ${className}`}
+            className={`block w-full rounded-md border border-blue-300/50 bg-white px-3 py-2 dark:border-gray-500/50 dark:bg-gray-700 dark:focus:ring-gray-800 ${className}`}
             type={type}
         />
     );
