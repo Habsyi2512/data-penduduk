@@ -2,14 +2,13 @@ import AddPendudukForm from '@/Components/form/AddPendudukForm';
 import ConfirmDiscardModal from '@/Components/modal/ConfirmDiscardModal';
 import ConfirmSubmitModal from '@/Components/modal/ConfirmSubmitModal';
 import { useLoadingContext } from '@/context/LoadingContext';
-import { AddPendudukProps, CommonFormikProps } from '@/interface/pageprops/interface';
+import { AddPendudukProps } from '@/interface/pageprops/interface';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { handleSubmitTambahPenduduk } from '@/services/form/routerService';
-import { FieldArray, Formik, FormikProps } from 'formik';
+import { FieldArray, Formik } from 'formik';
 import { useState } from 'react';
 import { formFieldBiodata } from './InitialValues';
 import { validationSchemabuatKTP } from './validation';
-import { InputPendudukProps } from '@/interface/interface';
 
 export default function AddPenduduk({ agama, dataKelamin, dataGolDarah, dataKewarganegaraan, dataPekerjaan, dataStatusKawin, dataStatusHubungan }: AddPendudukProps) {
     const [openByIdx, setOpenByIdx] = useState<boolean[]>([true]);
@@ -24,10 +23,6 @@ export default function AddPenduduk({ agama, dataKelamin, dataGolDarah, dataKewa
         setOpenByIdx(newOpenByIdx);
     };
 
-    // const printRef = useRef<HTMLDivElement>(null);
-
-    // const handlePrint = useReactToPrint({ contentRef: printRef });
-
     return (
         <Authenticated>
             {/* <PrintComponent ref={printRef} /> */}
@@ -37,6 +32,9 @@ export default function AddPenduduk({ agama, dataKelamin, dataGolDarah, dataKewa
                 }}
                 onSubmit={(values) =>
                     handleSubmitTambahPenduduk(values, {
+                        onLoading: () => {
+                            setLoading(true);
+                        },
                         onSuccess: () => {
                             setLoading(false);
                         },

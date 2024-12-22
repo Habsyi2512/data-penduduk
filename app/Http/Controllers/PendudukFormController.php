@@ -40,7 +40,7 @@ class PendudukFormController extends Controller
     {
         // Ambil data dari request tanpa validasi
         $forms = $request->input('forms');
-        dd($forms);
+        // dd($forms);
 
         // Iterasi setiap data
         foreach ($forms as $form) {
@@ -77,7 +77,7 @@ class PendudukFormController extends Controller
             $data->refresh();
         }
 
-        return redirect()->route('tambah-penduduk')->with('success', count($forms) . ' Data berhasil ditambahkan. browww');
+        return to_route('tambah-penduduk')->with('success', count($forms) . ' Data berhasil ditambahkan.');
     }
 
 public function getPendudukData(Request $request)
