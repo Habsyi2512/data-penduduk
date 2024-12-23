@@ -88,7 +88,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboard', [DataPendudukController::class, 'dashboard'])->name('dashboard');
 
-
     Route::get('population-data/create', [DataPendudukController::class, 'create'])->name('insert_population.create');
     Route::post('/population-data', [DataPendudukController::class, 'store'])->name('insert_population.store');
 
