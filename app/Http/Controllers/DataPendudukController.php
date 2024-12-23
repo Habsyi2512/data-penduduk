@@ -16,7 +16,7 @@ class DataPendudukController extends Controller
 {
     public function index(Request $request)
     {
-        $data_penduduk = DataPenduduk::filter()->paginate(5);
+        $data_penduduk = DataPenduduk::filter()->paginate(8);
         //Menampilkan Jumlah Penduduk
         $total_penduduk = DataPenduduk::count();
 
@@ -78,11 +78,23 @@ class DataPendudukController extends Controller
 
     public function delete(){
         $data = request()->input('id');
-
-        foreach($data as $id){
-            DataPenduduk::find($id)->delete();
-        }
         // dd($data);
+        DataPenduduk::whereIn('nik', $data)->delete();
+
         return to_route('population_data')->with('success', 'Data Penduduk Berhasil Dihapus');
+    }
+    public function restore()
+    {
+        $data = request()->input('id');
+    
+        if (empty($data)) {
+            return redirect()->route('population_data')->with('error', 'Tidak ada data yang dipilih untuk dipulihkan.');
+        }
+    
+        // Restore data yang telah soft-deleted
+        $selectedData = DataPenduduk::whereIn('nik', $data)->restore();
+    
+        // Mengembalikan ke halaman sebelumnya dengan pesan sukses
+        return to_route('arsip.biodata')->with('success', 'Data Penduduk Berhasil Dipulihkan');
     }
 }

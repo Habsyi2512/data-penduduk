@@ -49,7 +49,8 @@ Route::middleware('auth')->group(function () {
     // edit data
     Route::get('/dashboard/penduduk/edit', [PendudukFormController::class, 'edit'])->name('penduduk.edit');
     Route::put('/dashboard/penduduk/update', [PendudukFormController::class, 'update'])->name('penduduk.update');
-    Route::delete('/dashboard/penduduk/delete', [DataPendudukController::class, 'delete'])->name('penduduk.delete');
+    Route::put('/dashboard/penduduk/delete', [DataPendudukController::class, 'delete'])->name('penduduk.delete');
+    Route::put('/dashboard/penduduk/restore', [DataPendudukController::class, 'restore'])->name('penduduk.restore');
 
 
     // route arsip sampah

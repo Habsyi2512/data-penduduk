@@ -1,8 +1,7 @@
 import Box from '@/Components/box/Box';
 import Button from '@/Components/button/Button';
 import { ArrowPathIcon } from '@/Components/icons/ArrowPathIcon';
-import { TrashIcon } from '@/Components/icons/TrashIcon';
-import ConfirmDiscardModalAll from '@/Components/modal/ConfirmDiscardModalAll';
+import ConfirmRestoreModal from '@/Components/modal/ConfirmRestoreModal';
 import PaginationLinks from '@/Components/pagination/PaginationLinks';
 import Table from '@/Components/table/Table';
 import TableBody from '@/Components/table/TableBody';
@@ -17,20 +16,19 @@ import Authenticated from '@/Layouts/AuthenticatedLayout';
 import { Link, router } from '@inertiajs/react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import SearchForm from './Form/search/SearchForm';
+import SearchForm from '../Form/search/SearchForm';
 
-interface PopulationDataProps {
-    data_penduduk: PaginatedPenduduk;
-    csrf_token: string;
+interface ArsipBiodataProps {
+    data: PaginatedPenduduk;
 }
 
-export default function Population_data({ data_penduduk, csrf_token }: PopulationDataProps) {
+export default function ArsipBiodata({ data }: ArsipBiodataProps) {
     const [selectedRows, setSelectedRows] = useState<string[]>([]);
-    const [openModalDiscard, setOpenModalDiscard] = useState(false);
+    const [openModalRestore, setOpenModalRestore] = useState(false);
     const { setLoading } = useLoadingContext();
 
-    const currentPage = data_penduduk.current_page;
-    const perPage = data_penduduk.per_page;
+    const currentPage = data.current_page;
+    const perPage = data.per_page;
 
     function formatDate(dateString: string) {
         const options: Intl.DateTimeFormatOptions = {
@@ -42,13 +40,13 @@ export default function Population_data({ data_penduduk, csrf_token }: Populatio
         return date.toLocaleDateString('id-ID', options);
     }
 
-    const handleDelete = () => {
+    const handleRestore = () => {
         setLoading(true);
         setTimeout(() => {
             try {
                 if (selectedRows.length > 0) {
                     router.put(
-                        route('penduduk.delete'),
+                        route('penduduk.restore'),
                         { id: selectedRows }, // Data yang dikirim
                         {
                             onSuccess: (message) => {
@@ -69,25 +67,23 @@ export default function Population_data({ data_penduduk, csrf_token }: Populatio
             }
         }, 500);
     };
-
     return (
         <Authenticated>
-            <ConfirmDiscardModalAll onClick={handleDelete} state={openModalDiscard} setState={setOpenModalDiscard} />
+            <ConfirmRestoreModal onClick={handleRestore} state={openModalRestore} setState={setOpenModalRestore} />
             <Box className="p-2">
                 <div className="px-5">
-                    <h1 className="mb-3 py-2 font-inter text-2xl font-bold text-blue-500">Data Penduduk</h1>
+                    <h1 className="mb-3 py-2 font-inter text-2xl font-bold text-blue-500">Arsip Biodata</h1>
                 </div>
                 <div className="mb-2 flex items-center justify-between space-x-5">
                     <Button
                         onClick={() => {
-                            setOpenModalDiscard(true);
+                            setOpenModalRestore(true);
                         }}
-                        btnColor="red"
+                        btnColor="blue"
                         disabled={selectedRows.length < 1}
-                        className="flex text-sm items-center justify-center space-x-2"
+                        className=""
                     >
-                        <TrashIcon className="size-4" />
-                        <span>Remove</span>
+                        <span>Pulihkan</span>
                     </Button>
                     <div className="flex items-center space-x-2">
                         <Button
@@ -107,11 +103,11 @@ export default function Population_data({ data_penduduk, csrf_token }: Populatio
                             <Th className="rounded-tl pl-5">
                                 <input
                                     type="checkbox"
-                                    checked={selectedRows.length === data_penduduk.data.length && selectedRows.length != 0}
+                                    checked={selectedRows.length === data.data.length}
                                     onChange={(e) => {
                                         if (e.target.checked) {
                                             // Pilih semua baris
-                                            const allIds = data_penduduk.data.map((penduduk) => penduduk.nik);
+                                            const allIds = data.data.map((penduduk) => penduduk.nik);
                                             setSelectedRows(allIds);
                                         } else {
                                             // Hapus semua pilihan
@@ -136,7 +132,7 @@ export default function Population_data({ data_penduduk, csrf_token }: Populatio
                     </TableHead>
 
                     <TableBody>
-                        {data_penduduk.data.length === 0 ? (
+                        {data.data.length === 0 ? (
                             <Tr>
                                 <Td colSpan={13} className="py-4 text-center text-gray-500">
                                     Tidak ada data
@@ -147,7 +143,7 @@ export default function Population_data({ data_penduduk, csrf_token }: Populatio
                                 </Td>
                             </Tr>
                         ) : (
-                            data_penduduk.data.map((penduduk, index) => (
+                            data.data.map((penduduk, index) => (
                                 <Tr className="bg-slate-100 transition-colors duration-200 ease-in-out hover:bg-slate-200" key={penduduk.nik}>
                                     <Td className="pl-5">
                                         <input
@@ -192,7 +188,7 @@ export default function Population_data({ data_penduduk, csrf_token }: Populatio
                     <tfoot className="w-full">
                         <tr className="w-full">
                             <td colSpan={13} className="rounded-b bg-white p-2">
-                                <PaginationLinks links={data_penduduk.links} />
+                                <PaginationLinks links={data.links} />
                             </td>
                         </tr>
                     </tfoot>
