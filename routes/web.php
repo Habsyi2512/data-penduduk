@@ -80,15 +80,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/data-kewarganegaraan', [KewarganegaraanController::class, 'store'])->name('data-kewarganegaraan.store');
 
     // Route Permohonan
-    Route::get('/dashboard/permohonan',[PemohonController::class, 'index'])->name('permohonan');
+    Route::get('/dashboard/permohonan', [PemohonController::class, 'index'])->name('permohonan');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/population', [DataPendudukController::class, 'index'])->name('population_data');
 
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DataPendudukController::class, 'dashboard'])->name('dashboard');
+
 
     Route::get('population-data/create', [DataPendudukController::class, 'create'])->name('insert_population.create');
     Route::post('/population-data', [DataPendudukController::class, 'store'])->name('insert_population.store');

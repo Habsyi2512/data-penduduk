@@ -8,7 +8,9 @@ use App\Models\DataPenduduk;
 use App\Models\GolDarah;
 use App\Models\JenisKelamin;
 use App\Models\Kewarganegaraan;
+use App\Models\MasterKK;
 use App\Models\Pekerjaan;
+use App\Models\StatusHubunganKeluarga;
 use App\Models\StatusKawin;
 use Inertia\Inertia;
 
@@ -28,6 +30,7 @@ class DataPendudukController extends Controller
         $jumlahLakiLaki = DataPenduduk::where('kelamin_id', 1)->count();
         $jumlahPerempuan = DataPenduduk::where('kelamin_id', 2)->count();
 
+
         return Inertia::render('Population_data', [
             'data_penduduk' => $data_penduduk,
             'total_penduduk' => $total_penduduk,
@@ -35,6 +38,24 @@ class DataPendudukController extends Controller
             'jumlahLakiLaki' => $jumlahLakiLaki,
             'jumlahPerempuan' => $jumlahPerempuan,
             'csrf_token' => csrf_token(),
+        ]);
+    }
+    public function dashboard()
+    {
+        // Data yang sama dari method index
+        $total_penduduk = DataPenduduk::count();
+        $jumlahTidakBekerja = DataPenduduk::whereNull('pekerjaan_id')->orWhere('pekerjaan_id', '==', 1)->count();
+        $persentaseTidakBekerja = $total_penduduk > 0 ? ($jumlahTidakBekerja / $total_penduduk) * 100 : 0;
+
+        $jumlahLakiLaki = DataPenduduk::where('kelamin_id', 1)->count();
+        $jumlahPerempuan = DataPenduduk::where('kelamin_id', 2)->count();
+
+        // Kirim data ke halaman Dashboard
+        return Inertia::render('Dashboard', [
+            'total_penduduk' => $total_penduduk,
+            'persentaseTidakBekerja' => $persentaseTidakBekerja,
+            'jumlahLakiLaki' => $jumlahLakiLaki,
+            'jumlahPerempuan' => $jumlahPerempuan,
         ]);
     }
 
@@ -46,6 +67,8 @@ class DataPendudukController extends Controller
         $kewarganegaraan = Kewarganegaraan::all();
         $pekerjaan = Pekerjaan::all();
         $status_kawin = StatusKawin::all();
+        $no_kk = MasterKK::all();
+        $hubungan_keluarga = StatusHubunganKeluarga::all();
 
         return inertia::render('Insert_population', [
             'agama' => $agama,
@@ -54,6 +77,8 @@ class DataPendudukController extends Controller
             'kewarganegaraan' => $kewarganegaraan,
             'pekerjaan' => $pekerjaan,
             'status_kawin' => $status_kawin,
+            'no_kk' => $no_kk,
+            'hubungan_keluarga' => $hubungan_keluarga,
         ]);
     }
 
