@@ -26,7 +26,7 @@ export const handleComboboxChangeNIK = <T = TypeFormFieldBuatKK>(
     formik: FormikProps<T>,
     suggestions: TypeSuggestions,
     setSuggestions: React.Dispatch<React.SetStateAction<TypeSuggestions>>,
-    callBack?: (suggestions: TypeKepalaKeluarga) => void
+    callBack?: (data: TypeKepalaKeluarga) => void
 ) => {
     const selectedPerson = suggestions.NIK.find((person) => person.nik === value);
     if (selectedPerson) {

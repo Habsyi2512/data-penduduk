@@ -68,6 +68,7 @@ export interface TypeFormFieldBuatKK {
     kelurahan: BaseEntity;
     kecamatan: BaseEntity;
     kabupaten: BaseEntity;
+    statusAnggotaKeluarga: {nik:string, status_hubungan:{id:string, nama_status:string}}[]
 }
 
 export interface TypeFormFieldPindahKK {

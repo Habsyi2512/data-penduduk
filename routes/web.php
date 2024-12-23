@@ -98,6 +98,7 @@ Route::prefix('search')->group(function(){
 
 Route::prefix('api')->group(function(){
     Route::get('/getStatusHubungan', [MasterDataController::class, 'getStatusHubungan']);
+    Route::get('/getDetailKKByNoKK/{no_kk}', [MasterDataController::class, 'getDetailKKByNoKK']);
 });
 
 

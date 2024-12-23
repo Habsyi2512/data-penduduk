@@ -50,10 +50,7 @@ class PendudukFormController extends Controller
                 ->first();
             $data_kecamatan = $data_kk->village->district;
             $tanggal_lahir = $form['tanggal_lahir'];
-            // dd($form['status_hubungan']);
             $generateNIK = DataPenduduk::generateNIK($data_kecamatan->id, $tanggal_lahir, $data_kk->no_kk);
-            // dd($generateNIK);
-            // dd('nik baru', $generateNIK);
 
             // Setelah alamat disimpan, gunakan ID-nya untuk data penduduk
             if($generateNIK){

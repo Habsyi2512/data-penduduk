@@ -5,17 +5,23 @@ import TooltipDemo from '@/Components/tooltip/TooltipDemo';
 import { DataKKProps } from '@/interface/pageprops/tabel-kk-props/interface';
 import { PaginatedKK } from '@/interface/pagination/interface';
 import { Link } from '@inertiajs/react';
-import React from 'react';
+import React, { useState } from 'react';
 
 interface TableProps {
     openModal: (data: DataKKProps) => void;
     setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>;
-    data: PaginatedKK,
-    handleSelect: (id:string)=>void;
+    data: PaginatedKK;
+    handleSelect: (id: string) => void;
     selectedIds: string[];
 }
 
 export default function TableKK({ handleSelect, openModal, setSelectedIds, data, selectedIds }: TableProps) {
+    const [selectedRows, setSelectedRows] = useState<string[]>([]);
+
+    React.useEffect(() => {
+        console.log('data', selectedRows);
+    }, [selectedRows]);
+
     return (
         <Table>
             <TableHead>
@@ -23,14 +29,15 @@ export default function TableKK({ handleSelect, openModal, setSelectedIds, data,
                     <Th className="rounded-tl text-center">
                         <input
                             type="checkbox"
+                            checked={selectedRows.length === data.data.length}
                             onChange={(e) => {
                                 if (e.target.checked) {
                                     // Pilih semua baris
                                     const allIds = data.data.map((penduduk) => penduduk.no_kk);
-                                    setSelectedIds(allIds);
+                                    setSelectedRows(allIds);
                                 } else {
                                     // Hapus semua pilihan
-                                    setSelectedIds([]);
+                                    setSelectedRows([]);
                                 }
                             }}
                             className="h-4 w-4 rounded border-gray-300 text-blue-600 transition duration-200 ease-in-out focus:ring-1 focus:ring-blue-500 focus:ring-offset-2"
@@ -67,8 +74,18 @@ export default function TableKK({ handleSelect, openModal, setSelectedIds, data,
                             <Td className="text-center">
                                 <input
                                     type="checkbox"
-                                    checked={selectedIds.includes(penduduk.no_kk)}
-                                    onChange={() => handleSelect(penduduk.no_kk)}
+                                    checked={selectedRows.includes(penduduk.no_kk)}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                        setSelectedRows((prevSelectedRows) => {
+                                            if (prevSelectedRows.includes(penduduk.no_kk)) {
+                                                // Menghapus no_kk dari selectedRows jika checkbox dibersihkan
+                                                return prevSelectedRows.filter((item) => item !== penduduk.no_kk);
+                                            } else {
+                                                // Menambahkan no_kk ke selectedRows jika checkbox dicentang
+                                                return [...prevSelectedRows, penduduk.no_kk];
+                                            }
+                                        });
+                                    }}
                                     className="h-4 w-4 rounded border-gray-300 text-blue-600 transition duration-200 ease-in-out focus:ring-1 focus:ring-blue-500 focus:ring-offset-2"
                                 />
                             </Td>

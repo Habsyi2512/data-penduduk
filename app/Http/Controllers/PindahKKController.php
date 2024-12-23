@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\MasterKK;
+use App\Models\Pemohon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
@@ -26,7 +28,22 @@ class PindahKKController extends Controller
                 'statusHubunganBaru.id' => 'required',
                 'statusHubunganBaru.name' => 'required',
             ]);
-            dd($data);
+            $nik = $request->input('nikPemohon');
+            DB::table('data_penduduks')
+            ->where('nik','=',$nik)
+            ->update([
+                "no_kk" => $request->input("noKKBaru"),
+                "status_hubungan_id" => $request->input("statusHubunganBaru.id"),
+                "updated_at" => now()
+            ]);
+
+            Pemohon::create([
+                "name" => $request->input("namaPemohon"),
+                "jenis_permohonan" => 1,
+                "status_permohonan" => 3
+            ]);
+
+            return to_route('kk.display')->with('success', "Berhasil melakukan perubahan data");
         } catch (ValidationException $e){
             return response()->json([
                'status'=>'error',

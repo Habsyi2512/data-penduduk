@@ -18,7 +18,7 @@ class MasterKK extends Model
 
     public static function getDataWithFilters(array $filters = [], $perPage = 5)
     {
-        $query = self::with('village.district.regency')->filter($filters);
+        $query = self::with(['village.district.regency', 'data_penduduk'])->filter($filters);
 
         // Paginate data
         $data = $query->paginate($perPage);
@@ -30,7 +30,7 @@ class MasterKK extends Model
         });
 
         // Load relasi tambahan setelah pagination
-        $data->load('data_penduduk');
+        // $data->load('data_penduduk');
 
         return compact('data', 'filters');
     }

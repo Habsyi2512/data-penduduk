@@ -25,6 +25,7 @@ export const formFieldBuatKK: TypeFormFieldBuatKK = {
     rt: '',
     rw: '',
     no_kk_semula: '',
+    statusAnggotaKeluarga: [{ nik: '', status_hubungan: { id: '', nama_status: '' } }],
     kelurahan: { ...BaseEntity },
     kecamatan: { ...BaseEntity },
     kabupaten: { ...BaseEntity },

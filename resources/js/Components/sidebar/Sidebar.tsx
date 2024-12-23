@@ -37,12 +37,12 @@ export default function Sidebar({ isOpenSidebar, setIsOpenSidebar }: { isOpenSid
             url: '',
             subMenu: [
                 {
-                    title: 'Registrasi KTP',
-                    url: '/dashboard/tambah-penduduk',
-                },
-                {
                     title: 'Registrasi KK',
                     url: '/dashboard/buat-kk',
+                },
+                {
+                    title: 'Registrasi KTP',
+                    url: '/dashboard/tambah-penduduk',
                 },
                 {
                     title: 'Registrasi KTP dan KK',

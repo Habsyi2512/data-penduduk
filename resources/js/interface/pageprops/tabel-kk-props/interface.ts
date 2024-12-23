@@ -16,6 +16,14 @@ export interface DataPendudukProps {
     status_hubungan_keluarga: { id: string; nama_status: string };
 }
 
+// "no_kk": "2105011803090007",
+// "alamat": "JL. TANJUNG NO. 35",
+// "rt": "001",
+// "rw": "002",
+// "kelurahan_id": "2105040003",
+// "created_at": "2024-12-22T08:53:35.000000Z",
+// "updated_at": "2024-12-22T08:53:35.000000Z",
+// "data_penduduk": [
 export interface DataKKProps{
     no_kk: string;
     alamat:string;

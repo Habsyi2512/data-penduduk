@@ -1,36 +1,41 @@
 import { TypeFormFieldBuatKK, TypeFormFieldPindahKK } from '@/interface/interface';
 import { router } from '@inertiajs/react';
-import { FormikHelpers } from 'formik';
 import toast from 'react-hot-toast';
 interface HandleSubmitOptions {
     onLoading?: () => void;
     onSuccess?: () => void;
 }
 
-export const handleSubmitFormBuatKK = (values: TypeFormFieldBuatKK, { setSubmitting, resetForm }: FormikHelpers<TypeFormFieldBuatKK>) => {
-    router.post(
-        route('kk.store.form'),
-        {
-            no_kk_semula: values.no_kk_semula,
-            kepala_keluarga_nik: values.kepala_keluarga_nik,
-            alamat: values.alamat,
-            rt: values.rt || '-',
-            rw: values.rw || '-',
-            kelurahan_id: values.kelurahan.id,
-            kecamatan_id: values.kecamatan.id.toString().slice(-2),
-            kabupaten_id: values.kabupaten.id.toString().slice(-2),
-        },
-        {
-            onStart: () => setSubmitting(true),
-            onSuccess: () => {
-                resetForm();
+export const handleSubmitFormBuatKK = (values: TypeFormFieldBuatKK, { onLoading, onSuccess }: HandleSubmitOptions) => {
+    onLoading && onLoading();
+    setTimeout(() => {
+        router.post(
+            route('kk.store.form'),
+            {
+                no_kk_semula: values.no_kk_semula,
+                kepala_keluarga_nik: values.kepala_keluarga_nik,
+                alamat: values.alamat,
+                rt: values.rt || '-',
+                rw: values.rw || '-',
+                kelurahan_id: values.kelurahan.id,
+                kecamatan_id: values.kecamatan.id.toString().slice(-2),
+                kabupaten_id: values.kabupaten.id.toString().slice(-2),
+                statusAnggotaKeluarga: values.statusAnggotaKeluarga,
             },
-            onError: (errors) => {
-                console.error('Terjadi kesalahan:', errors);
-            },
-            onFinish: () => setSubmitting(false),
-        }
-    );
+            {
+                onSuccess: (message) => {
+                    const successMessage = message.props.flash.success;
+                    console.log('message men', successMessage);
+                    toast.success(successMessage);
+                    onSuccess && onSuccess();
+                    router.get(route('population_data'));
+                },
+                onError: (errors) => {
+                    console.error('Terjadi kesalahan:', errors);
+                },
+            }
+        );
+    }, 400);
 };
 
 export const handleSubmitTambahPenduduk = async (values: any, { onLoading, onSuccess }: HandleSubmitOptions) => {

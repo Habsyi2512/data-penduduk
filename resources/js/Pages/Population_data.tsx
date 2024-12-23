@@ -138,7 +138,7 @@ export default function Population_data({
 
                     <TableBody>
                         {data_penduduk.data.length === 0 ? (
-                            <Tr>
+                            <Tr >
                                 <Td
                                     colSpan={13}
                                     className="py-4 text-center text-gray-500"
@@ -157,7 +157,7 @@ export default function Population_data({
                             data_penduduk.data.map((penduduk, index) => (
                                 <Tr
                                     className="bg-slate-100 transition-colors duration-200 ease-in-out hover:bg-slate-200"
-                                    key={penduduk.id}
+                                    key={penduduk.nik}
                                 >
                                     <Td className="pl-5">
                                         <input
