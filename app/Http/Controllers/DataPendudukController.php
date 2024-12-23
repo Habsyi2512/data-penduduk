@@ -75,4 +75,14 @@ class DataPendudukController extends Controller
         ]);
         return Inertia::location('/population');
     }
+
+    public function delete(){
+        $data = request()->input('id');
+
+        foreach($data as $id){
+            DataPenduduk::find($id)->delete();
+        }
+        // dd($data);
+        return to_route('population_data')->with('success', 'Data Penduduk Berhasil Dihapus');
+    }
 }

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('pekerjaan_id');
             $table->unsignedBigInteger('kewarganegaraan_id');
             $table->unsignedBigInteger('status_hubungan_id');
+            $table->softDeletesTz('deleted_at', precision: 0);
             
             $table->foreign('kelamin_id')->references('id')->on('jenis_kelamins');
             $table->foreign('gol_darah_id')->references('id')->on('gol_darahs');

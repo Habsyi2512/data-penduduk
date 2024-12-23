@@ -6,9 +6,12 @@ use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DataPenduduk extends Model
 {
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
     protected $table = 'data_penduduks';
     protected $primaryKey = 'nik';
     public $incrementing = false;     // Karena no_kk bukan auto increment

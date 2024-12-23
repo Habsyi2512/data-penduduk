@@ -85,8 +85,18 @@ export default function Sidebar({ isOpenSidebar, setIsOpenSidebar }: { isOpenSid
             url: '/dashboard/permohonan',
         },
         {
-            title: 'Laporan',
-            url: '/laporan',
+            title: 'Arsip Data Hapus',
+            url: '',
+            subMenu: [
+                {
+                    title: 'Biodata',
+                    url: '/dashboard/arsip-biodata',
+                },
+                {
+                    title: 'Kartu Keluarga',
+                    url: '/dashboard/arsip-kartu-keluarga',
+                },
+            ],
         },
     ];
 

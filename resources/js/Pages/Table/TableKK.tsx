@@ -18,10 +18,6 @@ interface TableProps {
 export default function TableKK({ handleSelect, openModal, setSelectedIds, data, selectedIds }: TableProps) {
     const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
-    React.useEffect(() => {
-        console.log('data', selectedRows);
-    }, [selectedRows]);
-
     return (
         <Table>
             <TableHead>

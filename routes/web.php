@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgamaController;
+use App\Http\Controllers\ArsipSampahController;
 use App\Http\Controllers\DataKKController;
 use App\Http\Controllers\DataPendudukController;
 use App\Http\Controllers\DebugController;
@@ -48,6 +49,12 @@ Route::middleware('auth')->group(function () {
     // edit data
     Route::get('/dashboard/penduduk/edit', [PendudukFormController::class, 'edit'])->name('penduduk.edit');
     Route::put('/dashboard/penduduk/update', [PendudukFormController::class, 'update'])->name('penduduk.update');
+    Route::delete('/dashboard/penduduk/delete', [DataPendudukController::class, 'delete'])->name('penduduk.delete');
+
+
+    // route arsip sampah
+    Route::get('/dashboard/arsip-biodata', [ArsipSampahController::class, 'displayBioata'])->name('arsip.biodata');
+    Route::get('/dashboard/arsip-kartu-keluarga', [ArsipSampahController::class, 'displayKartuKeluarga'])->name('arsip.KK');
 
     // route Agama
     Route::get('/dashboard/data-agama', [AgamaController::class, 'index'])->name('data-agama');
