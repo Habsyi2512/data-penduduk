@@ -32,7 +32,7 @@ export default function Dashboard({
                         Total
                     </h2>
                     <h2 className="font-inter text-2xl font-bold text-blue-700 dark:text-gray-300">
-                        500
+                        {total_penduduk}
                     </h2>
                     <p className="font-inter text-gray-600 dark:text-gray-400">
                         Penduduk seluruh kepri
@@ -43,7 +43,7 @@ export default function Dashboard({
                         Persentase
                     </h2>
                     <h2 className="font-inter text-2xl font-bold text-blue-700 dark:text-gray-300">
-                        89%
+                       {persentaseTidakBekerja}%
                     </h2>
                     <p className="font-inter text-gray-600 dark:text-gray-400">
                         Masyarakat Tidak Bekerja
@@ -54,7 +54,7 @@ export default function Dashboard({
                         Angka
                     </h2>
                     <h2 className="font-inter text-2xl font-bold text-blue-700 dark:text-gray-300">
-                        87%
+                       {jumlahLakiLaki}%
                     </h2>
                     <p className="font-inter text-gray-600 dark:text-gray-400">
                         Harapan Hidup Laki-laki
@@ -65,12 +65,13 @@ export default function Dashboard({
                         Angka
                     </h2>
                     <h2 className="font-inter text-2xl font-bold text-blue-700 dark:text-gray-300">
-                        90%
+                       {jumlahPerempuan}%
                     </h2>
                     <p className="font-inter text-gray-600 dark:text-gray-400">
                         Harapan Hidup Perempuan
                     </p>
                 </Box>
+
             </div>
             <div className="grid grid-cols-2 gap-6">
                 <div className="col-span-2 w-full overflow-auto rounded-lg bg-white/20 p-5 shadow-lg backdrop-blur-md">
