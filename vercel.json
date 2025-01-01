@@ -1,0 +1,4 @@
+{
+    "buildCommand": "composer install && php artisan ziggy:generate && npm run build",
+    "installCommand": "npm install && composer install"
+}
