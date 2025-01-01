@@ -67,7 +67,7 @@ export default function EditPendudukForm({
                     <Box key={index} className="mb-3">
                         <FormHeader>
                             <FormTitle
-                                title={`Form Edit ${form.nik} `}
+                                title={`Form Edit ${form.no_kk} `}
                                 showIndex={false}
                                 index={index}
                             />
